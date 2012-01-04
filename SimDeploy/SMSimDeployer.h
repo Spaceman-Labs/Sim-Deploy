@@ -17,23 +17,21 @@
 	NSString *tempFile;
 }
 
-@property (nonatomic, retain) SMAppModel *downloadedApplication;
+//@property (nonatomic, retain) SMAppModel *downloadedApplication;
 @property (nonatomic, retain) NSArray *simulators;
 
 + (SMSimDeployer *)defaultDeployer;
 
 
-- (void)cleanup;
-- (void)resetTempArchivePath;
 - (void)launchiOSSimulator;
 - (void)killiOSSimulator;
 - (void)restartiOSSimulator;
 
-//- (void)deleteApplicationWithBundleIdentifier:(NSString *)bundleIdentifier;
-
-
-
 - (void)downloadAppAtURL:(NSURL *)url completion:(void(^)(BOOL failed))completion;
-- (BOOL)unzipAppArchive;
+- (SMAppModel *)unzipAppArchiveAtPath:(NSString *)path;
+- (SMAppModel *)unzipAppArchive;
+
+- (void)installApplication:(SMAppModel *)app;
+- (void)cleanup;
 
 @end

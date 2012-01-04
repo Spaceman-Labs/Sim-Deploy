@@ -10,6 +10,8 @@
 
 @interface SMAppModel : NSObject
 
+@property (nonatomic, assign) BOOL deleteGUIDWhenFinished;
+
 @property (nonatomic, retain) NSString *guidPath;
 @property (nonatomic, retain) NSBundle *mainBundle;
 @property (nonatomic, retain) NSDictionary *infoDictionary;

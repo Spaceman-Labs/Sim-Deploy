@@ -16,6 +16,7 @@
 		3D0D970C14B2D3F000BB51FC /* SMSimulatorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D970B14B2D3F000BB51FC /* SMSimulatorModel.m */; };
 		3D0D972614B2E8AD00BB51FC /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D972514B2E8AD00BB51FC /* ZipArchive.m */; };
 		3DB7748A14B36CBD0042BD98 /* NSAlert-OAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */; };
+		3DB7749B14B400580042BD98 /* SMFileDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7749A14B400580042BD98 /* SMFileDragView.m */; };
 		3DEAE81714AE94E400D239B4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DEAE81614AE94E400D239B4 /* Cocoa.framework */; };
 		3DEAE82114AE94E400D239B4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAE81F14AE94E400D239B4 /* InfoPlist.strings */; };
 		3DEAE82314AE94E400D239B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE82214AE94E400D239B4 /* main.m */; };
@@ -45,6 +46,8 @@
 		3D0D972514B2E8AD00BB51FC /* ZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipArchive.m; sourceTree = "<group>"; };
 		3DB7748814B36CBD0042BD98 /* NSAlert-OAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert-OAExtensions.h"; sourceTree = "<group>"; };
 		3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert-OAExtensions.m"; sourceTree = "<group>"; };
+		3DB7749914B400580042BD98 /* SMFileDragView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMFileDragView.h; sourceTree = "<group>"; };
+		3DB7749A14B400580042BD98 /* SMFileDragView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMFileDragView.m; sourceTree = "<group>"; };
 		3DEAE81214AE94E400D239B4 /* SimDeploy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimDeploy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DEAE81614AE94E400D239B4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3DEAE81914AE94E400D239B4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -162,11 +165,13 @@
 				3DEAE82B14AE94E400D239B4 /* MainMenu.xib */,
 				3DEAE82814AE94E400D239B4 /* SMAppDelegate.h */,
 				3DEAE82914AE94E400D239B4 /* SMAppDelegate.m */,
-				3DEAE83314AE964A00D239B4 /* SMSimDeployer.h */,
-				3DEAE83414AE964A00D239B4 /* SMSimDeployer.m */,
 				3D0D965014B28BF700BB51FC /* SMViewController.h */,
 				3D0D965114B28BF700BB51FC /* SMViewController.m */,
+				3DEAE83314AE964A00D239B4 /* SMSimDeployer.h */,
+				3DEAE83414AE964A00D239B4 /* SMSimDeployer.m */,
 				3DEAE81D14AE94E400D239B4 /* Supporting Files */,
+				3DB7749914B400580042BD98 /* SMFileDragView.h */,
+				3DB7749A14B400580042BD98 /* SMFileDragView.m */,
 			);
 			path = SimDeploy;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 				3D0D970C14B2D3F000BB51FC /* SMSimulatorModel.m in Sources */,
 				3D0D972614B2E8AD00BB51FC /* ZipArchive.m in Sources */,
 				3DB7748A14B36CBD0042BD98 /* NSAlert-OAExtensions.m in Sources */,
+				3DB7749B14B400580042BD98 /* SMFileDragView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,7 @@
 
 @implementation SMAppModel
 
-@synthesize guidPath, mainBundle, infoDictionary, name, identifier, version, marketingVersion;
+@synthesize deleteGUIDWhenFinished, guidPath, mainBundle, infoDictionary, name, identifier, version, marketingVersion;
 
 - (id)initWithBundle:(NSBundle *)bundle;
 {
@@ -39,6 +39,10 @@
 
 - (void)dealloc
 {
+	if (self.deleteGUIDWhenFinished) {
+		[[NSFileManager defaultManager] removeItemAtPath:self.guidPath error:nil];
+	}
+	
 	self.guidPath = nil;
 	self.mainBundle = nil;
 	self.infoDictionary = nil;

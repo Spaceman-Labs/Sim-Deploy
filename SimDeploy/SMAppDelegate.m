@@ -18,9 +18,13 @@
     [super dealloc];
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+- (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
 	[[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleURLEvent:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
@@ -47,8 +51,30 @@
 	if (nil != fetchLocation) {
 		[self.viewController downloadURLAtLocation:fetchLocation];
 	}
+}
+
+// Handle a file dropped on the dock icon
+- (BOOL)application:(NSApplication *)sender openFile:(NSString *)path
+{
 	
+	SMAppModel *newApp = nil;
 	
+	NSBundle *bundle = [NSBundle bundleWithPath:path];
+	SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
+	
+	if (nil == appModel) {
+		return NO;
+	}
+	
+	newApp = appModel;
+	
+	if (nil != newApp) {
+		[[SMSimDeployer defaultDeployer] installApplication:newApp];
+		[self.viewController showRestartAlertIfNeeded];
+		return YES;
+	}
+	
+	return YES;
 }
 
 @end

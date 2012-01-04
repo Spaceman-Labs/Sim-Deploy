@@ -11,6 +11,7 @@
 
 @implementation SMViewController
 
+@synthesize view;
 @synthesize simulatorIsRunning;
 @synthesize textField;
 @synthesize appNameLabel;
@@ -23,10 +24,13 @@
 {	
 	self.textField.target = self;
 	[self.textField setAction:@selector(downloadAppAtTextFieldURL:)];
+	[self.view registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+	self.view.delegate = self;
 }
 
 - (void)dealloc
 {
+	self.view = nil;
 	self.confirmSheet = nil;
 	self.restartSheet = nil;
 	self.textField = nil;
@@ -72,9 +76,9 @@
 							return;
 						}
 
-						BOOL success = [deployer unzipAppArchive];
+						SMAppModel *downloadedApp = [deployer unzipAppArchive];
 						
-						if (NO == success) {
+						if (nil == downloadedApp) {
 							NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 							[alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Ok")];
 							[alert setMessageText:NSLocalizedString(@"No Valid Application Found", nil)];
@@ -85,17 +89,17 @@
 							return;
 						}
 						
-						[self checkVersionsAndInstall];
+						[self checkVersionsAndInstallApp:downloadedApp];
 				   }];
 }
 
-- (void)checkVersionsAndInstall
+- (void)checkVersionsAndInstallApp:(SMAppModel *)app
 {
 	SMSimDeployer *deployer = [SMSimDeployer defaultDeployer];
 	
 	NSArray *simulators = deployer.simulators;
 	SMSimulatorModel *sim = [simulators lastObject];
-	SMAppCompare appCompare = [sim compareInstalledAppsAgainstApp:deployer.downloadedApplication installedApp:nil];
+	SMAppCompare appCompare = [sim compareInstalledAppsAgainstApp:app installedApp:nil];
 	
 	if (SMAppCompareSame == appCompare) {
 		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
@@ -115,19 +119,13 @@
 						  window:[NSApp mainWindow] 
 					  completion:^(NSAlert *alert, NSInteger returnCode) {
 						  if (returnCode == NSAlertFirstButtonReturn) {
-							  for (SMSimulatorModel *sim in simulators) {
-								  [sim installApplication:deployer.downloadedApplication upgradeIfPossible:NO];
-							  }
-							  
+							  [[SMSimDeployer defaultDeployer] installApplication:app];							  
 							  [self showRestartAlertIfNeeded];
 						  }
 					  }];
 		
 	} else {
-		for (SMSimulatorModel *sim in simulators) {
-			[sim installApplication:deployer.downloadedApplication upgradeIfPossible:NO];
-		}
-		
+		[[SMSimDeployer defaultDeployer] installApplication:app];
 		[self showRestartAlertIfNeeded];	
 	}
 	
@@ -170,5 +168,33 @@
 		}
 	}
 }
+
+#pragma mark - Drag & Drop
+
+- (void)fileDragView:(SMFileDragView *)dragView didReceiveFiles:(NSArray *)files
+{
+	// Check for valid application
+	
+	SMAppModel *newApp = nil;
+	
+	for (NSString *path in files) {
+		NSBundle *bundle = [NSBundle bundleWithPath:path];
+		SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
+		
+		if (nil == appModel) {
+			return;
+		}
+		
+		newApp = appModel;
+		break;
+	}
+	
+	if (nil != newApp) {
+		[[SMSimDeployer defaultDeployer] installApplication:newApp];
+		[self showRestartAlertIfNeeded];
+		return;
+	}
+}
+
 
 @end

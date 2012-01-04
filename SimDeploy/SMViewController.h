@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "SMSimDeployer.h"
+#import "SMFileDragView.h"
 
-@interface SMViewController : NSObject <NSAlertDelegate>
+@interface SMViewController : NSObject <NSAlertDelegate, SMFileDragViewDelegate>
 
+@property (nonatomic, retain) IBOutlet SMFileDragView *view;
 @property (nonatomic, retain) IBOutlet NSPanel *confirmSheet;
 @property (nonatomic, retain) IBOutlet NSPanel *restartSheet;
 @property (nonatomic, assign) BOOL simulatorIsRunning;
@@ -25,6 +27,6 @@
 
 - (void)showRestartAlertIfNeeded;
 
-- (void)checkVersionsAndInstall;
+- (void)checkVersionsAndInstallApp:(SMAppModel *)app;
 
 @end

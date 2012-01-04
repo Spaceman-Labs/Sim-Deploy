@@ -13,7 +13,6 @@
 
 @implementation SMSimDeployer
 
-@synthesize downloadedApplication;
 @synthesize simulators;
 
 + (SMSimDeployer *)defaultDeployer {
@@ -82,6 +81,13 @@
 	return [applicationDirectoryPath stringByAppendingPathComponent:@"temp.zip"];
 }
 
+- (void)deleteTempFile
+{
+	[[NSFileManager defaultManager] removeItemAtPath:tempFile error:nil];
+	[tempFile release];
+	tempFile = nil;
+}
+
 - (void)cleanup
 {
 	NSString *applicationDirectoryPath = [self applicationDirectoryPath];
@@ -90,13 +96,6 @@
 		NSString *fullPath = [applicationDirectoryPath stringByAppendingPathComponent:path];
 		[[NSFileManager defaultManager] removeItemAtPath:fullPath error:nil];
 	}
-}
-
-- (void)resetTempArchivePath
-{
-	[[NSFileManager defaultManager] removeItemAtPath:tempFile error:nil];
-	[tempFile release];
-	tempFile = nil;
 }
 
 - (NSString *)tempApplicationPath
@@ -185,6 +184,8 @@
 	[downloadCompletionBlock release];
 	downloadCompletionBlock = [completion copy];
 	
+	[self deleteTempFile];
+	
 	[[NSFileManager defaultManager] removeItemAtPath:[self tempArchivePath] error:nil];
 	
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20.0f];
@@ -192,10 +193,15 @@
 	[download setDestination:[self tempArchivePath] allowOverwrite:YES];
 }
 
-- (BOOL)unzipAppArchive
+- (SMAppModel *)unzipAppArchive
+{
+	return [self unzipAppArchiveAtPath:[self tempArchivePath]];
+}
+
+- (SMAppModel *)unzipAppArchiveAtPath:(NSString *)path
 {	
-	[self resetTempArchivePath];
-	self.downloadedApplication = nil;
+//	[self resetTempArchivePath];
+//	self.downloadedApplication = nil;
 	
 	NSFileManager *fm = [NSFileManager defaultManager];
 	NSError *error = nil;
@@ -203,7 +209,7 @@
 	NSString *tempApplicationPath = [self tempApplicationPath];
 	[fm removeItemAtPath:tempApplicationPath error:&error];
 	
-	if ([za UnzipOpenFile:[self tempArchivePath]]) {
+	if ([za UnzipOpenFile:path]) {
 		BOOL success = [za UnzipFileTo:tempApplicationPath overWrite:YES];
 		if (NO == success) {
 			NSLog(@"Invalid Zip");
@@ -230,7 +236,7 @@
 		
 		SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
 		if (nil != appModel) {
-			self.downloadedApplication = appModel;
+			[appModel setDeleteGUIDWhenFinished:YES];
 			
 			// Some bug causes the executable to lose it's +x permissions. Do that here.
 			NSString *executable = [appModel.infoDictionary objectForKey:@"CFBundleExecutable"];
@@ -249,11 +255,18 @@
 			error = chmod(path, mode);
 			/* check and handle error */
 			
-			return YES;
+			return appModel;
 		}
 	}
 
 	return NO;
+}
+
+- (void)installApplication:(SMAppModel *)app
+{
+	for (SMSimulatorModel *sim in self.simulators) {
+		[sim installApplication:app upgradeIfPossible:NO];
+	}
 }
 
 #pragma mark - NSURLDownloadDelegate
