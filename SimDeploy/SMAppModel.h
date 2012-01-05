@@ -19,6 +19,8 @@
 @property (nonatomic, retain) NSString *identifier;
 @property (nonatomic, retain) NSString *version;
 @property (nonatomic, retain) NSString *marketingVersion;
+@property (nonatomic, retain) NSString *iconPath;
+@property (nonatomic, assign) BOOL iconIsPreRendered;
 
 - (id)initWithBundle:(NSBundle *)bundle;
 

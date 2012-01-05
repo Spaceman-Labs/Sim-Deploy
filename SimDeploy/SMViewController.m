@@ -6,54 +6,100 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "SMViewController.h"
 #import "NSAlert-OAExtensions.h"
 
+
 @implementation SMViewController
 
-@synthesize view;
-@synthesize simulatorIsRunning;
-@synthesize textField;
-@synthesize appNameLabel;
-@synthesize appVersionLabel;
-@synthesize confirmSheet;
-@synthesize restartSheet;
+@synthesize fileDragView;
+@synthesize downloadTextField;
+@synthesize downloadURLSheet;
 @synthesize progressContainer;
+@synthesize titleLabel;
+@synthesize iconView;
+@synthesize boxView;
+@synthesize appInfoView;
+@synthesize versionLabel;
+@synthesize downloadButton;
 
 - (void)awakeFromNib
 {	
-	self.textField.target = self;
-	[self.textField setAction:@selector(downloadAppAtTextFieldURL:)];
-	[self.view registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
-	self.view.delegate = self;
+	self.downloadTextField.target = self;
+	[self.downloadTextField setAction:@selector(downloadAppAtTextFieldURL:)];
+	self.fileDragView.delegate = self;
+	[self registerForDragAndDrop];
+
+	CGRect frame = self.titleLabel.frame;
+	frame.size.height = 100.0f;
+	frame.origin.y -= 100.0f;
+	self.titleLabel.frame = frame;
+	
+	[[self.titleLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+	
+	CGColorRef someCGColor = NULL;
+	CGColorSpaceRef genericRGBSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+	if (genericRGBSpace != NULL)
+	{
+		float colorComponents[4] = {1.0f, 0.0f, 0.0f, 1.0f};
+		someCGColor = CGColorCreate(genericRGBSpace, (CGFloat *)colorComponents);
+		CGColorSpaceRelease(genericRGBSpace);
+	}
+	
+	self.iconView.image = [NSImage imageNamed:@"Icon@2x.png"];
 }
 
 - (void)dealloc
 {
-	self.view = nil;
-	self.confirmSheet = nil;
-	self.restartSheet = nil;
-	self.textField = nil;
-	self.appNameLabel = nil;
-	self.appVersionLabel = nil;
+	self.fileDragView = nil;
+	self.downloadURLSheet = nil;
+	self.downloadTextField = nil;
 	self.progressContainer = nil;
+	self.boxView = nil;
+	self.appInfoView = nil;
+	self.versionLabel = nil;
+	self.downloadButton = nil;
 	[super dealloc];
 }
 
-- (IBAction)resetButton:(id)sender
+- (IBAction)downloadFromURL:(id)sender
 {
+	self.downloadButton.state = 1;
 	
+	[self deregisterForDragAndDrop];
+	[[NSApplication sharedApplication] beginSheet:self.downloadURLSheet
+								   modalForWindow:[NSApp mainWindow]
+									modalDelegate:nil
+								   didEndSelector:nil
+									  contextInfo:nil];
+	
+	modalSession = [NSApp beginModalSessionForWindow:self.downloadURLSheet];
+	[NSApp runModalSession:modalSession];
+	
+	NSText *textEditor = [self.downloadTextField currentEditor];
+	NSRange range = { [[textEditor string] length], 0 };
+	[textEditor setSelectedRange: range];
+}
+
+- (IBAction)cancelDownloadFromURL:(id)sender
+{
+	[self registerForDragAndDrop];
+	[NSApp endModalSession:modalSession];
+    [NSApp endSheet:self.downloadURLSheet];
+    [self.downloadURLSheet orderOut:nil];
 }
 
 - (void)downloadURLAtLocation:(NSString *)location
 {
-	[self.textField setStringValue:location];
+	[self.downloadTextField setStringValue:location];
 	[self downloadAppAtTextFieldURL:self];
 }
 
 - (IBAction)downloadAppAtTextFieldURL:(id)sender
 {
-	NSString *urlPath = [self.textField stringValue];
+	
+	NSString *urlPath = [self.downloadTextField stringValue];
 	if (nil == urlPath || [urlPath length] < 1) {
 		return;
 	}
@@ -132,6 +178,21 @@
 
 }
 
+#pragma mark - App Info View
+
+- (void)setupAppInfoViewWithApp:(SMAppModel *)app
+{
+	self.titleLabel.stringValue = app.name;
+	self.versionLabel.stringValue = [NSString stringWithFormat:@"Version: %@", app.marketingVersion];
+	if (nil != app.iconPath) {
+		self.iconView.image = [[[NSImage alloc] initWithContentsOfFile:app.iconPath] autorelease];
+	} else {
+		self.iconView.image = nil;
+	}
+}
+
+#pragma mark -
+
 - (void)showRestartAlertIfNeeded
 {
 	// Check for a running simulator
@@ -169,6 +230,16 @@
 	}
 }
 
+- (void)registerForDragAndDrop
+{
+	[self.fileDragView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+}
+
+- (void)deregisterForDragAndDrop
+{
+	[self.fileDragView unregisterDraggedTypes];
+}
+
 #pragma mark - Drag & Drop
 
 - (void)fileDragView:(SMFileDragView *)dragView didReceiveFiles:(NSArray *)files
@@ -190,8 +261,11 @@
 	}
 	
 	if (nil != newApp) {
-		[[SMSimDeployer defaultDeployer] installApplication:newApp];
-		[self showRestartAlertIfNeeded];
+		[self setupAppInfoViewWithApp:newApp];
+		[self.boxView addSubview:self.appInfoView];
+		
+//		[[SMSimDeployer defaultDeployer] installApplication:newApp];
+//		[self showRestartAlertIfNeeded];
 		return;
 	}
 }

@@ -132,7 +132,7 @@
 	{
 		data = [ NSData dataWithContentsOfFile:file];
 		uLong crcValue = crc32( 0L,NULL, 0L );
-		crcValue = crc32( crcValue, (const Bytef*)[data bytes], [data length] );
+		crcValue = crc32( crcValue, (const Bytef*)[data bytes], (uInt)[data length] );
 		ret = zipOpenNewFileInZip3( _zipFile,
 								  (const char*) [newname UTF8String],
 								  &zipInfo,
@@ -156,7 +156,7 @@
 	{
 		data = [ NSData dataWithContentsOfFile:file];
 	}
-	unsigned int dataLen = [data length];
+	unsigned int dataLen = (UInt)[data length];
 	ret = zipWriteInFileInZip( _zipFile, (const void*)[data bytes], dataLen);
 	if( ret!=Z_OK )
 	{
@@ -203,7 +203,7 @@
 		unz_global_info  globalInfo = {0};
 		if( unzGetGlobalInfo(_unzFile, &globalInfo )==UNZ_OK )
 		{
-			NSLog(@"%d entries in the zip file", globalInfo.number_entry);
+			NSLog(@"%d entries in the zip file", (int)globalInfo.number_entry);
 		}
 	}
 	return _unzFile!=NULL;

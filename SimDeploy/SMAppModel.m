@@ -10,7 +10,7 @@
 
 @implementation SMAppModel
 
-@synthesize deleteGUIDWhenFinished, guidPath, mainBundle, infoDictionary, name, identifier, version, marketingVersion;
+@synthesize deleteGUIDWhenFinished, guidPath, mainBundle, infoDictionary, name, identifier, version, marketingVersion, iconPath, iconIsPreRendered;
 
 - (id)initWithBundle:(NSBundle *)bundle;
 {
@@ -32,7 +32,22 @@
 	self.identifier = [infoDictionary objectForKey:@"CFBundleIdentifier"];
 	self.version = [infoDictionary objectForKey:@"CFBundleVersion"];
 	self.marketingVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-				 
+	
+	// Find biggest icon file
+	NSString *biggestIconPath = nil;
+	NSSize biggestSize = NSMakeSize(0.0f, 0.0f);
+	for (NSString *iconName in [infoDictionary objectForKey:@"CFBundleIconFiles"]) {
+		NSString *path = [self.mainBundle.bundlePath stringByAppendingPathComponent:iconName];
+		NSImage *image = [[NSImage alloc] initWithContentsOfFile:path];
+		NSSize imageSize = [image size];
+		if (imageSize.width > biggestSize.width || imageSize.height > biggestSize.height) {
+			biggestIconPath = path;
+			biggestSize = imageSize;
+		}
+		[image release];
+	}
+	
+	self.iconPath = biggestIconPath;
 	
 	return self;
 }
@@ -50,6 +65,7 @@
 	self.identifier = nil;
 	self.version = nil;
 	self.marketingVersion = nil;
+	self.iconPath = nil;
 	[super dealloc];
 }
 

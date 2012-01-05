@@ -12,6 +12,7 @@
 
 @interface SMFileDragView : NSView 
 
+@property (nonatomic, assign) BOOL validDrag;
 @property (nonatomic, assign) id <SMFileDragViewDelegate> delegate;
 
 @end

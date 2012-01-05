@@ -9,24 +9,40 @@
 #import <Foundation/Foundation.h>
 #import "SMSimDeployer.h"
 #import "SMFileDragView.h"
+#import "SMIconView.h"
 
 @interface SMViewController : NSObject <NSAlertDelegate, SMFileDragViewDelegate>
+{
+	NSModalSession modalSession;
+}
 
-@property (nonatomic, retain) IBOutlet SMFileDragView *view;
-@property (nonatomic, retain) IBOutlet NSPanel *confirmSheet;
-@property (nonatomic, retain) IBOutlet NSPanel *restartSheet;
-@property (nonatomic, assign) BOOL simulatorIsRunning;
-@property (nonatomic, retain) IBOutlet NSTextField *textField;
-@property (nonatomic, retain) IBOutlet NSTextField *appNameLabel;
-@property (nonatomic, retain) IBOutlet NSTextField *appVersionLabel;
+@property (nonatomic, retain) IBOutlet NSPanel *downloadURLSheet;
+@property (nonatomic, retain) IBOutlet NSTextField *downloadTextField;
+
 @property (nonatomic, retain) IBOutlet NSView *progressContainer;
 
+@property (nonatomic, retain) IBOutlet NSBox *boxView;
+@property (nonatomic, retain) IBOutlet NSButton *downloadButton;
+@property (nonatomic, retain) IBOutlet SMFileDragView *fileDragView;
+
+@property (nonatomic, retain) IBOutlet NSView *appInfoView;
+@property (nonatomic, retain) IBOutlet NSTextField *titleLabel;
+@property (nonatomic, retain) IBOutlet NSTextField *versionLabel;
+@property (nonatomic, retain) IBOutlet SMIconView *iconView;
+
+- (IBAction)downloadFromURL:(id)sender;
+- (IBAction)cancelDownloadFromURL:(id)sender;
 - (void)downloadURLAtLocation:(NSString *)location;
 - (IBAction)downloadAppAtTextFieldURL:(id)sender;
-- (IBAction)resetButton:(id)sender;
+
+- (void)setupAppInfoViewWithApp:(SMAppModel *)app;
 
 - (void)showRestartAlertIfNeeded;
 
+
 - (void)checkVersionsAndInstallApp:(SMAppModel *)app;
+
+- (void)registerForDragAndDrop;
+- (void)deregisterForDragAndDrop;
 
 @end
