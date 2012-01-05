@@ -16,6 +16,8 @@
 	NSModalSession modalSession;
 }
 
+@property (nonatomic, retain) SMAppModel *pendingApp;
+
 @property (nonatomic, retain) IBOutlet NSPanel *downloadURLSheet;
 @property (nonatomic, retain) IBOutlet NSTextField *downloadTextField;
 

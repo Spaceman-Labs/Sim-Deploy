@@ -9,9 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import "SMViewController.h"
 
-@interface SMAppDelegate : NSObject <NSApplicationDelegate>
+@interface SMAppDelegate : NSObject <NSApplicationDelegate, NSOpenSavePanelDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property (nonatomic, retain) IBOutlet SMViewController *viewController;
+
+- (IBAction)openDocument:(id)sender;
 
 @end

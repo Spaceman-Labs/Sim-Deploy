@@ -77,4 +77,39 @@
 	return YES;
 }
 
+- (IBAction)openDocument:(id)sender
+{
+	NSOpenPanel *panel	= [NSOpenPanel openPanel];
+	panel.delegate = self;
+	[panel setAllowsMultipleSelection:NO];
+	
+	[panel beginSheetModalForWindow:[NSApp mainWindow]
+				  completionHandler:^(NSInteger result) {
+					  if (NSFileHandlingPanelOKButton == result) {
+						  NSArray *urls = [panel URLs];
+						  NSURL *url = [urls lastObject];
+						  NSString *path = [url path];
+						  [self application:nil openFile:path];
+					  }
+				  }];
+}
+
+- (BOOL)panel:(id)sender shouldEnableURL:(NSURL *)url
+{
+	
+	NSString *filename = [url lastPathComponent];
+	if ([filename hasSuffix:@".zip"] || [filename hasSuffix:@".app"]) {
+		return YES;
+	}
+	
+	// Allow Directories to be opened
+	BOOL directory = NO;
+	[[NSFileManager defaultManager] fileExistsAtPath:[url path] isDirectory:&directory];
+	if (directory) {
+		return YES;
+	}
+	
+	return NO;
+}
+
 @end

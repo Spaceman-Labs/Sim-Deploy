@@ -20,6 +20,8 @@
     return self;
 }
 
+
+
 - (NSString *)windowNibName
 {
     // Override returning the nib file name of the document
@@ -32,6 +34,7 @@
     [super windowControllerDidLoadNib:aController];
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
 }
+
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
@@ -65,15 +68,16 @@
 
 - (BOOL)readFromFileWrapper:(NSFileWrapper *)fileWrapper ofType:(NSString *)typeName error:(NSError **)outError
 {	
-	if ([typeName isEqualToString:@"AppDocumentType"]){
-		if (NO == fileWrapper.isDirectory) {
-			return NO;
-		}
-		
-		
-	}
-	
 	return YES;
+//	if ([typeName isEqualToString:@"AppDocumentType"]){
+//		if (NO == fileWrapper.isDirectory) {
+//			return NO;
+//		}
+//		
+//		
+//	}
+//	
+//	return YES;
 }
 
 
