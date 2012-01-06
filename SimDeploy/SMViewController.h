@@ -45,6 +45,8 @@
 - (void)setAppInfoViewShowing:(BOOL)showing;
 - (void)setupAppInfoViewWithApp:(SMAppModel *)app;
 - (void)checkVersionsAndInstallApp:(SMAppModel *)app;
+- (IBAction)installPendingApp:(id)sender;
+
 - (IBAction)install:(id)sender;
 - (IBAction)cancelInstall:(id)sender;
 - (void)showRestartAlertIfNeeded;

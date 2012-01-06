@@ -7,6 +7,7 @@
 //
 
 #import "SMAppDelegate.h"
+#import "PFMoveApplication.h"
 
 @implementation SMAppDelegate
 
@@ -20,6 +21,7 @@
 
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
+	PFMoveToApplicationsFolderIfNecessary();
 	[[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleURLEvent:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
 }
 

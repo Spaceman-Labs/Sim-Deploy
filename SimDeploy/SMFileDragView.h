@@ -15,6 +15,8 @@
 @property (nonatomic, assign) BOOL validDrag;
 @property (nonatomic, assign) id <SMFileDragViewDelegate> delegate;
 
+- (void)setHighlighted:(BOOL)highlighted;
+
 @end
 
 @protocol SMFileDragViewDelegate <NSObject>

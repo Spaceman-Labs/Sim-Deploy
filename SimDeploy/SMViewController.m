@@ -35,6 +35,7 @@
 	self.downloadTextField.target = self;
 	[self.downloadTextField setAction:@selector(downloadAppAtTextFieldURL:)];
 	self.fileDragView.delegate = self;
+	self.fileDragView.layer.cornerRadius = 15.0f;
 	[self registerForDragAndDrop];
 
 	CGRect frame = self.titleLabel.frame;
@@ -65,6 +66,8 @@
 		[CATransaction commit];
 		[CATransaction flush];
 	}
+	
+	
 }
 
 - (void)dealloc
@@ -112,7 +115,8 @@
 - (void)downloadURLAtLocation:(NSString *)location
 {
 	[self.downloadTextField setStringValue:location];
-	[self downloadAppAtTextFieldURL:self];
+	[self downloadFromURL:self];
+//	[self downloadAppAtTextFieldURL:self];
 }
 
 - (IBAction)downloadAppAtTextFieldURL:(id)sender
@@ -126,6 +130,11 @@
 	NSURL *url = [NSURL URLWithString:urlPath];
 	
 	SMSimDeployer *deployer = [SMSimDeployer defaultDeployer];
+	[NSApp endModalSession:modalSession];
+    [NSApp endSheet:self.downloadURLSheet];
+    [self.downloadURLSheet orderOut:nil];
+
+	
 	
 	[deployer downloadAppAtURL:url 
 					completion:^(BOOL failed) {
@@ -154,7 +163,7 @@
 							return;
 						}
 						
-						[self checkVersionsAndInstallApp:downloadedApp];
+						self.pendingApp = downloadedApp;
 				   }];
 }
 
@@ -197,6 +206,34 @@
 
 }
 
+- (void)installPendingApp:(id)sender
+{
+	SMSimDeployer *deployer = [SMSimDeployer defaultDeployer];
+	
+	NSArray *simulators = deployer.simulators;
+	SMSimulatorModel *sim = [simulators lastObject];
+	SMAppCompare appCompare = [sim compareInstalledAppsAgainstApp:self.pendingApp installedApp:nil];
+	
+	if (SMAppCompareGreaterThan == appCompare) {
+		[NSAlert beginAlertSheet:@"Your Current Version is Newer!" 
+						 message:@"Your current installed version is newer, are you sure you want to downgrade?" 
+				   defaultButton:@"Downgrade" 
+				 alternateButton:@"Cancel" 
+					 otherButton:nil 
+						  window:[NSApp mainWindow] 
+					  completion:^(NSAlert *alert, NSInteger returnCode) {
+						  if (returnCode == NSAlertFirstButtonReturn) {
+							  [[SMSimDeployer defaultDeployer] installApplication:self.pendingApp];							  
+							  [self showRestartAlertIfNeeded];
+						  }
+					  }];
+		
+	} else {
+		[[SMSimDeployer defaultDeployer] installApplication:self.pendingApp];
+		[self showRestartAlertIfNeeded];	
+	}
+}
+
 #pragma mark - App Info View
 
 - (void)setAppInfoViewShowing:(BOOL)showing
@@ -231,7 +268,7 @@
 - (void)setupAppInfoViewWithApp:(SMAppModel *)app
 {
 	self.titleLabel.stringValue = app.name;
-	self.versionLabel.stringValue = [NSString stringWithFormat:@"Version: %@", app.marketingVersion];
+	self.versionLabel.stringValue = [NSString stringWithFormat:@"Version: %@", app.version];
 	if (nil != app.iconPath) {
 		self.iconView.image = [[[NSImage alloc] initWithContentsOfFile:app.iconPath] autorelease];
 	} else {
@@ -252,7 +289,7 @@
 		self.installedVersionLabel.stringValue = [NSString stringWithFormat:@"Installed Version: %@", installedApp.version];
 		if (SMAppCompareLessThan == compare) {
 			self.installButton.title = @"Upgrade";
-		} else if (SMAppCompareLessThan == compare) {
+		} else if (SMAppCompareGreaterThan == compare) {
 			self.installButton.title = @"Downgrade";
 		} else if (SMAppCompareSame == compare) {
 			self.installButton.enabled = NO;
@@ -268,26 +305,31 @@
 
 - (void)showRestartAlertIfNeeded
 {
-	// Check for a running simulator
-	
-	NSArray *runningSims = [NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.iphonesimulator"];
-	if ([runningSims count] < 1) {
+	double delayInSeconds = 0.3;
+	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+		// Check for a running simulator
+		
+		NSArray *runningSims = [NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.iphonesimulator"];
+		if ([runningSims count] < 1) {
+			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+			[alert addButtonWithTitle:NSLocalizedString(@"Launch Simulator", @"Launch Simulator")];
+			[alert addButtonWithTitle:NSLocalizedString(@"No Thanks", @"No Thanks")];
+			[alert setMessageText:NSLocalizedString(@"Success!", nil)];
+			[alert setInformativeText:NSLocalizedString(@"Your builds were installed successfully! Would you like us to fire up the simulator for you?", nil)];
+			[alert setAlertStyle:NSInformationalAlertStyle];
+			[alert beginSheetModalForWindow:[NSApp mainWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:[NSNull null]];
+		}
+		
 		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-		[alert addButtonWithTitle:NSLocalizedString(@"Launch Simulator", @"Launch Simulator")];
-		[alert addButtonWithTitle:NSLocalizedString(@"No Thanks", @"No Thanks")];
+		[alert addButtonWithTitle:NSLocalizedString(@"Restart Now", @"Restart Now")];
+		[alert addButtonWithTitle:NSLocalizedString(@"Restart Later", @"Restart Later")];
 		[alert setMessageText:NSLocalizedString(@"Success!", nil)];
-		[alert setInformativeText:NSLocalizedString(@"Your builds were installed successfully! Would you like us to fire up the simulator for you?", nil)];
+		[alert setInformativeText:NSLocalizedString(@"Your builds were installed successfully, but the simulator is running and must be restarted before newly downloaded versions will be available.", nil)];
 		[alert setAlertStyle:NSInformationalAlertStyle];
-		[alert beginSheetModalForWindow:[NSApp mainWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:[NSNull null]];
-	}
+		[alert beginSheetModalForWindow:[NSApp mainWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+	});
 	
-	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-	[alert addButtonWithTitle:NSLocalizedString(@"Restart Now", @"Restart Now")];
-	[alert addButtonWithTitle:NSLocalizedString(@"Restart Later", @"Restart Later")];
-	[alert setMessageText:NSLocalizedString(@"Success!", nil)];
-	[alert setInformativeText:NSLocalizedString(@"Your builds were installed successfully, but the simulator is running and must be restarted before newly downloaded versions will be available.", nil)];
-	[alert setAlertStyle:NSInformationalAlertStyle];
-	[alert beginSheetModalForWindow:[NSApp mainWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
 }
 
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
@@ -316,6 +358,7 @@
 - (IBAction)install:(id)sender
 {
 	self.installButton.state = NSOnState;
+	[self installPendingApp:self];
 }
 
 - (IBAction)cancelInstall:(id)sender
@@ -364,6 +407,7 @@
 	
 	if (nil != newApp) {
 		self.pendingApp = newApp;
+		[self.fileDragView setHighlighted:NO];
 	}	
 }
 

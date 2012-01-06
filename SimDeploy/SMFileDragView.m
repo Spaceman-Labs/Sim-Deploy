@@ -15,6 +15,19 @@
 
 #pragma mark - Drag & Drop
 
+- (void)setHighlighted:(BOOL)highlighted
+{
+	if (highlighted) {
+		CGColorRef color = CGColorCreateGenericRGB(0.0f, 0.0f, 0.0f, 0.2f);
+		self.layer.backgroundColor = color;
+		CGColorRelease(color);
+	} else {
+		CGColorRef color = CGColorCreateGenericRGB(0.0f, 0.0f, 0.0f, 0.0f);
+		self.layer.backgroundColor = color;
+		CGColorRelease(color);	
+	}
+}
+
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
     NSPasteboard *pboard;
@@ -42,19 +55,15 @@
 	if (NO == self.validDrag) {
 		return NSDragOperationNone;
 	}
-
-	CGColorRef color = CGColorCreateGenericRGB(0.0f, 0.0f, 0.0f, 0.2f);
-	self.layer.backgroundColor = color;
-	CGColorRelease(color);
 	
+	[self setHighlighted:YES];
+		
 	return NSDragOperationCopy;
 }
 
 - (void)draggingExited:(id < NSDraggingInfo >)sender
 {
-	CGColorRef color = CGColorCreateGenericRGB(0.0f, 0.0f, 0.0f, 0.0f);
-	self.layer.backgroundColor = color;
-	CGColorRelease(color);	
+	[self setHighlighted:NO];
 }
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
