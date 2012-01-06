@@ -69,8 +69,7 @@
 	newApp = appModel;
 	
 	if (nil != newApp) {
-		[[SMSimDeployer defaultDeployer] installApplication:newApp];
-		[self.viewController showRestartAlertIfNeeded];
+		[self.viewController setupAppInfoViewWithApp:appModel];
 		return YES;
 	}
 	

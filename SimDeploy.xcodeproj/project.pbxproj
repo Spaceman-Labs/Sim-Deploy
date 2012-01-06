@@ -16,13 +16,13 @@
 		3D0D970C14B2D3F000BB51FC /* SMSimulatorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D970B14B2D3F000BB51FC /* SMSimulatorModel.m */; };
 		3D0D972614B2E8AD00BB51FC /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D972514B2E8AD00BB51FC /* ZipArchive.m */; };
 		3D41574C14B420B2002EF5D8 /* prefs_notifications.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D41574B14B420B2002EF5D8 /* prefs_notifications.png */; };
-		3D41574F14B42211002EF5D8 /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D41574E14B42211002EF5D8 /* noise.png */; };
 		3D41575214B422A5002EF5D8 /* SMLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D41575114B422A4002EF5D8 /* SMLayerView.m */; };
 		3D5F1CA014B4AF620017D6C3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */; };
 		3D5F1CA314B4AFA80017D6C3 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */; };
 		3D5F1CA514B4B1F50017D6C3 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3D5F1CA414B4B1F50017D6C3 /* dsa_pub.pem */; };
 		3D97866814B551E200F01009 /* SMDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97866614B551E200F01009 /* SMDocument.m */; };
-		3D97866914B551E200F01009 /* SMDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D97866714B551E200F01009 /* SMDocument.xib */; };
+		3D97866F14B6C02800F01009 /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D97866E14B6C02800F01009 /* noise.png */; };
+		3D97867214B6CB7B00F01009 /* SMDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867114B6CB7B00F01009 /* SMDividerView.m */; };
 		3DB7748A14B36CBD0042BD98 /* NSAlert-OAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */; };
 		3DB7749B14B400580042BD98 /* SMFileDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7749A14B400580042BD98 /* SMFileDragView.m */; };
 		3DD744EC14B52B3C00EA0A46 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD744EB14B52B3C00EA0A46 /* QuartzCore.framework */; };
@@ -68,14 +68,15 @@
 		3D0D970B14B2D3F000BB51FC /* SMSimulatorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSimulatorModel.m; sourceTree = "<group>"; };
 		3D0D972514B2E8AD00BB51FC /* ZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipArchive.m; sourceTree = "<group>"; };
 		3D41574B14B420B2002EF5D8 /* prefs_notifications.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_notifications.png; sourceTree = "<group>"; };
-		3D41574E14B42211002EF5D8 /* noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noise.png; sourceTree = "<group>"; };
 		3D41575014B422A4002EF5D8 /* SMLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMLayerView.h; sourceTree = "<group>"; };
 		3D41575114B422A4002EF5D8 /* SMLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMLayerView.m; sourceTree = "<group>"; };
 		3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		3D5F1CA414B4B1F50017D6C3 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		3D97866514B551E200F01009 /* SMDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDocument.h; sourceTree = "<group>"; };
 		3D97866614B551E200F01009 /* SMDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDocument.m; sourceTree = "<group>"; };
-		3D97866714B551E200F01009 /* SMDocument.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMDocument.xib; sourceTree = "<group>"; };
+		3D97866E14B6C02800F01009 /* noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noise.png; sourceTree = "<group>"; };
+		3D97867014B6CB7B00F01009 /* SMDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDividerView.h; sourceTree = "<group>"; };
+		3D97867114B6CB7B00F01009 /* SMDividerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDividerView.m; sourceTree = "<group>"; };
 		3DB7748814B36CBD0042BD98 /* NSAlert-OAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert-OAExtensions.h"; sourceTree = "<group>"; };
 		3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert-OAExtensions.m"; sourceTree = "<group>"; };
 		3DB7749914B400580042BD98 /* SMFileDragView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMFileDragView.h; sourceTree = "<group>"; };
@@ -147,10 +148,21 @@
 		3D41574D14B421FB002EF5D8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3D97866E14B6C02800F01009 /* noise.png */,
 				3D5F1CA414B4B1F50017D6C3 /* dsa_pub.pem */,
-				3D41574E14B42211002EF5D8 /* noise.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		3D97866A14B6AB3800F01009 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				3D41575014B422A4002EF5D8 /* SMLayerView.h */,
+				3D41575114B422A4002EF5D8 /* SMLayerView.m */,
+				3D97867014B6CB7B00F01009 /* SMDividerView.h */,
+				3D97867114B6CB7B00F01009 /* SMDividerView.m */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		3DB7748714B362990042BD98 /* Model */ = {
@@ -207,6 +219,7 @@
 		3DEAE81C14AE94E400D239B4 /* SimDeploy */ = {
 			isa = PBXGroup;
 			children = (
+				3D97866A14B6AB3800F01009 /* Classes */,
 				3DB7748714B362990042BD98 /* Model */,
 				3DB7748814B36CBD0042BD98 /* NSAlert-OAExtensions.h */,
 				3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */,
@@ -221,13 +234,10 @@
 				3DEAE81D14AE94E400D239B4 /* Supporting Files */,
 				3DB7749914B400580042BD98 /* SMFileDragView.h */,
 				3DB7749A14B400580042BD98 /* SMFileDragView.m */,
-				3D41575014B422A4002EF5D8 /* SMLayerView.h */,
-				3D41575114B422A4002EF5D8 /* SMLayerView.m */,
 				3DD744F014B532E400EA0A46 /* SMIconView.h */,
 				3DD744F114B532E400EA0A46 /* SMIconView.m */,
 				3D97866514B551E200F01009 /* SMDocument.h */,
 				3D97866614B551E200F01009 /* SMDocument.m */,
-				3D97866714B551E200F01009 /* SMDocument.xib */,
 			);
 			path = SimDeploy;
 			sourceTree = "<group>";
@@ -300,9 +310,8 @@
 				3DEAE82714AE94E400D239B4 /* Credits.rtf in Resources */,
 				3DEAE82D14AE94E400D239B4 /* MainMenu.xib in Resources */,
 				3D41574C14B420B2002EF5D8 /* prefs_notifications.png in Resources */,
-				3D41574F14B42211002EF5D8 /* noise.png in Resources */,
 				3D5F1CA514B4B1F50017D6C3 /* dsa_pub.pem in Resources */,
-				3D97866914B551E200F01009 /* SMDocument.xib in Resources */,
+				3D97866F14B6C02800F01009 /* noise.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +338,7 @@
 				3D41575214B422A5002EF5D8 /* SMLayerView.m in Sources */,
 				3DD744F214B532E400EA0A46 /* SMIconView.m in Sources */,
 				3D97866814B551E200F01009 /* SMDocument.m in Sources */,
+				3D97867214B6CB7B00F01009 /* SMDividerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

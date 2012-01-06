@@ -10,4 +10,6 @@
 
 @interface SMLayerView : NSView
 
+@property (nonatomic, assign) CGColorRef tintColor;
+
 @end

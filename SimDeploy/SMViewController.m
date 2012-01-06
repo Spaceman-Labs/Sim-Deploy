@@ -10,8 +10,9 @@
 #import "SMViewController.h"
 #import "NSAlert-OAExtensions.h"
 
-
 @implementation SMViewController
+
+@synthesize showingAppInfoView;
 
 @synthesize fileDragView;
 @synthesize downloadTextField;
@@ -22,7 +23,12 @@
 @synthesize boxView;
 @synthesize appInfoView;
 @synthesize versionLabel;
+@synthesize installedVersionLabel;
 @synthesize downloadButton;
+@synthesize pendingApp;
+@synthesize controlContainer;
+@synthesize cancelButton;
+@synthesize installButton;
 
 - (void)awakeFromNib
 {	
@@ -32,22 +38,33 @@
 	[self registerForDragAndDrop];
 
 	CGRect frame = self.titleLabel.frame;
-	frame.size.height = 100.0f;
-	frame.origin.y -= 100.0f;
+	frame.size.height += 20.0f;
+	frame.origin.y -= 25.0f;
 	self.titleLabel.frame = frame;
 	
-	[[self.titleLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+	frame = self.versionLabel.frame;
+	frame.origin.y = CGRectGetMinY(self.titleLabel.frame) - 5.0f;
+	self.versionLabel.frame = frame;
+
+	frame = self.installedVersionLabel.frame;
+	frame.origin.y = CGRectGetMinY(self.installedVersionLabel.frame) - 5.0f;
+	self.installedVersionLabel.frame = frame;
 	
-	CGColorRef someCGColor = NULL;
-	CGColorSpaceRef genericRGBSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
-	if (genericRGBSpace != NULL)
-	{
-		float colorComponents[4] = {1.0f, 0.0f, 0.0f, 1.0f};
-		someCGColor = CGColorCreate(genericRGBSpace, (CGFloat *)colorComponents);
-		CGColorSpaceRelease(genericRGBSpace);
-	}
+	[[self.versionLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+	[[self.titleLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+	[[self.installedVersionLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
 	
 	self.iconView.image = [NSImage imageNamed:@"Icon@2x.png"];
+	
+	if (nil == self.appInfoView.superview) {
+		[CATransaction begin];
+		self.appInfoView.layer.opacity = 0.0f;
+		self.appInfoView.hidden = YES;
+		[self.boxView addSubview:self.appInfoView];
+		
+		[CATransaction commit];
+		[CATransaction flush];
+	}
 }
 
 - (void)dealloc
@@ -60,6 +77,8 @@
 	self.appInfoView = nil;
 	self.versionLabel = nil;
 	self.downloadButton = nil;
+	self.controlContainer = nil;
+	self.installedVersionLabel = nil;
 	[super dealloc];
 }
 
@@ -180,6 +199,35 @@
 
 #pragma mark - App Info View
 
+- (void)setAppInfoViewShowing:(BOOL)showing
+{	
+	if (showing) {
+		self.appInfoView.hidden = NO;
+	}
+	
+	[CATransaction begin];
+	[CATransaction setAnimationDuration:0.3f];
+	[CATransaction setCompletionBlock:^{
+		if (NO == showing) {
+			self.appInfoView.hidden = YES;
+		}
+	}];
+	
+	CATransition *fade = [CATransition animation];
+	fade.type = kCATransitionFade;
+	fade.duration = 0.3f;
+	[self.appInfoView.layer addAnimation:fade forKey:@"fade"];
+	
+	if (showing) {
+		self.appInfoView.layer.opacity = 1.0f;
+		self.controlContainer.layer.opacity = 0.0f;
+	} else { 		
+		self.appInfoView.layer.opacity = 0.0f;
+		self.controlContainer.layer.opacity = 1.0f;
+	}	
+	[CATransaction commit];
+}
+
 - (void)setupAppInfoViewWithApp:(SMAppModel *)app
 {
 	self.titleLabel.stringValue = app.name;
@@ -189,6 +237,31 @@
 	} else {
 		self.iconView.image = nil;
 	}
+	
+	NSArray *simulators = [[SMSimDeployer defaultDeployer] simulators];
+	SMSimulatorModel *sim = [simulators lastObject];
+	SMAppModel *installedApp = nil;
+	SMAppCompare compare = [sim compareInstalledAppsAgainstApp:app installedApp:&installedApp];
+	
+	self.installButton.enabled = YES;
+	
+	if (SMAppCompareNotInstalled == compare || nil == installedApp) {
+		self.installedVersionLabel.stringValue = @"";
+		self.installButton.title = @"Install";
+	} else {
+		self.installedVersionLabel.stringValue = [NSString stringWithFormat:@"Installed Version: %@", installedApp.version];
+		if (SMAppCompareLessThan == compare) {
+			self.installButton.title = @"Upgrade";
+		} else if (SMAppCompareLessThan == compare) {
+			self.installButton.title = @"Downgrade";
+		} else if (SMAppCompareSame == compare) {
+			self.installButton.enabled = NO;
+			self.installButton.title = @"Upgrade";
+			self.installedVersionLabel.stringValue = [NSString stringWithFormat:@"This Version Is Already Installed."];
+		}
+
+	}	
+	
 }
 
 #pragma mark -
@@ -240,6 +313,35 @@
 	[self.fileDragView unregisterDraggedTypes];
 }
 
+- (IBAction)install:(id)sender
+{
+	self.installButton.state = NSOnState;
+}
+
+- (IBAction)cancelInstall:(id)sender
+{
+	self.cancelButton.state = NSOnState;
+	[self setAppInfoViewShowing:NO];
+}
+
+
+#pragma mark - Accessors
+
+- (void)setPendingApp:(SMAppModel *)newPendingApp
+{
+	if (newPendingApp == pendingApp) {
+		return;
+	}
+	
+	[pendingApp release];
+	pendingApp = [newPendingApp retain];
+	if (nil != pendingApp) {
+		[self setupAppInfoViewWithApp:pendingApp];
+		[self setAppInfoViewShowing:YES];
+	}
+	
+}
+
 #pragma mark - Drag & Drop
 
 - (void)fileDragView:(SMFileDragView *)dragView didReceiveFiles:(NSArray *)files
@@ -261,13 +363,8 @@
 	}
 	
 	if (nil != newApp) {
-		[self setupAppInfoViewWithApp:newApp];
-		[self.boxView addSubview:self.appInfoView];
-		
-//		[[SMSimDeployer defaultDeployer] installApplication:newApp];
-//		[self showRestartAlertIfNeeded];
-		return;
-	}
+		self.pendingApp = newApp;
+	}	
 }
 
 
