@@ -40,6 +40,13 @@
 		NSString *path = [self.mainBundle.bundlePath stringByAppendingPathComponent:iconName];
 		NSImage *image = [[NSImage alloc] initWithContentsOfFile:path];
 		NSSize imageSize = [image size];
+		
+		NSString *nameWithoutExtension = [iconName stringByDeletingPathExtension];
+		if ([nameWithoutExtension hasSuffix:@"@2x"]) {
+			imageSize.width *= 2.0f;
+			imageSize.height *= 2.0f;
+		}
+		
 		if (imageSize.width > biggestSize.width || imageSize.height > biggestSize.height) {
 			biggestIconPath = path;
 			biggestSize = imageSize;
