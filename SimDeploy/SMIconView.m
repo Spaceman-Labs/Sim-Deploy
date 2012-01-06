@@ -52,14 +52,16 @@ static CGPathRef createRoundedRectWithRadius(CGRect rect, CGFloat radius)
 	CGContextFillPath(context);
 	CGContextRestoreGState(context);
 	
-	CGContextSaveGState(context);
-	CGContextAddPath(context, path);
-	CGContextClip(context);
-	
-	CGImageSourceRef source = CGImageSourceCreateWithData((CFDataRef)[image TIFFRepresentation], NULL);
-	CGImageRef imageRef =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
-	CGContextDrawImage(context, insetRect, imageRef);
-	CGContextRestoreGState(context);
+	if (nil != self.image) {
+		CGContextSaveGState(context);
+		CGContextAddPath(context, path);
+		CGContextClip(context);
+		
+		CGImageSourceRef source = CGImageSourceCreateWithData((CFDataRef)[image TIFFRepresentation], NULL);
+		CGImageRef imageRef =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
+		CGContextDrawImage(context, insetRect, imageRef);
+		CGContextRestoreGState(context);
+	}
 	
 	CGColorRelease(black);
 	CGColorRelease(clear);
