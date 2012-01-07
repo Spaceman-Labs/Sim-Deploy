@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		C4F68FF414B8C7FF00FCC833 /* Version.h */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = C4F68FF514B8C7FF00FCC833 /* Build configuration list for PBXAggregateTarget "Version.h" */;
+			buildPhases = (
+				C4F68FF814B8C80200FCC833 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Version.h;
+			productName = Version.h;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		3D0D965214B28BF700BB51FC /* SMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D965114B28BF700BB51FC /* SMViewController.m */; };
 		3D0D970314B2CC4600BB51FC /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D96F914B2CC4600BB51FC /* ioapi.c */; };
@@ -15,7 +29,6 @@
 		3D0D970914B2CC8100BB51FC /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0D970814B2CC8100BB51FC /* libz.1.2.5.dylib */; };
 		3D0D970C14B2D3F000BB51FC /* SMSimulatorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D970B14B2D3F000BB51FC /* SMSimulatorModel.m */; };
 		3D0D972614B2E8AD00BB51FC /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D972514B2E8AD00BB51FC /* ZipArchive.m */; };
-		3D41574C14B420B2002EF5D8 /* prefs_notifications.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D41574B14B420B2002EF5D8 /* prefs_notifications.png */; };
 		3D41575214B422A5002EF5D8 /* SMLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D41575114B422A4002EF5D8 /* SMLayerView.m */; };
 		3D5F1CA014B4AF620017D6C3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */; };
 		3D5F1CA314B4AFA80017D6C3 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */; };
@@ -36,12 +49,21 @@
 		3DEAE81714AE94E400D239B4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DEAE81614AE94E400D239B4 /* Cocoa.framework */; };
 		3DEAE82114AE94E400D239B4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAE81F14AE94E400D239B4 /* InfoPlist.strings */; };
 		3DEAE82314AE94E400D239B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE82214AE94E400D239B4 /* main.m */; };
-		3DEAE82714AE94E400D239B4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAE82514AE94E400D239B4 /* Credits.rtf */; };
 		3DEAE82A14AE94E400D239B4 /* SMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE82914AE94E400D239B4 /* SMAppDelegate.m */; };
 		3DEAE82D14AE94E400D239B4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAE82B14AE94E400D239B4 /* MainMenu.xib */; };
 		3DEAE83514AE964A00D239B4 /* SMSimDeployer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE83414AE964A00D239B4 /* SMSimDeployer.m */; };
 		3DEAE83814B011B300D239B4 /* SMAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE83714B011B300D239B4 /* SMAppModel.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C4F68FF914B8C81800FCC833 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3DEAE80914AE94E400D239B4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C4F68FF414B8C7FF00FCC833;
+			remoteInfo = Version.h;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		3D5F1CA214B4AF9C0017D6C3 /* CopyFiles */ = {
@@ -73,7 +95,6 @@
 		3D0D970A14B2D3F000BB51FC /* SMSimulatorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSimulatorModel.h; sourceTree = "<group>"; };
 		3D0D970B14B2D3F000BB51FC /* SMSimulatorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSimulatorModel.m; sourceTree = "<group>"; };
 		3D0D972514B2E8AD00BB51FC /* ZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipArchive.m; sourceTree = "<group>"; };
-		3D41574B14B420B2002EF5D8 /* prefs_notifications.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs_notifications.png; sourceTree = "<group>"; };
 		3D41575014B422A4002EF5D8 /* SMLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMLayerView.h; sourceTree = "<group>"; };
 		3D41575114B422A4002EF5D8 /* SMLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMLayerView.m; sourceTree = "<group>"; };
 		3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
@@ -107,7 +128,6 @@
 		3DEAE82014AE94E400D239B4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DEAE82214AE94E400D239B4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3DEAE82414AE94E400D239B4 /* SimDeploy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimDeploy-Prefix.pch"; sourceTree = "<group>"; };
-		3DEAE82614AE94E400D239B4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		3DEAE82814AE94E400D239B4 /* SMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMAppDelegate.h; sourceTree = "<group>"; };
 		3DEAE82914AE94E400D239B4 /* SMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMAppDelegate.m; sourceTree = "<group>"; };
 		3DEAE82C14AE94E400D239B4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -280,8 +300,6 @@
 				3DEAE81F14AE94E400D239B4 /* InfoPlist.strings */,
 				3DEAE82214AE94E400D239B4 /* main.m */,
 				3DEAE82414AE94E400D239B4 /* SimDeploy-Prefix.pch */,
-				3DEAE82514AE94E400D239B4 /* Credits.rtf */,
-				3D41574B14B420B2002EF5D8 /* prefs_notifications.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -289,9 +307,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3DEAE81114AE94E400D239B4 /* SimDeploy */ = {
+		3DEAE81114AE94E400D239B4 /* Sim Deploy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3DEAE83014AE94E400D239B4 /* Build configuration list for PBXNativeTarget "SimDeploy" */;
+			buildConfigurationList = 3DEAE83014AE94E400D239B4 /* Build configuration list for PBXNativeTarget "Sim Deploy" */;
 			buildPhases = (
 				3DEAE80E14AE94E400D239B4 /* Sources */,
 				3DEAE80F14AE94E400D239B4 /* Frameworks */,
@@ -301,8 +319,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				C4F68FFA14B8C81800FCC833 /* PBXTargetDependency */,
 			);
-			name = SimDeploy;
+			name = "Sim Deploy";
 			productName = SimDeploy;
 			productReference = 3DEAE81214AE94E400D239B4 /* SimDeploy.app */;
 			productType = "com.apple.product-type.application";
@@ -327,7 +346,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3DEAE81114AE94E400D239B4 /* SimDeploy */,
+				3DEAE81114AE94E400D239B4 /* Sim Deploy */,
+				C4F68FF414B8C7FF00FCC833 /* Version.h */,
 			);
 		};
 /* End PBXProject section */
@@ -338,9 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DEAE82114AE94E400D239B4 /* InfoPlist.strings in Resources */,
-				3DEAE82714AE94E400D239B4 /* Credits.rtf in Resources */,
 				3DEAE82D14AE94E400D239B4 /* MainMenu.xib in Resources */,
-				3D41574C14B420B2002EF5D8 /* prefs_notifications.png in Resources */,
 				3D5F1CA514B4B1F50017D6C3 /* dsa_pub.pem in Resources */,
 				3D97866F14B6C02800F01009 /* noise.png in Resources */,
 				3D97868214B6D91500F01009 /* MoveApplication.strings in Resources */,
@@ -350,6 +368,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C4F68FF814B8C80200FCC833 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/version.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "CURRENT_PROJECT_VERSION=$(cd ${SRCROOT} && svnversion | sed s/M//)\necho \"#define CURRENT_PROJECT_VERSION ${CURRENT_PROJECT_VERSION}\" > \"${SRCROOT}/version.h\"\n#echo \"#define CURRENT_PROJECT_VERSION 23\" > \"${SRCROOT}/version.h\"\n#sed 's/SVN_REVISION/'\"$REVISION\"'/' \"${INFO_PLIST_STRINGS}\" > /tmp/InfoPlist.strings";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3DEAE80E14AE94E400D239B4 /* Sources */ = {
@@ -380,6 +415,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C4F68FFA14B8C81800FCC833 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C4F68FF414B8C7FF00FCC833 /* Version.h */;
+			targetProxy = C4F68FF914B8C81800FCC833 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		3D97868414B6D91500F01009 /* MoveApplication.strings */ = {
 			isa = PBXVariantGroup;
@@ -395,14 +438,6 @@
 				3DEAE82014AE94E400D239B4 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		3DEAE82514AE94E400D239B4 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3DEAE82614AE94E400D239B4 /* en */,
-			);
-			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 		3DEAE82B14AE94E400D239B4 /* MainMenu.xib */ = {
@@ -473,6 +508,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimDeploy/SimDeploy-Prefix.pch";
 				INFOPLIST_FILE = "SimDeploy/SimDeploy-Info.plist";
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				INFOPLIST_PREFIX_HEADER = version.h;
+				INFOPLIST_PREPROCESS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -488,8 +526,25 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimDeploy/SimDeploy-Prefix.pch";
 				INFOPLIST_FILE = "SimDeploy/SimDeploy-Info.plist";
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				INFOPLIST_PREFIX_HEADER = version.h;
+				INFOPLIST_PREPROCESS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C4F68FF614B8C7FF00FCC833 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C4F68FF714B8C7FF00FCC833 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -505,11 +560,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3DEAE83014AE94E400D239B4 /* Build configuration list for PBXNativeTarget "SimDeploy" */ = {
+		3DEAE83014AE94E400D239B4 /* Build configuration list for PBXNativeTarget "Sim Deploy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3DEAE83114AE94E400D239B4 /* Debug */,
 				3DEAE83214AE94E400D239B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C4F68FF514B8C7FF00FCC833 /* Build configuration list for PBXAggregateTarget "Version.h" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4F68FF614B8C7FF00FCC833 /* Debug */,
+				C4F68FF714B8C7FF00FCC833 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

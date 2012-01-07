@@ -42,19 +42,24 @@
 	[self.progressIndicator setMinValue:0.0f];
 	[self.progressIndicator setMaxValue:100.0f];
 	
-
-	CGRect frame = self.titleLabel.frame;
-	frame.size.height += 20.0f;
-	frame.origin.y -= 25.0f;
-	self.titleLabel.frame = frame;
+	NSString *lastURL = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastURL"];
+	if (nil != lastURL) {
+		self.downloadTextField.stringValue = lastURL;
+	}
 	
-	frame = self.versionLabel.frame;
-	frame.origin.y = CGRectGetMinY(self.titleLabel.frame) - 5.0f;
-	self.versionLabel.frame = frame;
 
-	frame = self.installedVersionLabel.frame;
-	frame.origin.y = CGRectGetMinY(self.installedVersionLabel.frame) - 5.0f;
-	self.installedVersionLabel.frame = frame;
+//	CGRect frame = self.titleLabel.frame;
+//	frame.size.height += 20.0f;
+//	frame.origin.y -= 25.0f;
+//	self.titleLabel.frame = frame;
+//	
+//	frame = self.versionLabel.frame;
+//	frame.origin.y = CGRectGetMinY(self.titleLabel.frame) - 5.0f;
+//	self.versionLabel.frame = frame;
+//
+//	frame = self.installedVersionLabel.frame;
+//	frame.origin.y = CGRectGetMinY(self.installedVersionLabel.frame) - 5.0f;
+//	self.installedVersionLabel.frame = frame;
 	
 	[[self.versionLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
 	[[self.titleLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
@@ -93,6 +98,10 @@
 
 - (IBAction)downloadFromURL:(id)sender
 {
+	if (nil != modalSession) {
+		return;
+	}
+	
 	self.downloadFromURLButton.state = 1;
 	
 	[self deregisterForDragAndDrop];
@@ -123,6 +132,7 @@
 	[NSApp endModalSession:modalSession];
     [NSApp endSheet:self.downloadURLSheet];
     [self.downloadURLSheet orderOut:nil];
+	modalSession = nil;
 }
 
 - (void)downloadURLAtLocation:(NSString *)location
@@ -144,6 +154,7 @@
 	NSURL *url = [NSURL URLWithString:urlPath];
 	
 	SMSimDeployer *deployer = [SMSimDeployer defaultDeployer];
+	[[NSUserDefaults standardUserDefaults] setObject:urlPath forKey:@"lastURL"];
 	
 	[deployer downloadAppAtURL:url 
 			   percentComplete:^(CGFloat percentComplete) {
@@ -161,10 +172,16 @@
 					   [self.progressIndicator setIndeterminate:YES];
 					   [self.progressIndicator startAnimation:nil];
 				   }
-				   
-				   NSLog(@"percent complete: %f", percentComplete);
 			   }
 					completion:^(BOOL failed) {
+						self.downloadButton.enabled = YES;
+						[self registerForDragAndDrop];
+						[NSApp endModalSession:modalSession];
+						[NSApp endSheet:self.downloadURLSheet];
+						modalSession = nil;
+						[self.downloadURLSheet orderOut:nil];
+						
+						
 						[self.downloadFromURLButton setEnabled:YES];
 						if (showingProgressIndicator) {
 							showingProgressIndicator = NO;
@@ -307,7 +324,9 @@
 	}
 	
 	self.titleLabel.stringValue = app.name;
-	self.versionLabel.stringValue = [NSString stringWithFormat:@"Version: %@", app.version];
+	NSMutableString *version = [NSMutableString stringWithFormat:@"Version: %@", app.marketingVersion];
+	[version appendFormat:@" (%@)", app.version];
+	self.versionLabel.stringValue = version;
 	if (nil != app.iconPath) {
 		self.iconView.image = [[[NSImage alloc] initWithContentsOfFile:app.iconPath] autorelease];
 	} else {
@@ -325,7 +344,9 @@
 		self.installedVersionLabel.stringValue = @"";
 		self.installButton.title = @"Install";
 	} else {
-		self.installedVersionLabel.stringValue = [NSString stringWithFormat:@"Installed Version: %@", installedApp.version];
+		NSMutableString *version = [NSMutableString stringWithFormat:@"Version: %@", installedApp.marketingVersion];
+		[version appendFormat:@" (%@)", installedApp.version];
+		self.installedVersionLabel.stringValue = version;
 		if (SMAppCompareLessThan == compare) {
 			self.installButton.title = @"Upgrade";
 		} else if (SMAppCompareGreaterThan == compare) {
