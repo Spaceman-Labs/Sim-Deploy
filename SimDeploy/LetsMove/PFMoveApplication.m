@@ -277,22 +277,22 @@ static NSString *PreferredInstallLocation(BOOL *isUserDirectory) {
 	// Assume that if the user has a ~/Applications folder, they'd prefer their
 	// applications to go there.
 
-	NSFileManager *fm = [NSFileManager defaultManager];
-
-	NSArray *userApplicationsDirs = NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSUserDomainMask, YES);
-
-	if ([userApplicationsDirs count] > 0) {
-		NSString *userApplicationsDir = [userApplicationsDirs objectAtIndex:0];
-		BOOL isDirectory;
-
-		if ([fm fileExistsAtPath:userApplicationsDir isDirectory:&isDirectory] && isDirectory) {
-			if (isUserDirectory) *isUserDirectory = YES;
-			return [userApplicationsDir stringByResolvingSymlinksAndAliases];
-		}
-	}
-
-	// No user Applications directory. Return the machine local Applications directory
-	if (isUserDirectory) *isUserDirectory = NO;
+//	NSFileManager *fm = [NSFileManager defaultManager];
+//
+//	NSArray *userApplicationsDirs = NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSUserDomainMask, YES);
+//
+//	if ([userApplicationsDirs count] > 0) {
+//		NSString *userApplicationsDir = [userApplicationsDirs objectAtIndex:0];
+//		BOOL isDirectory;
+//
+//		if ([fm fileExistsAtPath:userApplicationsDir isDirectory:&isDirectory] && isDirectory) {
+//			if (isUserDirectory) *isUserDirectory = YES;
+//			return [userApplicationsDir stringByResolvingSymlinksAndAliases];
+//		}
+//	}
+//
+//	// No user Applications directory. Return the machine local Applications directory
+//	if (isUserDirectory) *isUserDirectory = NO;
 	return [[NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSLocalDomainMask, YES) lastObject] stringByResolvingSymlinksAndAliases];
 }
 
