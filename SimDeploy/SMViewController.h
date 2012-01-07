@@ -20,6 +20,8 @@
 @property (nonatomic, retain) SMAppModel *pendingApp;
 @property (nonatomic, readonly) BOOL showingAppInfoView;
 
+@property (nonatomic, retain) IBOutlet NSWindow *mainWindow;
+
 @property (nonatomic, retain) IBOutlet NSPanel *downloadURLSheet;
 @property (nonatomic, retain) IBOutlet NSTextField *downloadTextField;
 @property (nonatomic, retain) IBOutlet NSProgressIndicator *progressIndicator;

@@ -30,6 +30,7 @@
 @synthesize installButton;
 @synthesize progressIndicator;
 @synthesize downloadButton;
+@synthesize mainWindow;
 
 - (void)awakeFromNib
 {	
@@ -82,6 +83,7 @@
 
 - (void)dealloc
 {
+	self.mainWindow = nil;
 	self.fileDragView = nil;
 	self.downloadURLSheet = nil;
 	self.downloadTextField = nil;
@@ -105,9 +107,8 @@
 	self.downloadFromURLButton.state = 1;
 	
 	[self deregisterForDragAndDrop];
-	NSLog(@"main window: %@", [NSApp mainWindow]);
 	[[NSApplication sharedApplication] beginSheet:self.downloadURLSheet
-								   modalForWindow:[NSApp mainWindow]
+								   modalForWindow:self.mainWindow
 									modalDelegate:nil
 								   didEndSelector:nil
 									  contextInfo:nil];
@@ -138,7 +139,7 @@
 
 - (void)downloadURLAtLocation:(NSString *)location
 {
-//	[self.downloadTextField setStringValue:location];
+	[self.downloadTextField setStringValue:location];
 	[self downloadFromURL:self];
 }
 
@@ -344,7 +345,7 @@
 		self.installedVersionLabel.stringValue = @"";
 		self.installButton.title = @"Install";
 	} else {
-		NSMutableString *version = [NSMutableString stringWithFormat:@"Version: %@", installedApp.marketingVersion];
+		NSMutableString *version = [NSMutableString stringWithFormat:@"Installed Version: %@", installedApp.marketingVersion];
 		[version appendFormat:@" (%@)", installedApp.version];
 		self.installedVersionLabel.stringValue = version;
 		if (SMAppCompareLessThan == compare) {
@@ -403,6 +404,8 @@
 			[[SMSimDeployer defaultDeployer] restartiOSSimulator];
 		}
 	}
+	
+	[self setAppInfoViewShowing:NO];
 }
 
 - (void)registerForDragAndDrop
