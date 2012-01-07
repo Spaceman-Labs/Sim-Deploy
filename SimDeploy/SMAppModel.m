@@ -19,6 +19,11 @@
 		return nil;
 	}
 	
+	if (NO == [[bundle.infoDictionary objectForKey:@"DTPlatformName"] isEqualToString:@"iphonesimulator"]) {
+		[self release];
+		return nil;
+	}
+	
 	self = [super init];
 	if (nil == self) {
 		return nil;
