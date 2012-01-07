@@ -21,7 +21,9 @@
 
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
+#ifdef DEBUG
 	PFMoveToApplicationsFolderIfNecessary();
+#endif
 	[[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleURLEvent:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
 }
 
