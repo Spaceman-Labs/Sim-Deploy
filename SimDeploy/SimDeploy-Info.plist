@@ -81,7 +81,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
-	<string>http://79lines.com/simpledeploy/appcast.xml</string>
+	<string>http://www.spacemanlabs.com/simdeploy/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
 </dict>
