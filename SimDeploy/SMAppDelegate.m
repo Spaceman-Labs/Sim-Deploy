@@ -13,9 +13,13 @@
 
 @synthesize window = _window;
 @synthesize viewController;
+@synthesize pathToFetchAfterLaunch;
 
 - (void)dealloc
 {
+	self.window = nil;
+	self.viewController = nil;
+	self.pathToFetchAfterLaunch = nil;
     [super dealloc];
 }
 
@@ -29,6 +33,10 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+//	if (nil != self.pathToFetchAfterLaunch) {
+//		[self.viewController downloadURLAtLocation:self.pathToFetchAfterLaunch];
+//	}
+
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
@@ -52,9 +60,8 @@
 	}
 	
 	NSString *fetchLocation = [queryParams objectForKey:@"url"];
-	if (nil != fetchLocation) {
-		[self.viewController downloadURLAtLocation:fetchLocation];
-	}
+	
+	self.pathToFetchAfterLaunch = fetchLocation;	
 }
 
 // Handle a file dropped on the dock icon

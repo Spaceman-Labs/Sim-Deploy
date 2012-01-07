@@ -13,6 +13,7 @@
 
 @property (assign) IBOutlet NSWindow *window;
 @property (nonatomic, retain) IBOutlet SMViewController *viewController;
+@property (nonatomic, retain) NSString *pathToFetchAfterLaunch;
 
 - (IBAction)openDocument:(id)sender;
 

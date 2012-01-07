@@ -105,6 +105,7 @@
 	self.downloadFromURLButton.state = 1;
 	
 	[self deregisterForDragAndDrop];
+	NSLog(@"main window: %@", [NSApp mainWindow]);
 	[[NSApplication sharedApplication] beginSheet:self.downloadURLSheet
 								   modalForWindow:[NSApp mainWindow]
 									modalDelegate:nil
@@ -137,9 +138,8 @@
 
 - (void)downloadURLAtLocation:(NSString *)location
 {
-	[self.downloadTextField setStringValue:location];
+//	[self.downloadTextField setStringValue:location];
 	[self downloadFromURL:self];
-//	[self downloadAppAtTextFieldURL:self];
 }
 
 - (IBAction)downloadAppAtTextFieldURL:(id)sender
