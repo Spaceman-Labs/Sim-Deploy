@@ -3,7 +3,7 @@
 //  SimDeploy
 //
 //  Created by Jerry Jones on 1/2/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Spaceman Labs. All rights reserved.
 //
 
 #import <QuartzCore/QuartzCore.h>

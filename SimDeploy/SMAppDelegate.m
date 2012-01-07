@@ -3,7 +3,7 @@
 //  SimDeploy
 //
 //  Created by Jerry Jones on 12/30/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Spaceman Labs. All rights reserved.
 //
 
 #import "SMAppDelegate.h"

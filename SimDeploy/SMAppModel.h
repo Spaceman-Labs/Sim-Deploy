@@ -3,7 +3,7 @@
 //  SimDeploy
 //
 //  Created by Jerry Jones on 12/31/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Spaceman Labs. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
