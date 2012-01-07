@@ -17,18 +17,19 @@
 @synthesize fileDragView;
 @synthesize downloadTextField;
 @synthesize downloadURLSheet;
-@synthesize progressContainer;
 @synthesize titleLabel;
 @synthesize iconView;
 @synthesize boxView;
 @synthesize appInfoView;
 @synthesize versionLabel;
 @synthesize installedVersionLabel;
-@synthesize downloadButton;
+@synthesize downloadFromURLButton;
 @synthesize pendingApp;
 @synthesize controlContainer;
 @synthesize cancelButton;
 @synthesize installButton;
+@synthesize progressIndicator;
+@synthesize downloadButton;
 
 - (void)awakeFromNib
 {	
@@ -37,6 +38,10 @@
 	self.fileDragView.delegate = self;
 	self.fileDragView.layer.cornerRadius = 15.0f;
 	[self registerForDragAndDrop];
+	
+	[self.progressIndicator setMinValue:0.0f];
+	[self.progressIndicator setMaxValue:100.0f];
+	
 
 	CGRect frame = self.titleLabel.frame;
 	frame.size.height += 20.0f;
@@ -75,19 +80,20 @@
 	self.fileDragView = nil;
 	self.downloadURLSheet = nil;
 	self.downloadTextField = nil;
-	self.progressContainer = nil;
 	self.boxView = nil;
 	self.appInfoView = nil;
 	self.versionLabel = nil;
-	self.downloadButton = nil;
+	self.downloadFromURLButton = nil;
 	self.controlContainer = nil;
 	self.installedVersionLabel = nil;
+	self.progressIndicator = nil;
+	self.downloadButton = nil;
 	[super dealloc];
 }
 
 - (IBAction)downloadFromURL:(id)sender
 {
-	self.downloadButton.state = 1;
+	self.downloadFromURLButton.state = 1;
 	
 	[self deregisterForDragAndDrop];
 	[[NSApplication sharedApplication] beginSheet:self.downloadURLSheet
@@ -106,6 +112,13 @@
 
 - (IBAction)cancelDownloadFromURL:(id)sender
 {
+	[[SMSimDeployer defaultDeployer].download cancel];
+	self.progressIndicator.hidden = YES;
+	self.downloadTextField.hidden = NO;
+	self.downloadButton.enabled = YES;
+	showingProgressIndicator = NO;
+	
+	
 	[self registerForDragAndDrop];
 	[NSApp endModalSession:modalSession];
     [NSApp endSheet:self.downloadURLSheet];
@@ -120,24 +133,45 @@
 }
 
 - (IBAction)downloadAppAtTextFieldURL:(id)sender
-{
-	
+{	
 	NSString *urlPath = [self.downloadTextField stringValue];
 	if (nil == urlPath || [urlPath length] < 1) {
 		return;
 	}
 	
+	self.downloadButton.enabled = NO;
+	
 	NSURL *url = [NSURL URLWithString:urlPath];
 	
 	SMSimDeployer *deployer = [SMSimDeployer defaultDeployer];
-	[NSApp endModalSession:modalSession];
-    [NSApp endSheet:self.downloadURLSheet];
-    [self.downloadURLSheet orderOut:nil];
-
-	
 	
 	[deployer downloadAppAtURL:url 
+			   percentComplete:^(CGFloat percentComplete) {
+				   if (NO == showingProgressIndicator) {
+					   showingProgressIndicator = YES;
+					   [self.downloadTextField setHidden:YES];
+					   [self.progressIndicator setHidden:NO];
+					   [self.progressIndicator setDoubleValue:0.0f];
+				   }
+				   
+				   if (percentComplete > 0.0f) {
+					   [self.progressIndicator setIndeterminate:NO];
+					   [self.progressIndicator setDoubleValue:percentComplete];
+				   } else {
+					   [self.progressIndicator setIndeterminate:YES];
+					   [self.progressIndicator startAnimation:nil];
+				   }
+				   
+				   NSLog(@"percent complete: %f", percentComplete);
+			   }
 					completion:^(BOOL failed) {
+						[self.downloadFromURLButton setEnabled:YES];
+						if (showingProgressIndicator) {
+							showingProgressIndicator = NO;
+							[self.downloadTextField setHidden:NO];
+							[self.progressIndicator setHidden:YES];
+						}
+						
 						if (failed) {
 							NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 							[alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Ok")];
@@ -153,13 +187,14 @@
 						SMAppModel *downloadedApp = [deployer unzipAppArchive];
 						
 						if (nil == downloadedApp) {
+							self.downloadButton.enabled = YES;
 							NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 							[alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Ok")];
 							[alert setMessageText:NSLocalizedString(@"No Valid Application Found", nil)];
 							[alert setInformativeText:NSLocalizedString(@"The downloaded file did not contain a valid simulator build. Please check your URL and try again.", nil)];
 							[alert setAlertStyle:NSCriticalAlertStyle];
 							
-							[alert beginSheetModalForWindow:[NSApp mainWindow] modalDelegate:nil didEndSelector:nil contextInfo:nil];
+							[alert beginSheetModalForWindow:nil modalDelegate:nil didEndSelector:nil contextInfo:nil];
 							return;
 						}
 						
@@ -266,7 +301,11 @@
 }
 
 - (void)setupAppInfoViewWithApp:(SMAppModel *)app
-{
+{	
+	if (nil == app) {
+		NSLog(@"nil!");
+	}
+	
 	self.titleLabel.stringValue = app.name;
 	self.versionLabel.stringValue = [NSString stringWithFormat:@"Version: %@", app.version];
 	if (nil != app.iconPath) {

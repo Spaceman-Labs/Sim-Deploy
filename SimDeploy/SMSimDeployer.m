@@ -13,7 +13,9 @@
 
 @implementation SMSimDeployer
 
+@synthesize download;
 @synthesize simulators;
+@synthesize downloadResponse;
 
 + (SMSimDeployer *)defaultDeployer {
 	static dispatch_once_t pred;
@@ -179,17 +181,20 @@
 
 
 
-- (void)downloadAppAtURL:(NSURL *)url completion:(void(^)(BOOL failed))completion
+- (void)downloadAppAtURL:(NSURL *)url percentComplete:(void(^)(CGFloat percentComplete))percentComplete completion:(void(^)(BOOL failed))completion
 {
 	[downloadCompletionBlock release];
 	downloadCompletionBlock = [completion copy];
+	
+	[percentCompleteBlock release];
+	percentCompleteBlock = [percentComplete copy];
 	
 	[self deleteTempFile];
 	
 	[[NSFileManager defaultManager] removeItemAtPath:[self tempArchivePath] error:nil];
 	
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20.0f];
-	NSURLDownload *download = [[NSURLDownload alloc] initWithRequest:request delegate:self];
+	self.download = [[[NSURLDownload alloc] initWithRequest:request delegate:self] autorelease];
 	[download setDestination:[self tempArchivePath] allowOverwrite:YES];
 }
 
@@ -270,6 +275,41 @@
 }
 
 #pragma mark - NSURLDownloadDelegate
+
+- (void)download:(NSURLDownload *)download didReceiveResponse:(NSURLResponse *)response
+{
+    // Reset the progress, this might be called multiple times.
+    // bytesReceived is an instance variable defined elsewhere.
+    bytesReceived = 0;
+	
+    // Retain the response to use later.
+	self.downloadResponse = nil;
+    [self setDownloadResponse:response];
+}
+
+- (void)download:(NSURLDownload *)download didReceiveDataOfLength:(NSUInteger)length
+{
+	long long expectedLength = [[self downloadResponse] expectedContentLength];
+	
+    bytesReceived = bytesReceived + length;
+	
+    if (expectedLength != NSURLResponseUnknownLength) {
+        // If the expected content length is
+        // available, display percent complete.
+        CGFloat percentComplete = (bytesReceived/(CGFloat)expectedLength)*100.0;
+		
+		if (nil != percentCompleteBlock) {
+			percentCompleteBlock(percentComplete);
+		}
+    } else {
+        // If the expected content length is
+        // unknown, just log the progress.
+		if (nil != percentCompleteBlock) {
+			percentCompleteBlock(-1.0f);
+		}
+//        NSLog(@"Bytes received - %i",bytesReceived);
+    }	
+}
 
 - (void)downloadDidFinish:(NSURLDownload *)download
 {

@@ -14,6 +14,7 @@
 @interface SMViewController : NSObject <NSAlertDelegate, SMFileDragViewDelegate>
 {
 	NSModalSession	modalSession;
+	BOOL showingProgressIndicator;
 }
 
 @property (nonatomic, retain) SMAppModel *pendingApp;
@@ -21,12 +22,12 @@
 
 @property (nonatomic, retain) IBOutlet NSPanel *downloadURLSheet;
 @property (nonatomic, retain) IBOutlet NSTextField *downloadTextField;
-
-@property (nonatomic, retain) IBOutlet NSView *progressContainer;
+@property (nonatomic, retain) IBOutlet NSProgressIndicator *progressIndicator;
+@property (nonatomic, retain) IBOutlet NSButton *downloadButton;
 
 @property (nonatomic, retain) IBOutlet NSView *controlContainer;
 @property (nonatomic, retain) IBOutlet NSBox *boxView;
-@property (nonatomic, retain) IBOutlet NSButton *downloadButton;
+@property (nonatomic, retain) IBOutlet NSButton *downloadFromURLButton;
 @property (nonatomic, retain) IBOutlet SMFileDragView *fileDragView;
 
 @property (nonatomic, retain) IBOutlet NSView *appInfoView;
