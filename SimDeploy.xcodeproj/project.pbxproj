@@ -42,6 +42,7 @@
 		3D97868214B6D91500F01009 /* MoveApplication.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D97868414B6D91500F01009 /* MoveApplication.strings */; };
 		3D97868814B75C3900F01009 /* DropRect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D97868714B75C3900F01009 /* DropRect.png */; };
 		3D97868A14B75EC200F01009 /* or.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D97868914B75EC200F01009 /* or.png */; };
+		3D97869314B8DE8000F01009 /* SimDeploy.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3D97869214B8DE8000F01009 /* SimDeploy.icns */; };
 		3DB7748A14B36CBD0042BD98 /* NSAlert-OAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */; };
 		3DB7749B14B400580042BD98 /* SMFileDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7749A14B400580042BD98 /* SMFileDragView.m */; };
 		3DD744EC14B52B3C00EA0A46 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD744EB14B52B3C00EA0A46 /* QuartzCore.framework */; };
@@ -112,6 +113,7 @@
 		3D97868314B6D91500F01009 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MoveApplication.strings; sourceTree = "<group>"; };
 		3D97868714B75C3900F01009 /* DropRect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DropRect.png; sourceTree = "<group>"; };
 		3D97868914B75EC200F01009 /* or.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = or.png; sourceTree = "<group>"; };
+		3D97869214B8DE8000F01009 /* SimDeploy.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = SimDeploy.icns; sourceTree = "<group>"; };
 		3DB7748814B36CBD0042BD98 /* NSAlert-OAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert-OAExtensions.h"; sourceTree = "<group>"; };
 		3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert-OAExtensions.m"; sourceTree = "<group>"; };
 		3DB7749914B400580042BD98 /* SMFileDragView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMFileDragView.h; sourceTree = "<group>"; };
@@ -119,7 +121,7 @@
 		3DD744EB14B52B3C00EA0A46 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3DD744F014B532E400EA0A46 /* SMIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMIconView.h; sourceTree = "<group>"; };
 		3DD744F114B532E400EA0A46 /* SMIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMIconView.m; sourceTree = "<group>"; };
-		3DEAE81214AE94E400D239B4 /* SimDeploy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimDeploy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DEAE81214AE94E400D239B4 /* SimDeploy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SimDeploy.app; path = "Sim Deploy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DEAE81614AE94E400D239B4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3DEAE81914AE94E400D239B4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		3DEAE81A14AE94E400D239B4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -183,6 +185,7 @@
 		3D41574D14B421FB002EF5D8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3D97869214B8DE8000F01009 /* SimDeploy.icns */,
 				3D97868414B6D91500F01009 /* MoveApplication.strings */,
 				3D97866E14B6C02800F01009 /* noise.png */,
 				3D97868914B75EC200F01009 /* or.png */,
@@ -364,6 +367,7 @@
 				3D97868214B6D91500F01009 /* MoveApplication.strings in Resources */,
 				3D97868814B75C3900F01009 /* DropRect.png in Resources */,
 				3D97868A14B75EC200F01009 /* or.png in Resources */,
+				3D97869314B8DE8000F01009 /* SimDeploy.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
