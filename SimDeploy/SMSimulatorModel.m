@@ -71,10 +71,6 @@
 			NSString *fullPath = [guidPath stringByAppendingPathComponent:appBundlePath];
 			NSBundle *bundle = [NSBundle bundleWithPath:fullPath];
 			
-			if (nil == bundle || NO == [[bundle.infoDictionary objectForKey:@"DTPlatformName"] isEqualToString:@"iphonesimulator"]) {
-				continue;
-			}
-			
 			
 			SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
 			if (nil != appModel) {
