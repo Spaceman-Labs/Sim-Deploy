@@ -65,6 +65,14 @@
 // Handle a file dropped on the dock icon
 - (BOOL)application:(NSApplication *)sender openFile:(NSString *)path
 {
+	if ([path hasSuffix:@".zip"]) {
+		SMAppModel *app = [[SMSimDeployer defaultDeployer] unzipAppArchiveAtPath:path];
+		if (nil != app) {
+			[self.viewController setupAppInfoViewWithApp:app];
+			return YES;
+		}		
+	}
+	
 	
 	SMAppModel *newApp = nil;
 	

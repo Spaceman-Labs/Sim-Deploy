@@ -451,12 +451,19 @@
 #pragma mark - Drag & Drop
 
 - (void)fileDragView:(SMFileDragView *)dragView didReceiveFiles:(NSArray *)files
-{
+{	
 	// Check for valid application
 	
 	SMAppModel *newApp = nil;
 	
 	for (NSString *path in files) {
+		if ([path hasSuffix:@".zip"]) {
+			newApp = [[SMSimDeployer defaultDeployer] unzipAppArchiveAtPath:path];
+			if (nil != newApp) {
+				break;
+			}		
+		}
+		
 		NSBundle *bundle = [NSBundle bundleWithPath:path];
 		SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
 		
