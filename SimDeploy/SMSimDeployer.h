@@ -34,7 +34,7 @@
 - (SMAppModel *)unzipAppArchiveAtPath:(NSString *)path;
 - (SMAppModel *)unzipAppArchive;
 
-- (void)installApplication:(SMAppModel *)app;
+- (void)installApplication:(SMAppModel *)app clean:(BOOL)clean;
 - (void)cleanup;
 
 @end

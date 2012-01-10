@@ -285,10 +285,10 @@
 	return NO;
 }
 
-- (void)installApplication:(SMAppModel *)app
+- (void)installApplication:(SMAppModel *)app clean:(BOOL)clean
 {
 	for (SMSimulatorModel *sim in self.simulators) {
-		[sim installApplication:app upgradeIfPossible:NO];
+		[sim installApplication:app upgradeIfPossible:!clean];
 	}
 }
 

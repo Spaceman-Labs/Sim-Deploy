@@ -31,9 +31,15 @@
 @synthesize progressIndicator;
 @synthesize downloadButton;
 @synthesize mainWindow;
+@synthesize installTitleLabel;
+@synthesize installMessageLabel;
+@synthesize installProgressIndicator;
+@synthesize installPanel;
+@synthesize cleanInstallButton;
 
 - (void)awakeFromNib
 {	
+	[self.installProgressIndicator startAnimation:self];
 	self.downloadTextField.target = self;
 	[self.downloadTextField setAction:@selector(downloadAppAtTextFieldURL:)];
 	self.fileDragView.delegate = self;
@@ -65,6 +71,7 @@
 	[[self.versionLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
 	[[self.titleLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
 	[[self.installedVersionLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+	[[self.cleanInstallButton cell] setBackgroundStyle:NSBackgroundStyleRaised];
 	
 	self.iconView.image = [NSImage imageNamed:@"Icon@2x.png"];
 	
@@ -95,6 +102,12 @@
 	self.installedVersionLabel = nil;
 	self.progressIndicator = nil;
 	self.downloadButton = nil;
+	self.installTitleLabel = nil;
+	self.installMessageLabel = nil;
+	self.installProgressIndicator = nil;
+	self.installPanel = nil;
+	self.cleanInstallButton = nil;
+	
 	[super dealloc];
 }
 
@@ -241,13 +254,13 @@
 						  window:[NSApp mainWindow] 
 					  completion:^(NSAlert *alert, NSInteger returnCode) {
 						  if (returnCode == NSAlertFirstButtonReturn) {
-							  [[SMSimDeployer defaultDeployer] installApplication:app];							  
+							  [[SMSimDeployer defaultDeployer] installApplication:app clean:YES];							  
 							  [self showRestartAlertIfNeeded];
 						  }
 					  }];
 		
 	} else {
-		[[SMSimDeployer defaultDeployer] installApplication:app];
+		[[SMSimDeployer defaultDeployer] installApplication:app clean:YES];
 		[self showRestartAlertIfNeeded];	
 	}
 	
@@ -262,6 +275,25 @@
 	SMSimulatorModel *sim = [simulators lastObject];
 	SMAppCompare appCompare = [sim compareInstalledAppsAgainstApp:self.pendingApp installedApp:nil];
 	
+	void (^installBlock)(void) = ^{
+		[[NSApplication sharedApplication] beginSheet:self.installPanel
+									   modalForWindow:self.mainWindow
+										modalDelegate:nil
+									   didEndSelector:nil
+										  contextInfo:nil];
+		
+		[[SMSimDeployer defaultDeployer] installApplication:self.pendingApp clean:self.cleanInstallButton.state == NSOnState];
+		
+		double delayInSeconds = 1.0;
+		dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+		dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+			[NSApp endSheet:self.installPanel];
+			[self.installPanel orderOut:nil];
+			[self showRestartAlertIfNeeded];
+		});
+
+	};
+	
 	if (SMAppCompareGreaterThan == appCompare) {
 		[NSAlert beginAlertSheet:@"Your Current Version is Newer!" 
 						 message:@"Your current installed version is newer, are you sure you want to downgrade?" 
@@ -271,14 +303,12 @@
 						  window:[NSApp mainWindow] 
 					  completion:^(NSAlert *alert, NSInteger returnCode) {
 						  if (returnCode == NSAlertFirstButtonReturn) {
-							  [[SMSimDeployer defaultDeployer] installApplication:self.pendingApp];							  
-							  [self showRestartAlertIfNeeded];
+							  installBlock();
 						  }
 					  }];
 		
 	} else {
-		[[SMSimDeployer defaultDeployer] installApplication:self.pendingApp];
-		[self showRestartAlertIfNeeded];	
+		installBlock();
 	}
 }
 
@@ -299,6 +329,7 @@
 {	
 	if (showing) {
 		self.appInfoView.hidden = NO;
+		self.cleanInstallButton.state = NSOffState;
 	}
 	
 	[CATransaction begin];
@@ -317,9 +348,11 @@
 	if (showing) {
 		self.appInfoView.layer.opacity = 1.0f;
 		self.controlContainer.layer.opacity = 0.0f;
+		self.downloadFromURLButton.enabled = NO;
 	} else { 		
 		self.appInfoView.layer.opacity = 0.0f;
 		self.controlContainer.layer.opacity = 1.0f;
+		self.downloadFromURLButton.enabled = YES;
 	}	
 	[CATransaction commit];
 }
@@ -331,6 +364,7 @@
 	}
 	
 	self.titleLabel.stringValue = app.name;
+	[self.titleLabel sizeToFit];
 	NSMutableString *version = [NSMutableString stringWithFormat:@"Version: %@", app.marketingVersion];
 	[version appendFormat:@" (%@)", app.version];
 	self.versionLabel.stringValue = version;
@@ -350,10 +384,18 @@
 	if (SMAppCompareNotInstalled == compare || nil == installedApp) {
 		self.installedVersionLabel.stringValue = @"";
 		self.installButton.title = @"Install";
+		self.cleanInstallButton.hidden = YES;
 	} else {
 		NSMutableString *version = [NSMutableString stringWithFormat:@"Installed Version: %@", installedApp.marketingVersion];
 		[version appendFormat:@" (%@)", installedApp.version];
 		self.installedVersionLabel.stringValue = version;
+		[self.installedVersionLabel sizeToFit];
+		
+		self.cleanInstallButton.hidden = NO;
+		CGRect frame = self.cleanInstallButton.frame;
+		frame.origin.y = CGRectGetMinY(self.installedVersionLabel.frame) - frame.size.height - 5.0f;
+		self.cleanInstallButton.frame = frame;
+		
 		if (SMAppCompareLessThan == compare) {
 			self.installButton.title = @"Upgrade";
 		} else if (SMAppCompareGreaterThan == compare) {
@@ -365,6 +407,8 @@
 		}
 
 	}	
+	
+	self.appInfoView.installDisabled = ![self.installButton isEnabled];
 	
 }
 

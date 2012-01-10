@@ -10,6 +10,7 @@
 #import "SMSimDeployer.h"
 #import "SMFileDragView.h"
 #import "SMIconView.h"
+#import "SMAppInstallView.h"
 
 @interface SMViewController : NSObject <NSAlertDelegate, SMFileDragViewDelegate>
 {
@@ -32,13 +33,19 @@
 @property (nonatomic, retain) IBOutlet NSButton *downloadFromURLButton;
 @property (nonatomic, retain) IBOutlet SMFileDragView *fileDragView;
 
-@property (nonatomic, retain) IBOutlet NSView *appInfoView;
+@property (nonatomic, retain) IBOutlet SMAppInstallView *appInfoView;
 @property (nonatomic, retain) IBOutlet NSTextField *titleLabel;
 @property (nonatomic, retain) IBOutlet NSTextField *versionLabel;
 @property (nonatomic, retain) IBOutlet NSTextField *installedVersionLabel;
 @property (nonatomic, retain) IBOutlet NSButton *cancelButton;
 @property (nonatomic, retain) IBOutlet NSButton *installButton;
+@property (nonatomic, retain) IBOutlet NSButton *cleanInstallButton;
 @property (nonatomic, retain) IBOutlet SMIconView *iconView;
+
+@property (nonatomic, retain) IBOutlet NSPanel *installPanel;
+@property (nonatomic, retain) IBOutlet NSTextField *installTitleLabel;
+@property (nonatomic, retain) IBOutlet NSTextField *installMessageLabel;
+@property (nonatomic, retain) IBOutlet NSProgressIndicator *installProgressIndicator;
 
 - (IBAction)downloadFromURL:(id)sender;
 - (IBAction)cancelDownloadFromURL:(id)sender;

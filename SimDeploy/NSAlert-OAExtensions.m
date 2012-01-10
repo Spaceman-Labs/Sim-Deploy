@@ -47,8 +47,14 @@
     // Clean up the hidden -retain from -startOnWindow:, first and with -autorelease in case the block asplodes.
     [self performSelector:@selector(autorelease)];
     
-    if (_completionHandler)
+    if (_completionHandler) {
+		double delayInSeconds = 0.1;
+	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         _completionHandler(_alert, returnCode);
+	});
+	}
+
 }
 
 @end

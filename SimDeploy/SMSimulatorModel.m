@@ -130,6 +130,10 @@
 
 - (void)installApplication:(SMAppModel *)app upgradeIfPossible:(BOOL)shouldUpgrade
 {
+	if (NO == shouldUpgrade) {
+		NSLog(@"clean!!!!!");
+	}
+	
 	SMAppModel *installedMatch = nil;
 	for (SMAppModel *installedApp in self.userApplications) {
 		if ([app.identifier isEqualToString:installedApp.identifier]) {
@@ -142,13 +146,18 @@
 	NSString *destinationBundlePath = [destinationGUIDPath stringByAppendingPathComponent:[app.mainBundle.bundlePath lastPathComponent]];
 	
 	// Remove old app
-	if (NO == shouldUpgrade && nil != installedMatch) {
+	if (nil != installedMatch) {
 		NSError *error = nil;
+		if (shouldUpgrade) {
+			
+			[[NSFileManager defaultManager] removeItemAtPath:destinationGUIDPath	error:&error];
+			// Copy old guid to new guid location
+			[[NSFileManager defaultManager] moveItemAtPath:installedMatch.guidPath toPath:destinationGUIDPath error:&error];
+		}
+		
+		// Remove old item
 		[[NSFileManager defaultManager] removeItemAtPath:installedMatch.guidPath error:&error];
 		[(NSMutableArray *)self.userApplications removeObject:installedMatch];
-	} else if (shouldUpgrade && nil != installedMatch) {
-		// Copy old guid to new guid location
-		[[NSFileManager defaultManager] moveItemAtPath:installedMatch.guidPath toPath:destinationGUIDPath error:nil];
 	}
 		
 	NSError *error = nil;

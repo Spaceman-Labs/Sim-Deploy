@@ -54,6 +54,7 @@
 		3DEAE82D14AE94E400D239B4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAE82B14AE94E400D239B4 /* MainMenu.xib */; };
 		3DEAE83514AE964A00D239B4 /* SMSimDeployer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE83414AE964A00D239B4 /* SMSimDeployer.m */; };
 		3DEAE83814B011B300D239B4 /* SMAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE83714B011B300D239B4 /* SMAppModel.m */; };
+		C482EDBF14BBF95B00A713D5 /* SMAppInstallView.m in Sources */ = {isa = PBXBuildFile; fileRef = C482EDBE14BBF95B00A713D5 /* SMAppInstallView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,8 @@
 		3DEAE83414AE964A00D239B4 /* SMSimDeployer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSimDeployer.m; sourceTree = "<group>"; };
 		3DEAE83614B011B300D239B4 /* SMAppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAppModel.h; sourceTree = "<group>"; };
 		3DEAE83714B011B300D239B4 /* SMAppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMAppModel.m; sourceTree = "<group>"; };
+		C482EDBD14BBF95B00A713D5 /* SMAppInstallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAppInstallView.h; sourceTree = "<group>"; };
+		C482EDBE14BBF95B00A713D5 /* SMAppInstallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMAppInstallView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +295,8 @@
 				3DD744F114B532E400EA0A46 /* SMIconView.m */,
 				3D97866514B551E200F01009 /* SMDocument.h */,
 				3D97866614B551E200F01009 /* SMDocument.m */,
+				C482EDBD14BBF95B00A713D5 /* SMAppInstallView.h */,
+				C482EDBE14BBF95B00A713D5 /* SMAppInstallView.m */,
 			);
 			path = SimDeploy;
 			sourceTree = "<group>";
@@ -414,6 +419,7 @@
 				3D97867214B6CB7B00F01009 /* SMDividerView.m in Sources */,
 				3D97867C14B6D83D00F01009 /* PFMoveApplication.m in Sources */,
 				3D97867D14B6D83D00F01009 /* NSString+SymlinksAndAliases.m in Sources */,
+				C482EDBF14BBF95B00A713D5 /* SMAppInstallView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
