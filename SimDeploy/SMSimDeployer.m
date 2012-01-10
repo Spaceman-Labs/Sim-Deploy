@@ -10,6 +10,15 @@
 #import "ZipArchive/ZipArchive.h"
 #include <sys/types.h>
 #include <sys/stat.h>
+#import <ScriptingBridge/ScriptingBridge.h>
+
+/* App bundle ID. Used to request that the simulator be brought to the foreground */
+#define SIM_APP_BUNDLE_ID @"com.apple.iphonesimulator"
+
+/* Load a class from the runtime-loaded iPhoneSimulatorRemoteClient framework */
+#define C(name) NSClassFromString(@"" #name)
+
+
 
 @implementation SMSimDeployer
 
@@ -29,6 +38,28 @@
 }
 
 #pragma mark - Simulator
+
+- (id)init
+{
+	self = [super init];
+	if (nil == self) {
+		return nil;
+	}
+	
+
+	NSArray *roots = [DTiPhoneSimulatorSystemRoot knownRoots];
+	for (DTiPhoneSimulatorSystemRoot *root in roots) {
+		NSString *v = [root sdkVersion];
+		if ([v isEqualToString:@"5.0"])
+		{
+			sdkRoot = root;
+			break;
+		}
+	}
+
+	
+	return self;
+}
 
 - (void)launchiOSSimulator
 {
@@ -53,6 +84,101 @@
 		[self launchiOSSimulator];
 	});
 
+}
+
+
+- (void)launchApplication:(SMAppModel *)app
+{
+	if (nil != session) {
+		[session requestEndWithTimeout:0];
+		[session release];
+		session = nil;
+	}
+	
+	double delayInSeconds = 2.0;
+	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+		if (nil == app) {
+			NSLog(@"Error: NO APP!");
+			return;
+		} else {
+			NSLog(@"Launch: %@", app.mainBundle.bundlePath);
+		}
+		//launchApp: (NSString *) path withFamily:(NSString*)family uuid:(NSString*)uuid{
+		DTiPhoneSimulatorApplicationSpecifier *appSpec;
+		DTiPhoneSimulatorSessionConfig *config;
+		NSError *error;
+		
+		/* Create the app specifier */
+		appSpec = [DTiPhoneSimulatorApplicationSpecifier specifierWithApplicationPath: app.mainBundle.bundlePath];
+		if (appSpec == nil) {
+			NSLog(@"Could not load application specification for %@", app.mainBundle.bundlePath);
+			return;
+		}
+		NSLog(@"App Spec: %@", appSpec);
+		
+		/* Load the default SDK root */
+		
+		NSLog(@"SDK Root: %@", sdkRoot);
+		
+		/* Set up the session configuration */
+		config = [[[DTiPhoneSimulatorSessionConfig alloc] init] autorelease];
+		[config setApplicationToSimulateOnStart: appSpec];
+		[config setSimulatedSystemRoot: sdkRoot];
+		[config setSimulatedApplicationShouldWaitForDebugger: NO];
+		
+		[config setSimulatedApplicationLaunchArgs: [NSArray array]];
+		[config setSimulatedApplicationLaunchEnvironment: [[NSProcessInfo processInfo] environment]];
+		
+		[config setLocalizedClientName: @"Sim Deploy"];
+		
+		// this was introduced in 3.2 of SDK
+		if ([config respondsToSelector:@selector(setSimulatedDeviceFamily:)])
+		{
+			//		if (family == nil)
+			//		{
+			//			family = @"iphone";
+			//		}
+			
+			//		nsprintf(@"using device family %@",family);
+			
+			//		if ([family isEqualToString:@"ipad"])
+			//		{
+			//			[config setSimulatedDeviceFamily:[NSNumber numberWithInt:2]];
+			//		}
+			//		else
+			//		{
+			//			[config setSimulatedDeviceFamily:[NSNumber numberWithInt:1]];
+			//		}
+			
+			[config setSimulatedDeviceFamily:[NSNumber numberWithInt:2]];
+		}
+		
+		/* Start the session */
+		session = [[DTiPhoneSimulatorSession alloc] init];
+		[session setDelegate: self];
+		[session setSimulatedApplicationPID: [NSNumber numberWithInt: 35]];
+		//	if (uuid!=nil)
+		//	{
+		//		[session setUuid:uuid];
+		//	}
+		
+		if (![session requestStartWithConfig: config timeout: 30 error: &error]) {
+			NSLog(@"Could not start simulator session: %@", error);
+			//        return EXIT_FAILURE;
+		}
+		
+		//    return EXIT_SUCCESS;
+	});
+
+	
+
+}
+
+- (void)killApp:(SMAppModel *)app
+{
+	NSString *command = [NSString stringWithFormat:@"killall %@", app.executablePath];
+	 (void)system([command cStringUsingEncoding:NSASCIIStringEncoding]);
 }
 
 #pragma mark - Paths
@@ -348,5 +474,46 @@
 	[downloadCompletionBlock release];
 	downloadCompletionBlock = nil;
 }
+
+#pragma mark - Simulator
+
+//- (void) simulatorDiscovery: (PLSimulatorDiscovery *) discovery didFindMatchingSimulatorPlatforms: (NSArray *) platforms
+//{
+//	_platform = [platforms lastObject];
+//	NSLog(@"found em");
+//}
+
+// from DTiPhoneSimulatorSessionDelegate protocol
+- (void) session: (DTiPhoneSimulatorSession *) aSession didEndWithError: (NSError *) error {
+    // Do we care about this?
+    NSLog(@"Did end with error: %@", error);
+	[session release];
+	session = nil;
+}
+
+// from DTiPhoneSimulatorSessionDelegate protocol
+- (void) session: (DTiPhoneSimulatorSession *) session didStart: (BOOL) started withError: (NSError *) error {
+    /* If the application starts successfully, we can exit */
+    if (started) {
+//        NSLog(@"Did start app %@ successfully, exiting", _app.path);
+		
+        /* Bring simulator to foreground */
+        [[SBApplication applicationWithBundleIdentifier:SIM_APP_BUNDLE_ID] activate];
+		
+        /* Exit */
+//        [[NSApplication sharedApplication] terminate: self];
+        return;
+    } else {
+		NSLog(@"Error starting simulator: %@", error);
+	}
+	
+//    /* Otherwise, an error occured. Inform the user. */
+//    NSLog(@"Simulator session did not start: %@", error);
+//    NSString *text = NSLocalizedString(@"The iPhone Simulator could not be started. If another Simulator application "
+//                                       "is currently running, please close the Simulator and try again.", 
+//                                       @"Simulator error alert info");
+//    [self displayLaunchError: text];
+}
+
 
 @end

@@ -10,6 +10,7 @@
 
 @implementation SMAppInstallView
 
+@synthesize cleanInstallButton;
 @synthesize installButton;
 @synthesize installDisabled;
 
@@ -38,8 +39,10 @@
 	
 	if (self.installDisabled) {
 		if ([theEvent modifierFlags] & NSAlternateKeyMask) {
+			self.cleanInstallButton.state = NSOnState;
 			self.installButton.enabled = YES;
 		} else {
+			self.cleanInstallButton.state = NSOffState;
 			self.installButton.enabled = NO;
 		}
 	}
@@ -47,6 +50,7 @@
 
 - (void)dealloc
 {
+	self.cleanInstallButton = nil;
 	self.installButton = nil;
 	[super dealloc];
 }

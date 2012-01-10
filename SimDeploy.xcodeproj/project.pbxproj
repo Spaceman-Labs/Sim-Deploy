@@ -55,6 +55,8 @@
 		3DEAE83514AE964A00D239B4 /* SMSimDeployer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE83414AE964A00D239B4 /* SMSimDeployer.m */; };
 		3DEAE83814B011B300D239B4 /* SMAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE83714B011B300D239B4 /* SMAppModel.m */; };
 		C482EDBF14BBF95B00A713D5 /* SMAppInstallView.m in Sources */ = {isa = PBXBuildFile; fileRef = C482EDBE14BBF95B00A713D5 /* SMAppInstallView.m */; };
+		C482EDEE14BC13C400A713D5 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C482EDED14BC13C400A713D5 /* ScriptingBridge.framework */; };
+		C482EDF614BC240900A713D5 /* iPhoneSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = C482EDF514BC240900A713D5 /* iPhoneSimulator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +142,9 @@
 		3DEAE83714B011B300D239B4 /* SMAppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMAppModel.m; sourceTree = "<group>"; };
 		C482EDBD14BBF95B00A713D5 /* SMAppInstallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAppInstallView.h; sourceTree = "<group>"; };
 		C482EDBE14BBF95B00A713D5 /* SMAppInstallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMAppInstallView.m; sourceTree = "<group>"; };
+		C482EDED14BC13C400A713D5 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		C482EDF414BC240900A713D5 /* iPhoneSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPhoneSimulator.h; sourceTree = "<group>"; };
+		C482EDF514BC240900A713D5 /* iPhoneSimulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPhoneSimulator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C482EDEE14BC13C400A713D5 /* ScriptingBridge.framework in Frameworks */,
 				3D97868114B6D8CD00F01009 /* Security.framework in Frameworks */,
 				3DD744EC14B52B3C00EA0A46 /* QuartzCore.framework in Frameworks */,
 				3D0D970914B2CC8100BB51FC /* libz.1.2.5.dylib in Frameworks */,
@@ -254,6 +260,7 @@
 		3DEAE81514AE94E400D239B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C482EDED14BC13C400A713D5 /* ScriptingBridge.framework */,
 				3D97868014B6D8CD00F01009 /* Security.framework */,
 				3DD744EB14B52B3C00EA0A46 /* QuartzCore.framework */,
 				3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */,
@@ -277,6 +284,7 @@
 		3DEAE81C14AE94E400D239B4 /* SimDeploy */ = {
 			isa = PBXGroup;
 			children = (
+				C482EDF314BC240900A713D5 /* Simulator */,
 				3D97867714B6D83400F01009 /* LetsMove */,
 				3D97866A14B6AB3800F01009 /* Classes */,
 				3DB7748714B362990042BD98 /* Model */,
@@ -310,6 +318,15 @@
 				3DEAE82414AE94E400D239B4 /* SimDeploy-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C482EDF314BC240900A713D5 /* Simulator */ = {
+			isa = PBXGroup;
+			children = (
+				C482EDF414BC240900A713D5 /* iPhoneSimulator.h */,
+				C482EDF514BC240900A713D5 /* iPhoneSimulator.m */,
+			);
+			path = Simulator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -420,6 +437,7 @@
 				3D97867C14B6D83D00F01009 /* PFMoveApplication.m in Sources */,
 				3D97867D14B6D83D00F01009 /* NSString+SymlinksAndAliases.m in Sources */,
 				C482EDBF14BBF95B00A713D5 /* SMAppInstallView.m in Sources */,
+				C482EDF614BC240900A713D5 /* iPhoneSimulator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,14 +532,25 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimDeploy/SimDeploy-Prefix.pch";
+				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "SimDeploy/SimDeploy-Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				INFOPLIST_PREFIX_HEADER = version.h;
 				INFOPLIST_PREPROCESS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_LDFLAGS = (
+					"-framework",
+					AppKit,
+					"-F/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks",
+					"-framework",
+					iPhoneSimulatorRemoteClient,
+					"-Wl,-rpath",
+					"-Wl,/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -533,14 +562,25 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimDeploy/SimDeploy-Prefix.pch";
+				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "SimDeploy/SimDeploy-Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				INFOPLIST_PREFIX_HEADER = version.h;
 				INFOPLIST_PREPROCESS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_LDFLAGS = (
+					"-framework",
+					AppKit,
+					"-F/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks",
+					"-framework",
+					iPhoneSimulatorRemoteClient,
+					"-Wl,-rpath",
+					"-Wl,/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

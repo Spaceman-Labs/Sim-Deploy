@@ -11,6 +11,8 @@
 @implementation SMAppModel
 
 @synthesize deleteGUIDWhenFinished, guidPath, mainBundle, infoDictionary, name, identifier, version, marketingVersion, iconPath, iconIsPreRendered;
+@synthesize executableName;
+@dynamic executablePath;
 
 - (id)initWithBundle:(NSBundle *)bundle;
 {
@@ -37,6 +39,7 @@
 	self.identifier = [infoDictionary objectForKey:@"CFBundleIdentifier"];
 	self.version = [infoDictionary objectForKey:@"CFBundleVersion"];
 	self.marketingVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+	self.executableName = [infoDictionary objectForKey:@"CFBundleExecutable"];
 	
 	// Find biggest icon file
 	NSString *biggestIconPath = nil;
@@ -84,6 +87,12 @@
 - (NSString *)description
 {
 	return [NSString stringWithFormat:@"{%@ %@ %@}", self.name, self.identifier, self.version];
+}
+
+- (NSString *)executablePath
+{
+	
+	return [[self.mainBundle bundlePath] stringByAppendingPathComponent:[infoDictionary objectForKey:@"CFBundleExecutable"]];
 }
 
 @end

@@ -150,21 +150,47 @@
 		NSError *error = nil;
 		if (shouldUpgrade) {
 			
+			
 			[[NSFileManager defaultManager] removeItemAtPath:destinationGUIDPath	error:&error];
+			if (nil != error) {
+				NSLog(@"error: %@", error);
+				error = nil;
+			}
+				
 			// Copy old guid to new guid location
 			[[NSFileManager defaultManager] moveItemAtPath:installedMatch.guidPath toPath:destinationGUIDPath error:&error];
+			if (nil != error) {
+				NSLog(@"error: %@", error);
+				error = nil;
+			}
+
 		}
 		
 		// Remove old item
 		[[NSFileManager defaultManager] removeItemAtPath:installedMatch.guidPath error:&error];
+		if (nil != error) {
+			NSLog(@"error: %@", error);
+			error = nil;
+		}
+
 		[(NSMutableArray *)self.userApplications removeObject:installedMatch];
 	}
 		
 	NSError *error = nil;
 	// Remove Old App
 	[[NSFileManager defaultManager] removeItemAtPath:destinationBundlePath error:&error];
+	if (nil != error) {
+		NSLog(@"error: %@", error);
+		error = nil;
+	}
+
 	
 	[[NSFileManager defaultManager] copyItemAtPath:app.mainBundle.bundlePath toPath:destinationBundlePath error:&error];
+	if (nil != error) {
+		NSLog(@"error: %@", error);
+		error = nil;
+	}
+
 	
 	// Invalidate old application list
 	self.userApplications = nil;

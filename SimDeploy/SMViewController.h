@@ -16,6 +16,7 @@
 {
 	NSModalSession	modalSession;
 	BOOL showingProgressIndicator;
+	BOOL versionsAreTheSame;
 }
 
 @property (nonatomic, retain) SMAppModel *pendingApp;
@@ -56,7 +57,9 @@
 - (void)setupAppInfoViewWithApp:(SMAppModel *)app;
 - (void)checkVersionsAndInstallApp:(SMAppModel *)app;
 - (IBAction)installPendingApp:(id)sender;
+- (void)updateInstallButton;
 
+- (IBAction)cleanInstall:(id)sender;
 - (IBAction)install:(id)sender;
 - (IBAction)cancelInstall:(id)sender;
 - (void)showRestartAlertIfNeeded;

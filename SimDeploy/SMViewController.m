@@ -363,6 +363,8 @@
 		NSLog(@"nil!");
 	}
 	
+	versionsAreTheSame = NO;
+
 	self.titleLabel.stringValue = app.name;
 	[self.titleLabel sizeToFit];
 	NSMutableString *version = [NSMutableString stringWithFormat:@"Version: %@", app.marketingVersion];
@@ -401,14 +403,16 @@
 		} else if (SMAppCompareGreaterThan == compare) {
 			self.installButton.title = @"Downgrade";
 		} else if (SMAppCompareSame == compare) {
+			versionsAreTheSame = YES;
 			self.installButton.enabled = NO;
-			self.installButton.title = @"Upgrade";
+			self.installButton.title = @"Install";
 			self.installedVersionLabel.stringValue = [NSString stringWithFormat:@"This Version Is Already Installed."];
 		}
 
 	}	
 	
 	self.appInfoView.installDisabled = ![self.installButton isEnabled];
+	[self updateInstallButton];
 	
 }
 
@@ -416,6 +420,7 @@
 
 - (void)showRestartAlertIfNeeded
 {
+	
 	double delayInSeconds = 0.3;
 	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
 	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -445,16 +450,18 @@
 
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
-	if ([NSNull null] == contextInfo) {
-		if (returnCode == NSAlertFirstButtonReturn) {
-			[[SMSimDeployer defaultDeployer] launchiOSSimulator];
-		}		
-	} else {
-		if (returnCode == NSAlertFirstButtonReturn) {
-			[[SMSimDeployer defaultDeployer] restartiOSSimulator];
+	//[[SMSimDeployer defaultDeployer] killApp:pendingApp];
+//	[[SMSimDeployer defaultDeployer] restartiOSSimulator];
+	
+	NSArray *simulators = [SMSimDeployer defaultDeployer].simulators;
+	SMSimulatorModel *sim = [simulators lastObject];
+	SMAppModel *newApp = nil;
+	for (SMAppModel *app in sim.userApplications) {
+		if ([app.identifier isEqualToString:self.pendingApp.identifier]) {
+			newApp = app;
 		}
 	}
-	
+	[[SMSimDeployer defaultDeployer] launchApplication:newApp];	
 	[self setAppInfoViewShowing:NO];
 }
 
@@ -466,6 +473,20 @@
 - (void)deregisterForDragAndDrop
 {
 	[self.fileDragView unregisterDraggedTypes];
+}
+
+- (void)updateInstallButton
+{
+	if (NO == versionsAreTheSame) {
+		self.installButton.enabled = YES;
+	} else {
+		self.installButton.enabled = self.cleanInstallButton.state == NSOnState;
+	}
+}
+
+- (IBAction)cleanInstall:(id)sender
+{
+	[self updateInstallButton];
 }
 
 - (IBAction)install:(id)sender

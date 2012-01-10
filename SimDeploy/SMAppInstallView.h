@@ -15,5 +15,6 @@
 
 @property (nonatomic, assign) BOOL installDisabled;
 @property (nonatomic, retain) IBOutlet NSButton *installButton;
+@property (nonatomic, retain) IBOutlet NSButton *cleanInstallButton;
 
 @end

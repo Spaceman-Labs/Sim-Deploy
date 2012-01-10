@@ -14,6 +14,8 @@
 
 @property (nonatomic, retain) NSString *guidPath;
 @property (nonatomic, retain) NSBundle *mainBundle;
+@property (nonatomic, retain) NSString *executablePath;
+@property (nonatomic, retain) NSString *executableName;
 @property (nonatomic, retain) NSDictionary *infoDictionary;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *identifier;

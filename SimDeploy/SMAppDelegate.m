@@ -31,7 +31,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-
+	[SMSimDeployer defaultDeployer];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification

@@ -992,7 +992,7 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="NSButton" id="437184677">
+					<object class="NSButton" id="277446461">
 						<reference key="NSNextResponder" ref="674410361"/>
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{144, 94}, {100, 18}}</string>
@@ -1002,13 +1002,13 @@
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:717</string>
 						<bool key="NSEnabled">YES</bool>
-						<object class="NSButtonCell" key="NSCell" id="578930396">
+						<object class="NSButtonCell" key="NSCell" id="719194185">
 							<int key="NSCellFlags">67239424</int>
 							<int key="NSCellFlags2">134217728</int>
 							<string key="NSContents">Clean Install</string>
 							<reference key="NSSupport" ref="297627282"/>
 							<string key="NSCellIdentifier">_NS:717</string>
-							<reference key="NSControlView" ref="437184677"/>
+							<reference key="NSControlView" ref="277446461"/>
 							<int key="NSButtonFlags">1211912703</int>
 							<int key="NSButtonFlags2">2</int>
 							<object class="NSCustomResource" key="NSNormalImage">
@@ -1116,7 +1116,7 @@
 						<string key="NSFrame">{{143, 107}, {200, 33}}</string>
 						<reference key="NSSuperview" ref="674410361"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="437184677"/>
+						<reference key="NSNextKeyView" ref="277446461"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:3944</string>
 						<bool key="NSEnabled">YES</bool>
@@ -1541,9 +1541,17 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">cleanInstallButton</string>
 						<reference key="source" ref="695594925"/>
-						<reference key="destination" ref="437184677"/>
+						<reference key="destination" ref="277446461"/>
 					</object>
 					<int key="connectionID">839</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">cleanInstall:</string>
+						<reference key="source" ref="695594925"/>
+						<reference key="destination" ref="277446461"/>
+					</object>
+					<int key="connectionID">841</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1552,6 +1560,14 @@
 						<reference key="destination" ref="614517979"/>
 					</object>
 					<int key="connectionID">829</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">cleanInstallButton</string>
+						<reference key="source" ref="674410361"/>
+						<reference key="destination" ref="277446461"/>
+					</object>
+					<int key="connectionID">842</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1978,7 +1994,7 @@
 							<reference ref="132348933"/>
 							<reference ref="853990140"/>
 							<reference ref="894073456"/>
-							<reference ref="437184677"/>
+							<reference ref="277446461"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Application Info View</string>
@@ -2198,16 +2214,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">837</int>
-						<reference key="object" ref="437184677"/>
+						<reference key="object" ref="277446461"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="578930396"/>
+							<reference ref="719194185"/>
 						</array>
 						<reference key="parent" ref="674410361"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">838</int>
-						<reference key="object" ref="578930396"/>
-						<reference key="parent" ref="437184677"/>
+						<reference key="object" ref="719194185"/>
+						<reference key="parent" ref="277446461"/>
 					</object>
 				</array>
 			</object>
@@ -2334,7 +2350,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">839</int>
+			<int key="maxID">842</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2375,13 +2391,13 @@
 					<string key="className">SMAppInstallView</string>
 					<string key="superclassName">NSView</string>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">installButton</string>
+						<string key="NS.key.0">cleanInstallButton</string>
 						<string key="NS.object.0">NSButton</string>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">installButton</string>
+						<string key="NS.key.0">cleanInstallButton</string>
 						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">installButton</string>
+							<string key="name">cleanInstallButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
 					</object>
@@ -2428,6 +2444,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="cancelDownloadFromURL:">id</string>
 						<string key="cancelInstall:">id</string>
+						<string key="cleanInstall:">id</string>
 						<string key="downloadAppAtTextFieldURL:">id</string>
 						<string key="downloadFromURL:">id</string>
 						<string key="install:">id</string>
@@ -2440,6 +2457,10 @@
 						</object>
 						<object class="IBActionInfo" key="cancelInstall:">
 							<string key="name">cancelInstall:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="cleanInstall:">
+							<string key="name">cleanInstall:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="downloadAppAtTextFieldURL:">

@@ -9,14 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "SMAppModel.h"
 #import "SMSimulatorModel.h"
+#import "iPhoneSimulator.h"
 
-@interface SMSimDeployer : NSObject <NSURLDownloadDelegate>
+@interface SMSimDeployer : NSObject <NSURLDownloadDelegate, DTiPhoneSimulatorSessionDelegate>
 {
 	void (^downloadCompletionBlock)(BOOL);
 	void (^percentCompleteBlock)(CGFloat);
 	BOOL downloading;
 	NSString *tempFile;
 	NSUInteger bytesReceived;
+	
+	/** Instance used to find the required simulator platform SDK */
+	DTiPhoneSimulatorSystemRoot *sdkRoot;
+	DTiPhoneSimulatorSession *session;
 }
 
 //@property (nonatomic, retain) SMAppModel *downloadedApplication;
@@ -29,6 +34,9 @@
 - (void)launchiOSSimulator;
 - (void)killiOSSimulator;
 - (void)restartiOSSimulator;
+- (void)launchApplication:(SMAppModel *)app;
+- (void)killApp:(SMAppModel *)app;
+
 
 - (void)downloadAppAtURL:(NSURL *)url percentComplete:(void(^)(CGFloat percentComplete))percentComplete completion:(void(^)(BOOL failed))completion;
 - (SMAppModel *)unzipAppArchiveAtPath:(NSString *)path;
