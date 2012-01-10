@@ -55,8 +55,12 @@
 	}
 	
 	NSString *fetchLocation = [queryParams objectForKey:@"url"];
-	
+		
 	if (nil != fetchLocation) {
+		if (NO == [fetchLocation hasPrefix:@"http://"]) {
+			fetchLocation = [NSString stringWithFormat:@"http://%@", fetchLocation];
+		}
+
 		[self.viewController downloadURLAtLocation:fetchLocation];
 	}
 
