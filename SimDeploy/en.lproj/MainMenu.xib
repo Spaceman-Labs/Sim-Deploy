@@ -992,7 +992,7 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="NSButton" id="847246221">
+					<object class="NSButton" id="437184677">
 						<reference key="NSNextResponder" ref="674410361"/>
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{144, 94}, {100, 18}}</string>
@@ -1002,13 +1002,13 @@
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:717</string>
 						<bool key="NSEnabled">YES</bool>
-						<object class="NSButtonCell" key="NSCell" id="414598442">
+						<object class="NSButtonCell" key="NSCell" id="578930396">
 							<int key="NSCellFlags">67239424</int>
 							<int key="NSCellFlags2">134217728</int>
 							<string key="NSContents">Clean Install</string>
 							<reference key="NSSupport" ref="297627282"/>
 							<string key="NSCellIdentifier">_NS:717</string>
-							<reference key="NSControlView" ref="847246221"/>
+							<reference key="NSControlView" ref="437184677"/>
 							<int key="NSButtonFlags">1211912703</int>
 							<int key="NSButtonFlags2">2</int>
 							<object class="NSCustomResource" key="NSNormalImage">
@@ -1116,7 +1116,7 @@
 						<string key="NSFrame">{{143, 107}, {200, 33}}</string>
 						<reference key="NSSuperview" ref="674410361"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="847246221"/>
+						<reference key="NSNextKeyView" ref="437184677"/>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:3944</string>
 						<bool key="NSEnabled">YES</bool>
@@ -1134,7 +1134,7 @@
 					<object class="NSTextField" id="391599633">
 						<reference key="NSNextResponder" ref="674410361"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{143, 165}, {175, 17}}</string>
+						<string key="NSFrame">{{143, 148}, {200, 34}}</string>
 						<reference key="NSSuperview" ref="674410361"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="544013019"/>
@@ -1142,8 +1142,8 @@
 						<string key="NSReuseIdentifierKey">_NS:3944</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="201025172">
-							<int key="NSCellFlags">68288064</int>
-							<int key="NSCellFlags2">272630784</int>
+							<int key="NSCellFlags">67239424</int>
+							<int key="NSCellFlags2">272629760</int>
 							<string key="NSContents">Label</string>
 							<reference key="NSSupport" ref="297627282"/>
 							<string key="NSCellIdentifier">_NS:3944</string>
@@ -1541,7 +1541,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">cleanInstallButton</string>
 						<reference key="source" ref="695594925"/>
-						<reference key="destination" ref="847246221"/>
+						<reference key="destination" ref="437184677"/>
 					</object>
 					<int key="connectionID">839</int>
 				</object>
@@ -1978,7 +1978,7 @@
 							<reference ref="132348933"/>
 							<reference ref="853990140"/>
 							<reference ref="894073456"/>
-							<reference ref="847246221"/>
+							<reference ref="437184677"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Application Info View</string>
@@ -2198,16 +2198,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">837</int>
-						<reference key="object" ref="847246221"/>
+						<reference key="object" ref="437184677"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="414598442"/>
+							<reference ref="578930396"/>
 						</array>
 						<reference key="parent" ref="674410361"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">838</int>
-						<reference key="object" ref="414598442"/>
-						<reference key="parent" ref="847246221"/>
+						<reference key="object" ref="578930396"/>
+						<reference key="parent" ref="437184677"/>
 					</object>
 				</array>
 			</object>
