@@ -206,13 +206,8 @@
 						
 						if (nil == downloadedApp) {
 							self.downloadButton.enabled = YES;
-							NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-							[alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Ok")];
-							[alert setMessageText:NSLocalizedString(@"No Valid Application Found", nil)];
-							[alert setInformativeText:NSLocalizedString(@"The downloaded file did not contain a valid simulator build. Please check your URL and try again.", nil)];
-							[alert setAlertStyle:NSCriticalAlertStyle];
-							
-							[alert beginSheetModalForWindow:nil modalDelegate:nil didEndSelector:nil contextInfo:nil];
+							[self errorWithTitle:NSLocalizedString(@"No Valid Application Found", nil) 
+										 message:NSLocalizedString(@"The downloaded file did not contain a valid simulator build. Please check your URL and try again.", nil)];							
 							return;
 						}
 						
@@ -285,6 +280,17 @@
 		[[SMSimDeployer defaultDeployer] installApplication:self.pendingApp];
 		[self showRestartAlertIfNeeded];	
 	}
+}
+
+- (void)errorWithTitle:(NSString *)title message:(NSString *)message
+{
+	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	[alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Ok")];
+	[alert setMessageText:title];
+	[alert setInformativeText:message];
+	[alert setAlertStyle:NSCriticalAlertStyle];
+	
+	[alert beginSheetModalForWindow:nil modalDelegate:nil didEndSelector:nil contextInfo:nil];
 }
 
 #pragma mark - App Info View
@@ -466,19 +472,18 @@
 		
 		NSBundle *bundle = [NSBundle bundleWithPath:path];
 		SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
-		
-		if (nil == appModel) {
-			return;
-		}
-		
+				
 		newApp = appModel;
 		break;
 	}
 	
 	if (nil != newApp) {
 		self.pendingApp = newApp;
-		[self.fileDragView setHighlighted:NO];
-	}	
+	} else {
+		[self errorWithTitle:NSLocalizedString(@"Not a Valid Application", nil) 
+					 message:NSLocalizedString(@"The provided file did not contain a valid simulator build.", nil)];
+	}
+	[self.fileDragView setHighlighted:NO];
 }
 
 

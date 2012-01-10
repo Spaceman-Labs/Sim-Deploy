@@ -84,7 +84,9 @@
 	SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
 	
 	if (nil == appModel) {
-		return NO;
+		[self.viewController errorWithTitle:NSLocalizedString(@"Not a Valid Application", nil) 
+									message:NSLocalizedString(@"The provided file did not contain a valid simulator build.", nil)];
+
 	}
 	
 	newApp = appModel;

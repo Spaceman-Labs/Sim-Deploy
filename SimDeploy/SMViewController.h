@@ -57,4 +57,6 @@
 - (void)registerForDragAndDrop;
 - (void)deregisterForDragAndDrop;
 
+- (void)errorWithTitle:(NSString *)title message:(NSString *)message;
+
 @end
