@@ -152,29 +152,47 @@
 		return simulators;
 	}
 	
-	NSMutableArray *sims = [NSMutableArray array];
+	SMSimulatorModel *sim1 = nil;
+	SMSimulatorModel *sim2 = nil;
+	
 	
 	NSString *simulatorPath = [self simulatorDirectoryPath];
 	NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:simulatorPath error:nil];
 	for (NSString *path in contents) {
-		BOOL directory = NO;
 		NSString *fullPath = [simulatorPath stringByAppendingPathComponent:path];
-		[[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:&directory];
 		
-		if ([path isEqualToString:@"User"] || NO == directory) {
+		// Check for preferences to determine if the simulator is valid
+		NSString *springboardPlistPath = [fullPath stringByAppendingPathComponent:@"Library/Preferences/com.apple.springboard.plist"];
+		if (NO == [[NSFileManager defaultManager] fileExistsAtPath:springboardPlistPath isDirectory:NULL]) {
+			continue;
+		}
+
+		SMSimulatorModel *sim = [[SMSimulatorModel alloc] initWithPath:fullPath];
+		if (nil == sim) {
 			continue;
 		}
 		
-
-		SMSimulatorModel *sim = [[SMSimulatorModel alloc] initWithPath:fullPath];
-
-		
-		if (nil != sim) {
-			[sims addObject:sim];
+		if (nil == sim1) {
+			sim1 = sim;
+		} else if (nil == sim2) {
+			if ([sim isNewerThan:sim1]) {
+				sim2 = sim;
+			} else {
+				sim2 = sim1;
+				sim1 = sim;				
+			}
+		} else {
+			if ([sim isNewerThan:sim2]) {
+				sim1 = sim2;
+				sim2 = sim;
+			}
 		}
 	}
-	self.simulators = sims;
-	return simulators;
+	
+	NSArray *foundSims = [NSArray arrayWithObjects:sim1, sim2, nil];
+	
+	self.simulators = foundSims;
+	return foundSims;
 }
 
 #pragma mark - 

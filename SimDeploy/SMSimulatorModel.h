@@ -27,5 +27,6 @@ typedef enum SMAppCompare {
 // Old app compared against provided app
 - (SMAppCompare)compareInstalledAppsAgainstApp:(SMAppModel *)app installedApp:(SMAppModel **)appBuffer;
 - (void)installApplication:(SMAppModel *)app upgradeIfPossible:(BOOL)shouldUpgrade;
+- (BOOL)isNewerThan:(SMSimulatorModel *)sim;
 
 @end

@@ -162,4 +162,9 @@
 	
 }
 
+- (BOOL)isNewerThan:(SMSimulatorModel *)sim
+{
+	return ([self.version compare:sim.version options:NSNumericSearch] == NSOrderedDescending);
+}
+
 @end
