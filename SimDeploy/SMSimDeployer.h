@@ -22,6 +22,10 @@
 	/** Instance used to find the required simulator platform SDK */
 	DTiPhoneSimulatorSystemRoot *sdkRoot;
 	DTiPhoneSimulatorSession *session;
+	
+	BOOL installing;
+	NSOperationQueue *installQueue;
+	void (^installCompletion)(void);
 }
 
 //@property (nonatomic, retain) SMAppModel *downloadedApplication;
@@ -42,7 +46,7 @@
 - (SMAppModel *)unzipAppArchiveAtPath:(NSString *)path;
 - (SMAppModel *)unzipAppArchive;
 
-- (void)installApplication:(SMAppModel *)app clean:(BOOL)clean;
+- (void)installApplication:(SMAppModel *)app clean:(BOOL)clean completion:(void(^)(void))completion;
 - (void)cleanup;
 
 @end

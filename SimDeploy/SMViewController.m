@@ -255,13 +255,13 @@
 						  window:[NSApp mainWindow] 
 					  completion:^(NSAlert *alert, NSInteger returnCode) {
 						  if (returnCode == NSAlertFirstButtonReturn) {
-							  [[SMSimDeployer defaultDeployer] installApplication:app clean:YES];							  
+							  [[SMSimDeployer defaultDeployer] installApplication:app clean:YES completion:nil];							  
 							  [self showRestartAlertIfNeeded];
 						  }
 					  }];
 		
 	} else {
-		[[SMSimDeployer defaultDeployer] installApplication:app clean:YES];
+		[[SMSimDeployer defaultDeployer] installApplication:app clean:YES completion:nil];
 		[self showRestartAlertIfNeeded];	
 	}
 	
@@ -283,20 +283,14 @@
 									   didEndSelector:nil
 										  contextInfo:nil];
 
-		dispatch_async(dispatch_get_global_queue(0, 0), ^{
-			[[SMSimDeployer defaultDeployer] installApplication:self.pendingApp clean:self.cleanInstallButton.state == NSOnState];
-			dispatch_async(dispatch_get_main_queue(), ^{
-				[NSApp endSheet:self.installPanel];
-				[self.installPanel orderOut:nil];
-				[self showRestartAlertIfNeeded];
-			});
-		});
 		
-		
-//		delayInSeconds = 1.0;
-//		popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-//		dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//		});
+		[[SMSimDeployer defaultDeployer] installApplication:self.pendingApp 
+													  clean:self.cleanInstallButton.state == NSOnState
+												 completion:^{
+													 [NSApp endSheet:self.installPanel];
+													 [self.installPanel orderOut:nil];
+													 [self showRestartAlertIfNeeded];
+												 }];
 
 	};
 	

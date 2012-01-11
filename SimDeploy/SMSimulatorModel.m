@@ -129,11 +129,7 @@
 }
 
 - (void)installApplication:(SMAppModel *)app upgradeIfPossible:(BOOL)shouldUpgrade
-{
-	if (NO == shouldUpgrade) {
-		NSLog(@"clean!!!!!");
-	}
-	
+{	
 	SMAppModel *installedMatch = nil;
 	for (SMAppModel *installedApp in self.userApplications) {
 		if ([app.identifier isEqualToString:installedApp.identifier]) {
@@ -144,64 +140,64 @@
 
 	NSString *destinationGUIDPath = [self createDummyGUIDDirectoryWithName:[NSString stringWithFormat:@"%@-%@", app.identifier, app.version]];
 	NSString *destinationBundlePath = [destinationGUIDPath stringByAppendingPathComponent:[app.mainBundle.bundlePath lastPathComponent]];
-	
-	// Remove old app
-	if (nil != installedMatch) {
-		NSError *error = nil;
-		if (shouldUpgrade) {
-			
-			
-			[[NSFileManager defaultManager] removeItemAtPath:destinationGUIDPath	error:&error];
-			if (nil != error) {
-				NSLog(@"error: %@", error);
-				error = nil;
-			}
-				
-			// Copy old guid to new guid location
-			[[NSFileManager defaultManager] moveItemAtPath:installedMatch.guidPath toPath:destinationGUIDPath error:&error];
-			if (nil != error) {
-				NSLog(@"error: %@", error);
-				error = nil;
-			}
-
-		}
-		
-		// Remove old item
-		[[NSFileManager defaultManager] removeItemAtPath:installedMatch.guidPath error:&error];
-		if (nil != error) {
-			NSLog(@"error: %@", error);
-			error = nil;
-		}
-
-		[(NSMutableArray *)self.userApplications removeObject:installedMatch];
-	}
-		
+	NSFileManager *fm = [NSFileManager defaultManager];
 	NSError *error = nil;
 	
-	if (NO == [[NSFileManager defaultManager] fileExistsAtPath:destinationGUIDPath]) {
-		[[NSFileManager defaultManager] createDirectoryAtPath:destinationGUIDPath withIntermediateDirectories:YES attributes:nil error:&error];
-		if (nil != error) {
-			NSLog(@"error: %@", error);
-			error = nil;
+	if (NO == shouldUpgrade) {
+		// Remove old directory
+		BOOL pathsMatch = [installedMatch.guidPath isEqualToString:destinationGUIDPath];
+		
+		if (nil != installedMatch) {
+			[fm removeItemAtPath:installedMatch.guidPath error:&error];
+			if (nil != error) {
+				NSLog(@"error: %@", error);
+				error = nil;
+			}
+			
+			// If the new app is the same version as the old, and we're not upgrading, then we're basically reinstalling.
+			// This is fine, but code later expects the destination GUID to exist
+			if (pathsMatch) {
+				[fm createDirectoryAtPath:destinationGUIDPath withIntermediateDirectories:YES attributes:nil error:&error];
+				if (nil != error) {
+					NSLog(@"error: %@", error);
+					error = nil;
+				}
+				
+			}
 		}
-
+	} else {
+		// Copy old contents to new guid directory
+		if (nil != installedMatch) {
+			// Remove new dummy GUID path, we'll copy the old directory to the new GUID
+			[fm removeItemAtPath:destinationGUIDPath error:&error];
+			if (nil != error) {
+				NSLog(@"error: %@", error);
+				error = nil;
+			}
+			
+			// Remove Old App
+			[fm removeItemAtPath:installedMatch.mainBundle.bundlePath error:&error];
+			if (nil != error) {
+				NSLog(@"error: %@", error);
+				error = nil;
+			}
+			
+			// Copy old GUID contents to new GUID path
+			[fm copyItemAtPath:installedMatch.guidPath toPath:destinationGUIDPath error:&error];
+			if (nil != error) {
+				NSLog(@"error: %@", error);
+				error = nil;
+			}	
+		}		
 	}
 	
-	// Remove Old App
-	[[NSFileManager defaultManager] removeItemAtPath:destinationBundlePath error:&error];
+	
+	// Move App to new directory
+	[fm copyItemAtPath:app.mainBundle.bundlePath toPath:destinationBundlePath error:&error];	
 	if (nil != error) {
 		NSLog(@"error: %@", error);
 		error = nil;
 	}
-
-	
-	[[NSFileManager defaultManager] copyItemAtPath:app.mainBundle.bundlePath toPath:destinationBundlePath error:&error];
-	if (nil != error) {
-		NSLog(@"error: %@", error);
-		error = nil;
-	}
-	
-
 	
 	// Invalidate old application list
 	self.userApplications = nil;

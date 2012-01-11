@@ -412,10 +412,41 @@
 	return NO;
 }
 
-- (void)installApplication:(SMAppModel *)app clean:(BOOL)clean
+- (void)finishedInstallingApplication
+{	
+	if (installQueue.operationCount > 0) {
+//		NSLog(@"too many pending: %li", installQueue.operationCount);
+		return;
+	}
+	
+	if (nil != installCompletion) {
+		dispatch_async(dispatch_get_main_queue(), installCompletion);
+		[installCompletion release];
+		installCompletion = nil;
+	}
+	
+	
+}
+
+- (void)installApplication:(SMAppModel *)app clean:(BOOL)clean completion:(void(^)(void))completion
 {
+	if (nil != installQueue) {
+		return;
+	}
+		
+	installQueue = [[NSOperationQueue alloc] init];
+	[installQueue setName:@"com.spacemanlabs.simdeploy.install"];
+	
+	[installCompletion release];
+	installCompletion = [completion copy];
+	
 	for (SMSimulatorModel *sim in self.simulators) {
-		[sim installApplication:app upgradeIfPossible:!clean];
+		[installQueue addOperationWithBlock:^{
+			[sim installApplication:app upgradeIfPossible:!clean];
+			[[NSOperationQueue mainQueue] addOperationWithBlock:^{
+				[self finishedInstallingApplication];
+			}];
+		}];
 	}
 }
 
