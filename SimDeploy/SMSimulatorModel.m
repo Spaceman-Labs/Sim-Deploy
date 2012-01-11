@@ -177,6 +177,16 @@
 	}
 		
 	NSError *error = nil;
+	
+	if (NO == [[NSFileManager defaultManager] fileExistsAtPath:destinationGUIDPath]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:destinationGUIDPath withIntermediateDirectories:YES attributes:nil error:&error];
+		if (nil != error) {
+			NSLog(@"error: %@", error);
+			error = nil;
+		}
+
+	}
+	
 	// Remove Old App
 	[[NSFileManager defaultManager] removeItemAtPath:destinationBundlePath error:&error];
 	if (nil != error) {
@@ -190,6 +200,7 @@
 		NSLog(@"error: %@", error);
 		error = nil;
 	}
+	
 
 	
 	// Invalidate old application list

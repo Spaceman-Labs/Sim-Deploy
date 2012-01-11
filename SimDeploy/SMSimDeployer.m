@@ -89,8 +89,9 @@
 
 - (void)launchApplication:(SMAppModel *)app
 {
+	[self restartiOSSimulator];
 	if (nil != session) {
-		[session requestEndWithTimeout:0];
+//		[session requestEndWithTimeout:0];
 		[session release];
 		session = nil;
 	}
@@ -99,10 +100,10 @@
 	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
 	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
 		if (nil == app) {
-			NSLog(@"Error: NO APP!");
+//			NSLog(@"Error: NO APP!");
 			return;
 		} else {
-			NSLog(@"Launch: %@", app.mainBundle.bundlePath);
+//			NSLog(@"Launch: %@", app.mainBundle.bundlePath);
 		}
 		//launchApp: (NSString *) path withFamily:(NSString*)family uuid:(NSString*)uuid{
 		DTiPhoneSimulatorApplicationSpecifier *appSpec;
@@ -115,11 +116,11 @@
 			NSLog(@"Could not load application specification for %@", app.mainBundle.bundlePath);
 			return;
 		}
-		NSLog(@"App Spec: %@", appSpec);
+//		NSLog(@"App Spec: %@", appSpec);
 		
 		/* Load the default SDK root */
 		
-		NSLog(@"SDK Root: %@", sdkRoot);
+//		NSLog(@"SDK Root: %@", sdkRoot);
 		
 		/* Set up the session configuration */
 		config = [[[DTiPhoneSimulatorSessionConfig alloc] init] autorelease];
@@ -163,7 +164,7 @@
 		//		[session setUuid:uuid];
 		//	}
 		
-		if (![session requestStartWithConfig: config timeout: 30 error: &error]) {
+		if (![session requestStartWithConfig: config timeout: 5 error: &error]) {
 			NSLog(@"Could not start simulator session: %@", error);
 			//        return EXIT_FAILURE;
 		}
@@ -492,7 +493,7 @@
 }
 
 // from DTiPhoneSimulatorSessionDelegate protocol
-- (void) session: (DTiPhoneSimulatorSession *) session didStart: (BOOL) started withError: (NSError *) error {
+- (void) session: (DTiPhoneSimulatorSession *)aSession didStart: (BOOL) started withError: (NSError *) error {
     /* If the application starts successfully, we can exit */
     if (started) {
 //        NSLog(@"Did start app %@ successfully, exiting", _app.path);
@@ -505,6 +506,9 @@
         return;
     } else {
 		NSLog(@"Error starting simulator: %@", error);
+		[session release];
+		session = nil;
+//		[self restartiOSSimulator];
 	}
 	
 //    /* Otherwise, an error occured. Inform the user. */

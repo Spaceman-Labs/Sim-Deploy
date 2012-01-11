@@ -40,6 +40,7 @@
 - (void)awakeFromNib
 {	
 	[self.installProgressIndicator startAnimation:self];
+	[self.installProgressIndicator setUsesThreadedAnimation:YES];
 	self.downloadTextField.target = self;
 	[self.downloadTextField setAction:@selector(downloadAppAtTextFieldURL:)];
 	self.fileDragView.delegate = self;
@@ -281,16 +282,21 @@
 										modalDelegate:nil
 									   didEndSelector:nil
 										  contextInfo:nil];
-		
-		[[SMSimDeployer defaultDeployer] installApplication:self.pendingApp clean:self.cleanInstallButton.state == NSOnState];
-		
-		double delayInSeconds = 1.0;
-		dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-		dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-			[NSApp endSheet:self.installPanel];
-			[self.installPanel orderOut:nil];
-			[self showRestartAlertIfNeeded];
+
+		dispatch_async(dispatch_get_global_queue(0, 0), ^{
+			[[SMSimDeployer defaultDeployer] installApplication:self.pendingApp clean:self.cleanInstallButton.state == NSOnState];
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[NSApp endSheet:self.installPanel];
+				[self.installPanel orderOut:nil];
+				[self showRestartAlertIfNeeded];
+			});
 		});
+		
+		
+//		delayInSeconds = 1.0;
+//		popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//		dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//		});
 
 	};
 	
@@ -450,9 +456,6 @@
 
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
-	//[[SMSimDeployer defaultDeployer] killApp:pendingApp];
-//	[[SMSimDeployer defaultDeployer] restartiOSSimulator];
-	
 	NSArray *simulators = [SMSimDeployer defaultDeployer].simulators;
 	SMSimulatorModel *sim = [simulators lastObject];
 	SMAppModel *newApp = nil;
@@ -461,7 +464,18 @@
 			newApp = app;
 		}
 	}
-	[[SMSimDeployer defaultDeployer] launchApplication:newApp];	
+	
+	if ([NSNull null] == contextInfo) {
+		if (returnCode == NSAlertFirstButtonReturn) {
+			[[SMSimDeployer defaultDeployer] launchApplication:newApp];	
+		}		
+	} else {
+		if (returnCode == NSAlertFirstButtonReturn) {
+			[[SMSimDeployer defaultDeployer] launchApplication:newApp];	
+		}
+	}
+		
+//	[[SMSimDeployer defaultDeployer] launchApplication:newApp];	
 	[self setAppInfoViewShowing:NO];
 }
 
