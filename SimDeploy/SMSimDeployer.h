@@ -29,6 +29,7 @@
 }
 
 //@property (nonatomic, retain) SMAppModel *downloadedApplication;
+@property (nonatomic, retain) DTiPhoneSimulatorSystemRoot *sdkRoot;
 @property (nonatomic, retain) NSURLDownload *download;
 @property (nonatomic, retain) NSURLResponse *downloadResponse;
 @property (nonatomic, retain) NSArray *simulators;

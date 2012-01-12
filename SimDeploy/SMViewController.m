@@ -394,9 +394,9 @@
 		[self.installedVersionLabel sizeToFit];
 		
 		self.cleanInstallButton.hidden = NO;
-		CGRect frame = self.cleanInstallButton.frame;
-		frame.origin.y = CGRectGetMinY(self.installedVersionLabel.frame) - frame.size.height - 5.0f;
-		self.cleanInstallButton.frame = frame;
+//		CGRect frame = self.cleanInstallButton.frame;
+//		frame.origin.y = CGRectGetMinY(self.installedVersionLabel.frame) - frame.size.height - 5.0f;
+//		self.cleanInstallButton.frame = frame;
 		
 		if (SMAppCompareLessThan == compare) {
 			self.installButton.title = @"Upgrade";

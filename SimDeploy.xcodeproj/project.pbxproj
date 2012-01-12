@@ -54,6 +54,8 @@
 		3DEAE82D14AE94E400D239B4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAE82B14AE94E400D239B4 /* MainMenu.xib */; };
 		3DEAE83514AE964A00D239B4 /* SMSimDeployer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE83414AE964A00D239B4 /* SMSimDeployer.m */; };
 		3DEAE83814B011B300D239B4 /* SMAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEAE83714B011B300D239B4 /* SMAppModel.m */; };
+		C414080014BE0A9E002B8B32 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = C41407FE14BE0A9E002B8B32 /* checked.png */; };
+		C414080114BE0A9E002B8B32 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = C41407FF14BE0A9E002B8B32 /* unchecked.png */; };
 		C482EDBF14BBF95B00A713D5 /* SMAppInstallView.m in Sources */ = {isa = PBXBuildFile; fileRef = C482EDBE14BBF95B00A713D5 /* SMAppInstallView.m */; };
 		C482EDEE14BC13C400A713D5 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C482EDED14BC13C400A713D5 /* ScriptingBridge.framework */; };
 		C482EDF614BC240900A713D5 /* iPhoneSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = C482EDF514BC240900A713D5 /* iPhoneSimulator.m */; };
@@ -140,6 +142,8 @@
 		3DEAE83414AE964A00D239B4 /* SMSimDeployer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSimDeployer.m; sourceTree = "<group>"; };
 		3DEAE83614B011B300D239B4 /* SMAppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAppModel.h; sourceTree = "<group>"; };
 		3DEAE83714B011B300D239B4 /* SMAppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMAppModel.m; sourceTree = "<group>"; };
+		C41407FE14BE0A9E002B8B32 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
+		C41407FF14BE0A9E002B8B32 /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
 		C482EDBD14BBF95B00A713D5 /* SMAppInstallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAppInstallView.h; sourceTree = "<group>"; };
 		C482EDBE14BBF95B00A713D5 /* SMAppInstallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMAppInstallView.m; sourceTree = "<group>"; };
 		C482EDED14BC13C400A713D5 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
@@ -197,6 +201,8 @@
 				3D97869214B8DE8000F01009 /* SimDeploy.icns */,
 				3D97868414B6D91500F01009 /* MoveApplication.strings */,
 				3D97866E14B6C02800F01009 /* noise.png */,
+				C41407FE14BE0A9E002B8B32 /* checked.png */,
+				C41407FF14BE0A9E002B8B32 /* unchecked.png */,
 				3D97868914B75EC200F01009 /* or.png */,
 				3D5F1CA414B4B1F50017D6C3 /* dsa_pub.pem */,
 				3D97868714B75C3900F01009 /* DropRect.png */,
@@ -390,6 +396,8 @@
 				3D97868814B75C3900F01009 /* DropRect.png in Resources */,
 				3D97868A14B75EC200F01009 /* or.png in Resources */,
 				3D97869314B8DE8000F01009 /* SimDeploy.icns in Resources */,
+				C414080014BE0A9E002B8B32 /* checked.png in Resources */,
+				C414080114BE0A9E002B8B32 /* unchecked.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
