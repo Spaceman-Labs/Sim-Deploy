@@ -99,6 +99,11 @@
 	return YES;
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication
+{
+	return YES;
+}
+
 - (IBAction)openDocument:(id)sender
 {
 	NSOpenPanel *panel	= [NSOpenPanel openPanel];
