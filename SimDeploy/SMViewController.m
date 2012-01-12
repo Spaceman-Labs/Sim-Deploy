@@ -330,6 +330,9 @@
 	if (showing) {
 		self.appInfoView.hidden = NO;
 		self.cleanInstallButton.state = NSOffState;
+		[self deregisterForDragAndDrop];
+	} else {
+		[self registerForDragAndDrop];
 	}
 	
 	[CATransaction begin];
