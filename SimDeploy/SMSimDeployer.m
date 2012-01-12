@@ -25,6 +25,7 @@
 @synthesize download;
 @synthesize simulators;
 @synthesize downloadResponse;
+@synthesize sdkRoot;
 
 + (SMSimDeployer *)defaultDeployer {
 	static dispatch_once_t pred;
@@ -49,12 +50,18 @@
 
 	NSArray *roots = [DTiPhoneSimulatorSystemRoot knownRoots];
 	for (DTiPhoneSimulatorSystemRoot *root in roots) {
-		NSString *v = [root sdkVersion];
-		if ([v isEqualToString:@"5.0"])
-		{
-			sdkRoot = root;
-			break;
+		if (nil == sdkRoot) {
+			self.sdkRoot = root;
+			continue;
 		}
+		
+		NSString *oldVersion = [sdkRoot sdkVersion];
+		NSString *newVersion = [root sdkVersion];
+		BOOL newer = ([newVersion compare:oldVersion options:NSNumericSearch] != NSOrderedAscending);
+		
+		if (newer) {
+			self.sdkRoot = root;
+		}		
 	}
 
 	
@@ -89,7 +96,12 @@
 
 - (void)launchApplication:(SMAppModel *)app
 {
-	[self restartiOSSimulator];
+	if (nil == app) {
+		return;
+	}
+	
+	[self killiOSSimulator];
+	
 	if (nil != session) {
 //		[session requestEndWithTimeout:0];
 		[session release];
@@ -99,28 +111,17 @@
 	double delayInSeconds = 2.0;
 	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
 	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-		if (nil == app) {
-//			NSLog(@"Error: NO APP!");
-			return;
-		} else {
-//			NSLog(@"Launch: %@", app.mainBundle.bundlePath);
-		}
-		//launchApp: (NSString *) path withFamily:(NSString*)family uuid:(NSString*)uuid{
 		DTiPhoneSimulatorApplicationSpecifier *appSpec;
 		DTiPhoneSimulatorSessionConfig *config;
 		NSError *error;
 		
 		/* Create the app specifier */
+//		NSLog(@"launch app: %@", app.mainBundle.bundlePath);
 		appSpec = [DTiPhoneSimulatorApplicationSpecifier specifierWithApplicationPath: app.mainBundle.bundlePath];
 		if (appSpec == nil) {
 			NSLog(@"Could not load application specification for %@", app.mainBundle.bundlePath);
 			return;
 		}
-//		NSLog(@"App Spec: %@", appSpec);
-		
-		/* Load the default SDK root */
-		
-//		NSLog(@"SDK Root: %@", sdkRoot);
 		
 		/* Set up the session configuration */
 		config = [[[DTiPhoneSimulatorSessionConfig alloc] init] autorelease];
@@ -128,10 +129,10 @@
 		[config setSimulatedSystemRoot: sdkRoot];
 		[config setSimulatedApplicationShouldWaitForDebugger: NO];
 		
-		[config setSimulatedApplicationLaunchArgs: [NSArray array]];
-		[config setSimulatedApplicationLaunchEnvironment: [[NSProcessInfo processInfo] environment]];
+		[config setSimulatedApplicationLaunchArgs:[NSArray array]];
+		[config setSimulatedApplicationLaunchEnvironment:[[NSProcessInfo processInfo] environment]];
 		
-		[config setLocalizedClientName: @"Sim Deploy"];
+		[config setLocalizedClientName:@"Sim Deploy"];
 		
 		// this was introduced in 3.2 of SDK
 		if ([config respondsToSelector:@selector(setSimulatedDeviceFamily:)])
@@ -164,16 +165,10 @@
 		//		[session setUuid:uuid];
 		//	}
 		
-		if (![session requestStartWithConfig: config timeout: 5 error: &error]) {
+		if (![session requestStartWithConfig:config timeout:35 error:&error]) {
 			NSLog(@"Could not start simulator session: %@", error);
-			//        return EXIT_FAILURE;
 		}
-		
-		//    return EXIT_SUCCESS;
 	});
-
-	
-
 }
 
 - (void)killApp:(SMAppModel *)app
@@ -419,6 +414,9 @@
 		return;
 	}
 	
+	[installQueue release];
+	installQueue = nil;
+	
 	if (nil != installCompletion) {
 		dispatch_async(dispatch_get_main_queue(), installCompletion);
 		[installCompletion release];
@@ -508,12 +506,6 @@
 }
 
 #pragma mark - Simulator
-
-//- (void) simulatorDiscovery: (PLSimulatorDiscovery *) discovery didFindMatchingSimulatorPlatforms: (NSArray *) platforms
-//{
-//	_platform = [platforms lastObject];
-//	NSLog(@"found em");
-//}
 
 // from DTiPhoneSimulatorSessionDelegate protocol
 - (void) session: (DTiPhoneSimulatorSession *) aSession didEndWithError: (NSError *) error {
