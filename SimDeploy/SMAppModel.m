@@ -21,7 +21,10 @@
 		return nil;
 	}
 	
-	if (NO == [[bundle.infoDictionary objectForKey:@"DTPlatformName"] isEqualToString:@"iphonesimulator"]) {
+	NSString *infoPath = [[bundle bundlePath] stringByAppendingPathComponent:@"Info.plist"];
+	NSDictionary *infoDict = [NSDictionary dictionaryWithContentsOfFile:infoPath];
+	
+	if (NO == [[infoDict objectForKey:@"DTPlatformName"] isEqualToString:@"iphonesimulator"]) {
 		[self release];
 		return nil;
 	}
@@ -33,7 +36,7 @@
 	
 	self.guidPath = [[bundle bundlePath] stringByDeletingLastPathComponent];
 	self.mainBundle = bundle;
-	self.infoDictionary = [bundle infoDictionary];
+	self.infoDictionary = infoDict;
 	
 	self.name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
 	self.identifier = [infoDictionary objectForKey:@"CFBundleIdentifier"];
