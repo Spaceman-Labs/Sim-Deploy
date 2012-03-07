@@ -30,6 +30,9 @@
 	CGContextFillRect(context, CGRectMake(0, 1.0f, dirtyRect.size.width, 1.0f));
 	CGContextSetFillColorWithColor(context, bottomColor);
 	CGContextFillRect(context, CGRectMake(0, 0.0f, dirtyRect.size.width, 1.0f));
+	
+	CGColorRelease(topColor);
+	CGColorRelease(bottomColor);
 }
 
 @end

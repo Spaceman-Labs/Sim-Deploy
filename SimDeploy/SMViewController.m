@@ -547,7 +547,7 @@
 		}
 		
 		NSBundle *bundle = [NSBundle bundleWithPath:path];
-		SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
+		SMAppModel *appModel = [[[SMAppModel alloc] initWithBundle:bundle] autorelease];
 				
 		newApp = appModel;
 		break;

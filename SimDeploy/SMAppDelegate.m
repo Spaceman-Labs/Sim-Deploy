@@ -70,7 +70,7 @@
 - (BOOL)application:(NSApplication *)sender openFile:(NSString *)path
 {
 	if ([path hasSuffix:@".zip"]) {
-		SMAppModel *app = [[SMSimDeployer defaultDeployer] unzipAppArchiveAtPath:path];
+		SMAppModel *app = [[[SMSimDeployer defaultDeployer] unzipAppArchiveAtPath:path] autorelease];
 		if (nil != app) {
 			[self.viewController setupAppInfoViewWithApp:app];
 			return YES;

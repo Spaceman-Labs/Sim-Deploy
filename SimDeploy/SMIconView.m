@@ -61,6 +61,12 @@ static CGPathRef createRoundedRectWithRadius(CGRect rect, CGFloat radius)
 		CGImageRef imageRef =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
 		CGContextDrawImage(context, insetRect, imageRef);
 		CGContextRestoreGState(context);
+		if (NULL != source) {
+			CFRelease(source);
+		}
+		if (NULL != imageRef) {
+			CFRelease(imageRef);
+		}
 	}
 	
 	CGColorRelease(black);

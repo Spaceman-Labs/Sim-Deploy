@@ -108,7 +108,7 @@
 		session = nil;
 	}
 	
-	double delayInSeconds = 2.0;
+	double delayInSeconds = 0.1;
 	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
 	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
 		DTiPhoneSimulatorApplicationSpecifier *appSpec;
@@ -116,8 +116,8 @@
 		NSError *error;
 		
 		/* Create the app specifier */
-//		NSLog(@"launch app: %@", app.mainBundle.bundlePath);
-		appSpec = [DTiPhoneSimulatorApplicationSpecifier specifierWithApplicationPath: app.mainBundle.bundlePath];
+		NSString *path = app.mainBundle.bundlePath;
+		appSpec = [DTiPhoneSimulatorApplicationSpecifier specifierWithApplicationPath:path];
 		if (appSpec == nil) {
 			NSLog(@"Could not load application specification for %@", app.mainBundle.bundlePath);
 			return;
@@ -232,9 +232,11 @@
 	CFUUIDRef	uuidObj = CFUUIDCreate(nil);//create a new UUID
 	//get the string representation of the UUID
 	NSString	*uuidString = (NSString*)CFUUIDCreateString(nil, uuidObj);
-	CFRelease(uuidObj);
 	
 	tempFile = [[applicationDirectoryPath stringByAppendingPathComponent:uuidString] retain];
+
+	CFRelease(uuidObj);
+	CFRelease(uuidString);
 	
 	return tempFile;
 }
@@ -289,7 +291,7 @@
 			continue;
 		}
 
-		SMSimulatorModel *sim = [[SMSimulatorModel alloc] initWithPath:fullPath];
+		SMSimulatorModel *sim = [[[SMSimulatorModel alloc] initWithPath:fullPath] autorelease];
 		if (nil == sim) {
 			continue;
 		}
@@ -335,6 +337,7 @@
 	
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20.0f];
 	self.download = [[[NSURLDownload alloc] initWithRequest:request delegate:self] autorelease];
+	[request release];
 	[download setDestination:[self tempArchivePath] allowOverwrite:YES];
 }
 
@@ -368,8 +371,6 @@
 	
 	// Try to find an application bundle
 	
-
-	
 	NSArray *contents = [fm contentsOfDirectoryAtPath:tempApplicationPath error:&error];
 	for (NSString *path in contents) {
 		NSString *fullPath = [tempApplicationPath stringByAppendingPathComponent:path];
@@ -379,7 +380,7 @@
 			continue;
 		}
 		
-		SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
+		SMAppModel *appModel = [[[SMAppModel alloc] initWithBundle:bundle] autorelease];
 		if (nil != appModel) {
 			[appModel setDeleteGUIDWhenFinished:YES];
 			
@@ -517,29 +518,14 @@
 
 // from DTiPhoneSimulatorSessionDelegate protocol
 - (void) session: (DTiPhoneSimulatorSession *)aSession didStart: (BOOL) started withError: (NSError *) error {
-    /* If the application starts successfully, we can exit */
     if (started) {
-//        NSLog(@"Did start app %@ successfully, exiting", _app.path);
-		
         /* Bring simulator to foreground */
         [[SBApplication applicationWithBundleIdentifier:SIM_APP_BUNDLE_ID] activate];
-		
-        /* Exit */
-//        [[NSApplication sharedApplication] terminate: self];
-        return;
     } else {
 		NSLog(@"Error starting simulator: %@", error);
 		[session release];
 		session = nil;
-//		[self restartiOSSimulator];
-	}
-	
-//    /* Otherwise, an error occured. Inform the user. */
-//    NSLog(@"Simulator session did not start: %@", error);
-//    NSString *text = NSLocalizedString(@"The iPhone Simulator could not be started. If another Simulator application "
-//                                       "is currently running, please close the Simulator and try again.", 
-//                                       @"Simulator error alert info");
-//    [self displayLaunchError: text];
+	}	
 }
 
 
