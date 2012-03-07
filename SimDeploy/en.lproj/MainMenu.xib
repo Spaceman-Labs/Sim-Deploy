@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11C74</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
+		<string key="IBDocument.SystemVersion">11D50b</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2177</string>
+		<string key="IBDocument.AppKitVersion">1138.32</string>
+		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1938</string>
+			<string key="NS.object.0">2177</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSToolbar</string>
@@ -762,7 +762,7 @@
 					<int key="NSViewLayerContentsRedrawPolicy">2</int>
 					<string key="NSReuseIdentifierKey">_NS:224</string>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">NO</bool>
 			</object>
@@ -776,7 +776,7 @@
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<object class="NSView" key="NSWindowView" id="439893737">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSCustomView" id="444435593">
@@ -789,6 +789,7 @@
 									<object class="NSPSMatrix" key="NSDrawMatrix"/>
 									<string key="NSFrame">{{20, 52}, {410, 20}}</string>
 									<reference key="NSSuperview" ref="444435593"/>
+									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="888467519"/>
 									<string key="NSReuseIdentifierKey">_NS:2306</string>
 									<int key="NSpiFlags">24586</int>
@@ -797,8 +798,9 @@
 								<object class="NSTextField" id="487110103">
 									<reference key="NSNextResponder" ref="444435593"/>
 									<int key="NSvFlags">268</int>
-									<string key="NSFrame">{{17, 81}, {127, 17}}</string>
+									<string key="NSFrame">{{17, 81}, {414, 17}}</string>
 									<reference key="NSSuperview" ref="444435593"/>
+									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="137591338"/>
 									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<string key="NSReuseIdentifierKey">_NS:3944</string>
@@ -840,6 +842,7 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{251, 12}, {82, 32}}</string>
 									<reference key="NSSuperview" ref="444435593"/>
+									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="271653585"/>
 									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<string key="NSReuseIdentifierKey">_NS:687</string>
@@ -864,6 +867,7 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{333, 12}, {103, 32}}</string>
 									<reference key="NSSuperview" ref="444435593"/>
+									<reference key="NSWindow"/>
 									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<string key="NSReuseIdentifierKey">_NS:687</string>
 									<bool key="NSEnabled">YES</bool>
@@ -887,6 +891,7 @@
 									<int key="NSvFlags">271</int>
 									<string key="NSFrame">{{20, 51}, {410, 22}}</string>
 									<reference key="NSSuperview" ref="444435593"/>
+									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="329720367"/>
 									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<string key="NSReuseIdentifierKey">_NS:903</string>
@@ -912,6 +917,7 @@
 							</array>
 							<string key="NSFrameSize">{450, 118}</string>
 							<reference key="NSSuperview" ref="439893737"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="487110103"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<string key="NSReuseIdentifierKey">_NS:1192</string>
@@ -919,10 +925,12 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{450, 118}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="444435593"/>
 					<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">NO</bool>
 			</object>
@@ -984,7 +992,7 @@
 					<reference key="NSNextKeyView" ref="802975579"/>
 					<string key="NSReuseIdentifierKey">_NS:223</string>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
@@ -1569,6 +1577,14 @@
 						<reference key="destination" ref="277446461"/>
 					</object>
 					<int key="connectionID">841</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">urlLabel</string>
+						<reference key="source" ref="695594925"/>
+						<reference key="destination" ref="487110103"/>
+					</object>
+					<int key="connectionID">847</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -2381,7 +2397,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">846</int>
+			<int key="maxID">847</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2535,6 +2551,7 @@
 						<string key="mainWindow">NSWindow</string>
 						<string key="progressIndicator">NSProgressIndicator</string>
 						<string key="titleLabel">NSTextField</string>
+						<string key="urlLabel">NSTextField</string>
 						<string key="versionLabel">NSTextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -2618,6 +2635,10 @@
 							<string key="name">titleLabel</string>
 							<string key="candidateClassName">NSTextField</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="urlLabel">
+							<string key="name">urlLabel</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="versionLabel">
 							<string key="name">versionLabel</string>
 							<string key="candidateClassName">NSTextField</string>
@@ -2666,8 +2687,8 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="DropRect">{150, 150}</string>
-			<string key="NSMenuCheckmark">{9, 8}</string>
-			<string key="NSMenuMixedState">{7, 2}</string>
+			<string key="NSMenuCheckmark">{11, 11}</string>
+			<string key="NSMenuMixedState">{10, 3}</string>
 			<string key="NSToolbarPrint">{32, 32}</string>
 			<string key="NSToolbarShowColors">{32, 32}</string>
 			<string key="NSToolbarShowFonts">{32, 32}</string>

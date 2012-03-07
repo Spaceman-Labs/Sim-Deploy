@@ -35,6 +35,7 @@
 @synthesize installMessageLabel;
 @synthesize installProgressIndicator;
 @synthesize installPanel;
+@synthesize urlLabel;
 @synthesize cleanInstallButton;
 
 - (void)awakeFromNib
@@ -107,6 +108,7 @@
 	self.installMessageLabel = nil;
 	self.installProgressIndicator = nil;
 	self.installPanel = nil;
+	self.urlLabel = nil;
 	self.cleanInstallButton = nil;
 	
 	[super dealloc];
@@ -170,6 +172,8 @@
 	
 	SMSimDeployer *deployer = [SMSimDeployer defaultDeployer];
 	[[NSUserDefaults standardUserDefaults] setObject:urlPath forKey:@"lastURL"];
+	NSString *oldLabelString = self.urlLabel.stringValue;
+	self.urlLabel.stringValue = @"Downloading...";
 	
 	[deployer downloadAppAtURL:url 
 			   percentComplete:^(CGFloat percentComplete) {
@@ -181,6 +185,8 @@
 				   }
 				   
 				   if (percentComplete > 0.0f) {
+					   NSString *value = [NSString stringWithFormat:@"Downloading... %.2f%%", percentComplete];
+					   self.urlLabel.stringValue = value;
 					   [self.progressIndicator setIndeterminate:NO];
 					   [self.progressIndicator setDoubleValue:percentComplete];
 				   } else {
@@ -189,6 +195,7 @@
 				   }
 			   }
 					completion:^(BOOL failed) {
+						self.urlLabel.stringValue = oldLabelString;
 						self.downloadButton.enabled = YES;
 						[self registerForDragAndDrop];
 						[NSApp endModalSession:modalSession];
@@ -394,12 +401,7 @@
 		NSMutableString *version = [NSMutableString stringWithFormat:@"Installed Version: %@", installedApp.marketingVersion];
 		[version appendFormat:@" (%@)", installedApp.version];
 		self.installedVersionLabel.stringValue = version;
-		[self.installedVersionLabel sizeToFit];
-		
 		self.cleanInstallButton.hidden = NO;
-//		CGRect frame = self.cleanInstallButton.frame;
-//		frame.origin.y = CGRectGetMinY(self.installedVersionLabel.frame) - frame.size.height - 5.0f;
-//		self.cleanInstallButton.frame = frame;
 		
 		if (SMAppCompareLessThan == compare) {
 			self.installButton.title = @"Upgrade";
@@ -412,7 +414,7 @@
 			self.installedVersionLabel.stringValue = [NSString stringWithFormat:@"This Version Is Already Installed."];
 		}
 
-	}	
+	}
 	
 	self.appInfoView.installDisabled = ![self.installButton isEnabled];
 	[self updateInstallButton];

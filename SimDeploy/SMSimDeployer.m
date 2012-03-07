@@ -518,14 +518,9 @@
 
 // from DTiPhoneSimulatorSessionDelegate protocol
 - (void) session: (DTiPhoneSimulatorSession *)aSession didStart: (BOOL) started withError: (NSError *) error {
-    if (started) {
-        /* Bring simulator to foreground */
-        [[SBApplication applicationWithBundleIdentifier:SIM_APP_BUNDLE_ID] activate];
-    } else {
-		NSLog(@"Error starting simulator: %@", error);
-		[session release];
-		session = nil;
-	}	
+	NSLog(@"Error starting simulator: %@", error);
+	[session release];
+	session = nil;
 }
 
 

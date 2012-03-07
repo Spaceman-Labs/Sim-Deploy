@@ -25,6 +25,7 @@
 @property (nonatomic, retain) IBOutlet NSWindow *mainWindow;
 
 @property (nonatomic, retain) IBOutlet NSPanel *downloadURLSheet;
+@property (nonatomic, retain) IBOutlet NSTextField *urlLabel;
 @property (nonatomic, retain) IBOutlet NSTextField *downloadTextField;
 @property (nonatomic, retain) IBOutlet NSProgressIndicator *progressIndicator;
 @property (nonatomic, retain) IBOutlet NSButton *downloadButton;
