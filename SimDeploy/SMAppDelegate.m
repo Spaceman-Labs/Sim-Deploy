@@ -70,18 +70,15 @@
 - (BOOL)application:(NSApplication *)sender openFile:(NSString *)path
 {
 	if ([path hasSuffix:@".zip"]) {
-		SMAppModel *app = [[[SMSimDeployer defaultDeployer] unzipAppArchiveAtPath:path] autorelease];
+		SMAppModel *app = [[SMSimDeployer defaultDeployer] unzipAppArchiveAtPath:path];
 		if (nil != app) {
 			[self.viewController setupAppInfoViewWithApp:app];
 			return YES;
 		}		
 	}
 	
-	
-	SMAppModel *newApp = nil;
-	
 	NSBundle *bundle = [NSBundle bundleWithPath:path];
-	SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
+	SMAppModel *appModel = [[[SMAppModel alloc] initWithBundle:bundle] autorelease];
 	
 	if (nil == appModel) {
 		[self.viewController errorWithTitle:NSLocalizedString(@"Not a Valid Application", nil) 
@@ -89,9 +86,7 @@
 
 	}
 	
-	newApp = appModel;
-	
-	if (nil != newApp) {
+	if (nil != appModel) {
 		[self.viewController setupAppInfoViewWithApp:appModel];
 		return YES;
 	}

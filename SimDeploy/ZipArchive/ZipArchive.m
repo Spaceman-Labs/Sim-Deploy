@@ -425,7 +425,7 @@
         }
         
         // Copy name to array
-        [allFilenames addObject:[strPath copy]];
+        [allFilenames addObject:[[strPath copy] autorelease]];
         
         unzCloseCurrentFile( _unzFile );
         ret = unzGoToNextFile( _unzFile );
