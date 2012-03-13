@@ -6,20 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		C4F68FF414B8C7FF00FCC833 /* Version.h */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = C4F68FF514B8C7FF00FCC833 /* Build configuration list for PBXAggregateTarget "Version.h" */;
-			buildPhases = (
-				C4F68FF814B8C80200FCC833 /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = Version.h;
-			productName = Version.h;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		3D0D965214B28BF700BB51FC /* SMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D965114B28BF700BB51FC /* SMViewController.m */; };
 		3D0D970314B2CC4600BB51FC /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D96F914B2CC4600BB51FC /* ioapi.c */; };
@@ -60,16 +46,6 @@
 		C482EDEE14BC13C400A713D5 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C482EDED14BC13C400A713D5 /* ScriptingBridge.framework */; };
 		C482EDF614BC240900A713D5 /* iPhoneSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = C482EDF514BC240900A713D5 /* iPhoneSimulator.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		C4F68FF914B8C81800FCC833 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3DEAE80914AE94E400D239B4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C4F68FF414B8C7FF00FCC833;
-			remoteInfo = Version.h;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		3D5F1CA214B4AF9C0017D6C3 /* CopyFiles */ = {
@@ -350,7 +326,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C4F68FFA14B8C81800FCC833 /* PBXTargetDependency */,
 			);
 			name = "Sim Deploy";
 			productName = SimDeploy;
@@ -363,7 +338,9 @@
 		3DEAE80914AE94E400D239B4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = SM;
 				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Spaceman Labs";
 			};
 			buildConfigurationList = 3DEAE80C14AE94E400D239B4 /* Build configuration list for PBXProject "SimDeploy" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -378,7 +355,6 @@
 			projectRoot = "";
 			targets = (
 				3DEAE81114AE94E400D239B4 /* Sim Deploy */,
-				C4F68FF414B8C7FF00FCC833 /* Version.h */,
 			);
 		};
 /* End PBXProject section */
@@ -402,23 +378,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		C4F68FF814B8C80200FCC833 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-				"$(SRCROOT)/version.h",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "CURRENT_PROJECT_VERSION=$(cd ${SRCROOT} && svnversion | sed s/M//)\necho \"#define CURRENT_PROJECT_VERSION ${CURRENT_PROJECT_VERSION}\" > \"${SRCROOT}/version.h\"\n#echo \"#define CURRENT_PROJECT_VERSION 23\" > \"${SRCROOT}/version.h\"\n#sed 's/SVN_REVISION/'\"$REVISION\"'/' \"${INFO_PLIST_STRINGS}\" > /tmp/InfoPlist.strings";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3DEAE80E14AE94E400D239B4 /* Sources */ = {
@@ -450,14 +409,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		C4F68FFA14B8C81800FCC833 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C4F68FF414B8C7FF00FCC833 /* Version.h */;
-			targetProxy = C4F68FF914B8C81800FCC833 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3D97868414B6D91500F01009 /* MoveApplication.strings */ = {
@@ -494,6 +445,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 122;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -511,6 +463,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -521,6 +474,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 122;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -531,6 +485,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -550,7 +505,6 @@
 				);
 				INFOPLIST_FILE = "SimDeploy/SimDeploy-Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
-				INFOPLIST_PREFIX_HEADER = version.h;
 				INFOPLIST_PREPROCESS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
@@ -585,7 +539,6 @@
 				);
 				INFOPLIST_FILE = "SimDeploy/SimDeploy-Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
-				INFOPLIST_PREFIX_HEADER = version.h;
 				INFOPLIST_PREPROCESS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
@@ -601,20 +554,6 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		C4F68FF614B8C7FF00FCC833 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		C4F68FF714B8C7FF00FCC833 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -635,15 +574,6 @@
 			buildConfigurations = (
 				3DEAE83114AE94E400D239B4 /* Debug */,
 				3DEAE83214AE94E400D239B4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C4F68FF514B8C7FF00FCC833 /* Build configuration list for PBXAggregateTarget "Version.h" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C4F68FF614B8C7FF00FCC833 /* Debug */,
-				C4F68FF714B8C7FF00FCC833 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
