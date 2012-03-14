@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">
+   <channel>
+      <title>Sim Deploy Changelog</title>
+      <link>http://www.spacemanlabs.com/simdeploy/appcast.xml</link>
+      <language>en</language>
+         <item>
+            <title>Version {{MARKETING_VERSION}}</title>
+						<sparkle:releaseNotesLink>
+							http://www.spacemanlabs.com/simdeploy/dist/{{MARKETING_VERSION}}/releasenotes.html
+						</sparkle:releaseNotesLink>
+            <pubDate>{{DATE}}</pubDate>
+            <enclosure url="http://www.spacemanlabs.com/simdeploy/dist/{{MARKETING_VERSION}}/simdeploy.zip" sparkle:version="{{VERSION}}"  length="{{SIZE}}" type="application/octet-stream" sparkle:dsaSignature="{{SIGNATURE}}" sparkle:shortVersionString="{{MARKETING_VERSION}}"/>
+         </item>
+   </channel>
+</rss>
