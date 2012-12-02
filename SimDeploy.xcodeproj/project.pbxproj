@@ -18,11 +18,11 @@
 		3D41575214B422A5002EF5D8 /* SMLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D41575114B422A4002EF5D8 /* SMLayerView.m */; };
 		3D54B73B166BF1C4006B67F9 /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D54B739166BF1C4006B67F9 /* checked@2x.png */; };
 		3D54B73C166BF1C4006B67F9 /* unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D54B73A166BF1C4006B67F9 /* unchecked@2x.png */; };
+		3D54B796166BF454006B67F9 /* KGNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54B784166BF454006B67F9 /* KGNoise.m */; };
 		3D5F1CA014B4AF620017D6C3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */; };
 		3D5F1CA314B4AFA80017D6C3 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */; };
 		3D5F1CA514B4B1F50017D6C3 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3D5F1CA414B4B1F50017D6C3 /* dsa_pub.pem */; };
 		3D97866814B551E200F01009 /* SMDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97866614B551E200F01009 /* SMDocument.m */; };
-		3D97866F14B6C02800F01009 /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D97866E14B6C02800F01009 /* noise.png */; };
 		3D97867214B6CB7B00F01009 /* SMDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867114B6CB7B00F01009 /* SMDividerView.m */; };
 		3D97867C14B6D83D00F01009 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867914B6D83D00F01009 /* PFMoveApplication.m */; };
 		3D97867D14B6D83D00F01009 /* NSString+SymlinksAndAliases.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867B14B6D83D00F01009 /* NSString+SymlinksAndAliases.m */; };
@@ -83,11 +83,12 @@
 		3D41575114B422A4002EF5D8 /* SMLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMLayerView.m; sourceTree = "<group>"; };
 		3D54B739166BF1C4006B67F9 /* checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked@2x.png"; sourceTree = "<group>"; };
 		3D54B73A166BF1C4006B67F9 /* unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unchecked@2x.png"; sourceTree = "<group>"; };
+		3D54B783166BF454006B67F9 /* KGNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGNoise.h; sourceTree = "<group>"; };
+		3D54B784166BF454006B67F9 /* KGNoise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGNoise.m; sourceTree = "<group>"; };
 		3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = SOURCE_ROOT; };
 		3D5F1CA414B4B1F50017D6C3 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		3D97866514B551E200F01009 /* SMDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDocument.h; sourceTree = "<group>"; };
 		3D97866614B551E200F01009 /* SMDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDocument.m; sourceTree = "<group>"; };
-		3D97866E14B6C02800F01009 /* noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noise.png; sourceTree = "<group>"; };
 		3D97867014B6CB7B00F01009 /* SMDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDividerView.h; sourceTree = "<group>"; };
 		3D97867114B6CB7B00F01009 /* SMDividerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDividerView.m; sourceTree = "<group>"; };
 		3D97867814B6D83D00F01009 /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
@@ -179,7 +180,6 @@
 			children = (
 				3D97869214B8DE8000F01009 /* SimDeploy.icns */,
 				3D97868414B6D91500F01009 /* MoveApplication.strings */,
-				3D97866E14B6C02800F01009 /* noise.png */,
 				C41407FE14BE0A9E002B8B32 /* checked.png */,
 				3D54B739166BF1C4006B67F9 /* checked@2x.png */,
 				C41407FF14BE0A9E002B8B32 /* unchecked.png */,
@@ -189,6 +189,16 @@
 				3D97868714B75C3900F01009 /* DropRect.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		3D54B773166BF454006B67F9 /* KGNoise */ = {
+			isa = PBXGroup;
+			children = (
+				3D54B783166BF454006B67F9 /* KGNoise.h */,
+				3D54B784166BF454006B67F9 /* KGNoise.m */,
+			);
+			name = KGNoise;
+			path = vendor/KGNoise;
 			sourceTree = "<group>";
 		};
 		3D97866A14B6AB3800F01009 /* Classes */ = {
@@ -231,6 +241,7 @@
 		3DC59E73165B5B03004C7972 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				3D54B773166BF454006B67F9 /* KGNoise */,
 				3DC59E75165B5B4E004C7972 /* NSAlert-OAExtensions */,
 				3D97867714B6D83400F01009 /* LetsMove */,
 				3D0D96F614B2CC4600BB51FC /* ZipArchive */,
@@ -405,7 +416,6 @@
 				3DEAE82114AE94E400D239B4 /* InfoPlist.strings in Resources */,
 				3DEAE82D14AE94E400D239B4 /* MainMenu.xib in Resources */,
 				3D5F1CA514B4B1F50017D6C3 /* dsa_pub.pem in Resources */,
-				3D97866F14B6C02800F01009 /* noise.png in Resources */,
 				3D97868214B6D91500F01009 /* MoveApplication.strings in Resources */,
 				3D97868814B75C3900F01009 /* DropRect.png in Resources */,
 				3D97868A14B75EC200F01009 /* or.png in Resources */,
@@ -445,6 +455,7 @@
 				3D97867D14B6D83D00F01009 /* NSString+SymlinksAndAliases.m in Sources */,
 				C482EDBF14BBF95B00A713D5 /* SMAppInstallView.m in Sources */,
 				C482EDF614BC240900A713D5 /* iPhoneSimulator.m in Sources */,
+				3D54B796166BF454006B67F9 /* KGNoise.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +550,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimDeploy/SimDeploy-Prefix.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				HEADER_SEARCH_PATHS = (
 					"\".\"/**",
 					"\"$(SRCROOT)/Sparkle.framework\"/**",
@@ -573,6 +585,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimDeploy/SimDeploy-Prefix.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				HEADER_SEARCH_PATHS = (
 					"\".\"/**",
 					"\"$(SRCROOT)/Sparkle.framework\"/**",
