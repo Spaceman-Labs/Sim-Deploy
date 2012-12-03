@@ -14,7 +14,7 @@
 		3D0D970614B2CC4600BB51FC /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D96FF14B2CC4600BB51FC /* zip.c */; };
 		3D0D970914B2CC8100BB51FC /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0D970814B2CC8100BB51FC /* libz.1.2.5.dylib */; };
 		3D0D970C14B2D3F000BB51FC /* SMSimulatorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D970B14B2D3F000BB51FC /* SMSimulatorModel.m */; };
-		3D0D972614B2E8AD00BB51FC /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D972514B2E8AD00BB51FC /* ZipArchive.m */; };
+		3D0D972614B2E8AD00BB51FC /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D972514B2E8AD00BB51FC /* ZipArchive.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3D54B73B166BF1C4006B67F9 /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D54B739166BF1C4006B67F9 /* checked@2x.png */; };
 		3D54B73C166BF1C4006B67F9 /* unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D54B73A166BF1C4006B67F9 /* unchecked@2x.png */; };
 		3D54B796166BF454006B67F9 /* KGNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54B784166BF454006B67F9 /* KGNoise.m */; };
@@ -24,13 +24,13 @@
 		3D5F1CA514B4B1F50017D6C3 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3D5F1CA414B4B1F50017D6C3 /* dsa_pub.pem */; };
 		3D97866814B551E200F01009 /* SMDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97866614B551E200F01009 /* SMDocument.m */; };
 		3D97867214B6CB7B00F01009 /* SMDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867114B6CB7B00F01009 /* SMDividerView.m */; };
-		3D97867C14B6D83D00F01009 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867914B6D83D00F01009 /* PFMoveApplication.m */; };
-		3D97867D14B6D83D00F01009 /* NSString+SymlinksAndAliases.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867B14B6D83D00F01009 /* NSString+SymlinksAndAliases.m */; };
+		3D97867C14B6D83D00F01009 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867914B6D83D00F01009 /* PFMoveApplication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3D97867D14B6D83D00F01009 /* NSString+SymlinksAndAliases.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867B14B6D83D00F01009 /* NSString+SymlinksAndAliases.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3D97868114B6D8CD00F01009 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D97868014B6D8CD00F01009 /* Security.framework */; };
 		3D97868214B6D91500F01009 /* MoveApplication.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D97868414B6D91500F01009 /* MoveApplication.strings */; };
 		3D97868814B75C3900F01009 /* DropRect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D97868714B75C3900F01009 /* DropRect.png */; };
 		3D97869314B8DE8000F01009 /* SimDeploy.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3D97869214B8DE8000F01009 /* SimDeploy.icns */; };
-		3DB7748A14B36CBD0042BD98 /* NSAlert-OAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */; };
+		3DB7748A14B36CBD0042BD98 /* NSAlert-OAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3DB7749B14B400580042BD98 /* SMFileDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7749A14B400580042BD98 /* SMFileDragView.m */; };
 		3DD744EC14B52B3C00EA0A46 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD744EB14B52B3C00EA0A46 /* QuartzCore.framework */; };
 		3DD744F214B532E400EA0A46 /* SMIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD744F114B532E400EA0A46 /* SMIconView.m */; };
@@ -45,7 +45,7 @@
 		C414080114BE0A9E002B8B32 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = C41407FF14BE0A9E002B8B32 /* unchecked.png */; };
 		C482EDBF14BBF95B00A713D5 /* SMAppInstallView.m in Sources */ = {isa = PBXBuildFile; fileRef = C482EDBE14BBF95B00A713D5 /* SMAppInstallView.m */; };
 		C482EDEE14BC13C400A713D5 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C482EDED14BC13C400A713D5 /* ScriptingBridge.framework */; };
-		C482EDF614BC240900A713D5 /* iPhoneSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = C482EDF514BC240900A713D5 /* iPhoneSimulator.m */; };
+		C482EDF614BC240900A713D5 /* iPhoneSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = C482EDF514BC240900A713D5 /* iPhoneSimulator.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -537,6 +537,7 @@
 		3DEAE83114AE94E400D239B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks\"",
@@ -572,6 +573,7 @@
 		3DEAE83214AE94E400D239B4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks\"",

@@ -14,13 +14,6 @@
 @synthesize window = _window;
 @synthesize viewController;
 
-- (void)dealloc
-{
-	self.window = nil;
-	self.viewController = nil;
-    [super dealloc];
-}
-
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
 #ifndef DEBUG
@@ -78,7 +71,7 @@
 	}
 	
 	NSBundle *bundle = [NSBundle bundleWithPath:path];
-	SMAppModel *appModel = [[[SMAppModel alloc] initWithBundle:bundle] autorelease];
+	SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
 	
 	if (nil == appModel) {
 		[self.viewController errorWithTitle:NSLocalizedString(@"Not a Valid Application", nil) 
