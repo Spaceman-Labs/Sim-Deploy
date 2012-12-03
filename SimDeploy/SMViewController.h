@@ -12,7 +12,6 @@
 #import "SMIconView.h"
 #import "SMAppInstallView.h"
 #import "KGNoise.h"
-#import "SMShadowButtonView.h"
 
 @interface SMViewController : NSObject <NSAlertDelegate, SMFileDragViewDelegate>
 {
@@ -45,7 +44,7 @@
 @property (nonatomic, retain) IBOutlet NSTextField *installedVersionLabel;
 @property (nonatomic, retain) IBOutlet NSButton *cancelButton;
 @property (nonatomic, retain) IBOutlet NSButton *installButton;
-@property (nonatomic, retain) IBOutlet SMShadowButtonView *cleanInstallButton;
+@property (nonatomic, retain) IBOutlet NSButton *cleanInstallButton;
 @property (nonatomic, retain) IBOutlet SMIconView *iconView;
 
 @property (nonatomic, retain) IBOutlet NSPanel *installPanel;
