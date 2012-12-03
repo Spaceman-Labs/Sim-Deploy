@@ -553,7 +553,7 @@
 				INFOPLIST_FILE = "SimDeploy/SimDeploy-Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				INFOPLIST_PREPROCESS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				OTHER_LDFLAGS = (
 					"-framework",
 					AppKit,
@@ -589,7 +589,7 @@
 				INFOPLIST_FILE = "SimDeploy/SimDeploy-Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				INFOPLIST_PREPROCESS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				OTHER_LDFLAGS = (
 					"-framework",
 					AppKit,

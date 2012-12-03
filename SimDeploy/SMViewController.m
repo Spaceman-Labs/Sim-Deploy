@@ -469,7 +469,7 @@
 
 - (void)registerForDragAndDrop
 {
-	[self.fileDragView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+	[self.fileDragView registerForDraggedTypes:@[NSFilenamesPboardType]];
 }
 
 - (void)deregisterForDragAndDrop

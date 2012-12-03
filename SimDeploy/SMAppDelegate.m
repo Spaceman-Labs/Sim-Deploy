@@ -43,11 +43,10 @@
 	for (NSString *component in components) {
 		NSArray *pair = [component componentsSeparatedByString:@"="];
 		
-		[queryParams setObject:[[pair objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding: NSMacOSRomanStringEncoding]
-						forKey:[pair objectAtIndex:0]]; 
+		queryParams[pair[0]] = [pair[1] stringByReplacingPercentEscapesUsingEncoding: NSMacOSRomanStringEncoding]; 
 	}
 	
-	NSString *fetchLocation = [queryParams objectForKey:@"url"];
+	NSString *fetchLocation = queryParams[@"url"];
 		
 	if (nil != fetchLocation) {
 		if (NO == [fetchLocation hasPrefix:@"http://"]) {

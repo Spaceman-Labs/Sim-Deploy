@@ -128,7 +128,7 @@
 		[config setSimulatedSystemRoot: sdkRoot];
 		[config setSimulatedApplicationShouldWaitForDebugger: NO];
 		
-		[config setSimulatedApplicationLaunchArgs:[NSArray array]];
+		[config setSimulatedApplicationLaunchArgs:@[]];
 		[config setSimulatedApplicationLaunchEnvironment:[[NSProcessInfo processInfo] environment]];
 		
 		[config setLocalizedClientName:@"Sim Deploy"];
@@ -152,13 +152,13 @@
 			//			[config setSimulatedDeviceFamily:[NSNumber numberWithInt:1]];
 			//		}
 			
-			[config setSimulatedDeviceFamily:[NSNumber numberWithInt:2]];
+			[config setSimulatedDeviceFamily:@2];
 		}
 		
 		/* Start the session */
 		session = [[DTiPhoneSimulatorSession alloc] init];
 		[session setDelegate: self];
-		[session setSimulatedApplicationPID: [NSNumber numberWithInt: 35]];
+		[session setSimulatedApplicationPID: @35];
 		//	if (uuid!=nil)
 		//	{
 		//		[session setUuid:uuid];
@@ -310,7 +310,7 @@
 		}
 	}
 	
-	NSArray *foundSims = [NSArray arrayWithObjects:sim1, sim2, nil];
+	NSArray *foundSims = @[sim1, sim2];
 	
 	self.simulators = foundSims;
 	return foundSims;
@@ -379,7 +379,7 @@
 			[appModel setDeleteGUIDWhenFinished:YES];
 			
 			// Some bug causes the executable to lose it's +x permissions. Do that here.
-			NSString *executable = [appModel.infoDictionary objectForKey:@"CFBundleExecutable"];
+			NSString *executable = (appModel.infoDictionary)[@"CFBundleExecutable"];
 			NSString *executablePath = [appModel.mainBundle.bundlePath stringByAppendingPathComponent:executable];
 						
 			const char *path = [executablePath cStringUsingEncoding:NSASCIIStringEncoding];
