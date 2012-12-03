@@ -79,17 +79,13 @@
 //	[[self.cleanInstallButton cell] setBackgroundStyle:NSBackgroundStyleRaised];
 	
 	NSShadow *shadow = [[NSShadow alloc] init];
-	shadow.shadowColor = [NSColor colorWithDeviceRed:1.0f green:1.0f blue:1.0f alpha:0.6f];
+	shadow.shadowColor = [NSColor colorWithDeviceRed:1.0f green:1.0f blue:1.0f alpha:0.7f];
 	shadow.shadowOffset = CGSizeMake(0, 1.0f);
 
 	self.titleLabel.shadow = shadow;
 	self.versionLabel.shadow = shadow;
 	self.installedVersionLabel.shadow = shadow;
-	
-	shadow = [[NSShadow alloc] init];
-	shadow.shadowColor = [NSColor colorWithDeviceRed:1.0f green:1.0f blue:1.0f alpha:0.4f];
-	shadow.shadowOffset = CGSizeMake(0, -1.0f);
-	
+	self.orLabel.shadow = shadow;	
 	self.cleanInstallButton.shadow = shadow;
 	
 	self.iconView.image = [NSImage imageNamed:@"Icon@2x.png"];
