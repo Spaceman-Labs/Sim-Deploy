@@ -56,7 +56,10 @@
 		self.downloadTextField.stringValue = lastURL;
 	}
 	
-
+	self.mainView.backgroundColor = [NSColor colorWithDeviceRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0f];
+	self.mainView.noiseOpacity = 0.12f;
+	self.mainView.noiseBlendMode = kCGBlendModeMultiply;
+	
 //	CGRect frame = self.titleLabel.frame;
 //	frame.size.height += 20.0f;
 //	frame.origin.y -= 25.0f;
@@ -70,10 +73,24 @@
 //	frame.origin.y = CGRectGetMinY(self.installedVersionLabel.frame) - 5.0f;
 //	self.installedVersionLabel.frame = frame;
 	
-	[[self.versionLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
-	[[self.titleLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
-	[[self.installedVersionLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
-	[[self.cleanInstallButton cell] setBackgroundStyle:NSBackgroundStyleRaised];
+//	[[self.versionLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+//	[[self.titleLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+//	[[self.installedVersionLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+//	[[self.cleanInstallButton cell] setBackgroundStyle:NSBackgroundStyleRaised];
+	
+	NSShadow *shadow = [[NSShadow alloc] init];
+	shadow.shadowColor = [NSColor colorWithDeviceRed:1.0f green:1.0f blue:1.0f alpha:0.6f];
+	shadow.shadowOffset = CGSizeMake(0, 1.0f);
+
+	self.titleLabel.shadow = shadow;
+	self.versionLabel.shadow = shadow;
+	self.installedVersionLabel.shadow = shadow;
+	
+	shadow = [[NSShadow alloc] init];
+	shadow.shadowColor = [NSColor colorWithDeviceRed:1.0f green:1.0f blue:1.0f alpha:0.4f];
+	shadow.shadowOffset = CGSizeMake(0, -1.0f);
+	
+	self.cleanInstallButton.shadow = shadow;
 	
 	self.iconView.image = [NSImage imageNamed:@"Icon@2x.png"];
 	
@@ -376,7 +393,7 @@
 	versionsAreTheSame = NO;
 
 	self.titleLabel.stringValue = app.name;
-	[self.titleLabel sizeToFit];
+	
 	NSMutableString *version = [NSMutableString stringWithFormat:@"Version: %@", app.marketingVersion];
 	[version appendFormat:@" (%@)", app.version];
 	self.versionLabel.stringValue = version;

@@ -15,10 +15,11 @@
 		3D0D970914B2CC8100BB51FC /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0D970814B2CC8100BB51FC /* libz.1.2.5.dylib */; };
 		3D0D970C14B2D3F000BB51FC /* SMSimulatorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D970B14B2D3F000BB51FC /* SMSimulatorModel.m */; };
 		3D0D972614B2E8AD00BB51FC /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D972514B2E8AD00BB51FC /* ZipArchive.m */; };
-		3D41575214B422A5002EF5D8 /* SMLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D41575114B422A4002EF5D8 /* SMLayerView.m */; };
 		3D54B73B166BF1C4006B67F9 /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D54B739166BF1C4006B67F9 /* checked@2x.png */; };
 		3D54B73C166BF1C4006B67F9 /* unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D54B73A166BF1C4006B67F9 /* unchecked@2x.png */; };
 		3D54B796166BF454006B67F9 /* KGNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54B784166BF454006B67F9 /* KGNoise.m */; };
+		3D54B7A7166C3C12006B67F9 /* SMShadowTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54B7A6166C3C12006B67F9 /* SMShadowTextView.m */; };
+		3D54B7AA166C520B006B67F9 /* SMShadowButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54B7A9166C520B006B67F9 /* SMShadowButtonView.m */; };
 		3D5F1CA014B4AF620017D6C3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */; };
 		3D5F1CA314B4AFA80017D6C3 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */; };
 		3D5F1CA514B4B1F50017D6C3 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3D5F1CA414B4B1F50017D6C3 /* dsa_pub.pem */; };
@@ -79,12 +80,14 @@
 		3D0D970A14B2D3F000BB51FC /* SMSimulatorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSimulatorModel.h; sourceTree = "<group>"; };
 		3D0D970B14B2D3F000BB51FC /* SMSimulatorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSimulatorModel.m; sourceTree = "<group>"; };
 		3D0D972514B2E8AD00BB51FC /* ZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipArchive.m; sourceTree = "<group>"; };
-		3D41575014B422A4002EF5D8 /* SMLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMLayerView.h; sourceTree = "<group>"; };
-		3D41575114B422A4002EF5D8 /* SMLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMLayerView.m; sourceTree = "<group>"; };
 		3D54B739166BF1C4006B67F9 /* checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked@2x.png"; sourceTree = "<group>"; };
 		3D54B73A166BF1C4006B67F9 /* unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unchecked@2x.png"; sourceTree = "<group>"; };
 		3D54B783166BF454006B67F9 /* KGNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGNoise.h; sourceTree = "<group>"; };
 		3D54B784166BF454006B67F9 /* KGNoise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGNoise.m; sourceTree = "<group>"; };
+		3D54B7A5166C3C12006B67F9 /* SMShadowTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMShadowTextView.h; sourceTree = "<group>"; };
+		3D54B7A6166C3C12006B67F9 /* SMShadowTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMShadowTextView.m; sourceTree = "<group>"; };
+		3D54B7A8166C520B006B67F9 /* SMShadowButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMShadowButtonView.h; sourceTree = "<group>"; };
+		3D54B7A9166C520B006B67F9 /* SMShadowButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMShadowButtonView.m; sourceTree = "<group>"; };
 		3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = SOURCE_ROOT; };
 		3D5F1CA414B4B1F50017D6C3 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		3D97866514B551E200F01009 /* SMDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDocument.h; sourceTree = "<group>"; };
@@ -206,10 +209,12 @@
 			children = (
 				3DB7749914B400580042BD98 /* SMFileDragView.h */,
 				3DB7749A14B400580042BD98 /* SMFileDragView.m */,
-				3D41575014B422A4002EF5D8 /* SMLayerView.h */,
-				3D41575114B422A4002EF5D8 /* SMLayerView.m */,
 				3D97867014B6CB7B00F01009 /* SMDividerView.h */,
 				3D97867114B6CB7B00F01009 /* SMDividerView.m */,
+				3D54B7A5166C3C12006B67F9 /* SMShadowTextView.h */,
+				3D54B7A6166C3C12006B67F9 /* SMShadowTextView.m */,
+				3D54B7A8166C520B006B67F9 /* SMShadowButtonView.h */,
+				3D54B7A9166C520B006B67F9 /* SMShadowButtonView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -447,7 +452,6 @@
 				3D0D972614B2E8AD00BB51FC /* ZipArchive.m in Sources */,
 				3DB7748A14B36CBD0042BD98 /* NSAlert-OAExtensions.m in Sources */,
 				3DB7749B14B400580042BD98 /* SMFileDragView.m in Sources */,
-				3D41575214B422A5002EF5D8 /* SMLayerView.m in Sources */,
 				3DD744F214B532E400EA0A46 /* SMIconView.m in Sources */,
 				3D97866814B551E200F01009 /* SMDocument.m in Sources */,
 				3D97867214B6CB7B00F01009 /* SMDividerView.m in Sources */,
@@ -456,6 +460,8 @@
 				C482EDBF14BBF95B00A713D5 /* SMAppInstallView.m in Sources */,
 				C482EDF614BC240900A713D5 /* iPhoneSimulator.m in Sources */,
 				3D54B796166BF454006B67F9 /* KGNoise.m in Sources */,
+				3D54B7A7166C3C12006B67F9 /* SMShadowTextView.m in Sources */,
+				3D54B7AA166C520B006B67F9 /* SMShadowButtonView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
