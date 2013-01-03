@@ -54,6 +54,13 @@
 		}
 
 		[self.viewController downloadURLAtLocation:fetchLocation];
+		return;
+	}
+	
+	NSString *localFile = queryParams[@"file"];
+	if (nil != localFile) {
+		localFile = [localFile stringByExpandingTildeInPath];
+		[self application:nil openFile:localFile];
 	}
 
 }
@@ -65,6 +72,7 @@
 		SMAppModel *app = [[SMSimDeployer defaultDeployer] unzipAppArchiveAtPath:path];
 		if (nil != app) {
 			[self.viewController setupAppInfoViewWithApp:app];
+			[self.viewController setAppInfoViewShowing:YES];
 			return YES;
 		}		
 	}
