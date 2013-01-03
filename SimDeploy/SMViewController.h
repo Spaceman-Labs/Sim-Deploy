@@ -11,6 +11,7 @@
 #import "SMFileDragView.h"
 #import "SMIconView.h"
 #import "SMAppInstallView.h"
+#import "KGNoise.h"
 
 @interface SMViewController : NSObject <NSAlertDelegate, SMFileDragViewDelegate>
 {
@@ -23,6 +24,7 @@
 @property (nonatomic, readonly) BOOL showingAppInfoView;
 
 @property (nonatomic, retain) IBOutlet NSWindow *mainWindow;
+@property (nonatomic, retain) IBOutlet KGNoiseView *mainView;
 
 @property (nonatomic, retain) IBOutlet NSPanel *downloadURLSheet;
 @property (nonatomic, retain) IBOutlet NSTextField *urlLabel;
@@ -34,6 +36,7 @@
 @property (nonatomic, retain) IBOutlet NSBox *boxView;
 @property (nonatomic, retain) IBOutlet NSButton *downloadFromURLButton;
 @property (nonatomic, retain) IBOutlet SMFileDragView *fileDragView;
+@property (nonatomic, retain) IBOutlet NSTextField *orLabel;
 
 @property (nonatomic, retain) IBOutlet SMAppInstallView *appInfoView;
 @property (nonatomic, retain) IBOutlet NSTextField *titleLabel;

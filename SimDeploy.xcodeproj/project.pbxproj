@@ -14,22 +14,23 @@
 		3D0D970614B2CC4600BB51FC /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D96FF14B2CC4600BB51FC /* zip.c */; };
 		3D0D970914B2CC8100BB51FC /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0D970814B2CC8100BB51FC /* libz.1.2.5.dylib */; };
 		3D0D970C14B2D3F000BB51FC /* SMSimulatorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D970B14B2D3F000BB51FC /* SMSimulatorModel.m */; };
-		3D0D972614B2E8AD00BB51FC /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D972514B2E8AD00BB51FC /* ZipArchive.m */; };
-		3D41575214B422A5002EF5D8 /* SMLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D41575114B422A4002EF5D8 /* SMLayerView.m */; };
+		3D0D972614B2E8AD00BB51FC /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D972514B2E8AD00BB51FC /* ZipArchive.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3D54B73B166BF1C4006B67F9 /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D54B739166BF1C4006B67F9 /* checked@2x.png */; };
+		3D54B73C166BF1C4006B67F9 /* unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D54B73A166BF1C4006B67F9 /* unchecked@2x.png */; };
+		3D54B796166BF454006B67F9 /* KGNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D54B784166BF454006B67F9 /* KGNoise.m */; };
+		3D54B7AC166C58DB006B67F9 /* DropRect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D54B7AB166C58DB006B67F9 /* DropRect@2x.png */; };
 		3D5F1CA014B4AF620017D6C3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */; };
 		3D5F1CA314B4AFA80017D6C3 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */; };
 		3D5F1CA514B4B1F50017D6C3 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3D5F1CA414B4B1F50017D6C3 /* dsa_pub.pem */; };
 		3D97866814B551E200F01009 /* SMDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97866614B551E200F01009 /* SMDocument.m */; };
-		3D97866F14B6C02800F01009 /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D97866E14B6C02800F01009 /* noise.png */; };
 		3D97867214B6CB7B00F01009 /* SMDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867114B6CB7B00F01009 /* SMDividerView.m */; };
-		3D97867C14B6D83D00F01009 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867914B6D83D00F01009 /* PFMoveApplication.m */; };
-		3D97867D14B6D83D00F01009 /* NSString+SymlinksAndAliases.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867B14B6D83D00F01009 /* NSString+SymlinksAndAliases.m */; };
+		3D97867C14B6D83D00F01009 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867914B6D83D00F01009 /* PFMoveApplication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3D97867D14B6D83D00F01009 /* NSString+SymlinksAndAliases.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D97867B14B6D83D00F01009 /* NSString+SymlinksAndAliases.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3D97868114B6D8CD00F01009 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D97868014B6D8CD00F01009 /* Security.framework */; };
 		3D97868214B6D91500F01009 /* MoveApplication.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D97868414B6D91500F01009 /* MoveApplication.strings */; };
 		3D97868814B75C3900F01009 /* DropRect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D97868714B75C3900F01009 /* DropRect.png */; };
-		3D97868A14B75EC200F01009 /* or.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D97868914B75EC200F01009 /* or.png */; };
 		3D97869314B8DE8000F01009 /* SimDeploy.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3D97869214B8DE8000F01009 /* SimDeploy.icns */; };
-		3DB7748A14B36CBD0042BD98 /* NSAlert-OAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */; };
+		3DB7748A14B36CBD0042BD98 /* NSAlert-OAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3DB7749B14B400580042BD98 /* SMFileDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB7749A14B400580042BD98 /* SMFileDragView.m */; };
 		3DD744EC14B52B3C00EA0A46 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD744EB14B52B3C00EA0A46 /* QuartzCore.framework */; };
 		3DD744F214B532E400EA0A46 /* SMIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD744F114B532E400EA0A46 /* SMIconView.m */; };
@@ -44,7 +45,7 @@
 		C414080114BE0A9E002B8B32 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = C41407FF14BE0A9E002B8B32 /* unchecked.png */; };
 		C482EDBF14BBF95B00A713D5 /* SMAppInstallView.m in Sources */ = {isa = PBXBuildFile; fileRef = C482EDBE14BBF95B00A713D5 /* SMAppInstallView.m */; };
 		C482EDEE14BC13C400A713D5 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C482EDED14BC13C400A713D5 /* ScriptingBridge.framework */; };
-		C482EDF614BC240900A713D5 /* iPhoneSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = C482EDF514BC240900A713D5 /* iPhoneSimulator.m */; };
+		C482EDF614BC240900A713D5 /* iPhoneSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = C482EDF514BC240900A713D5 /* iPhoneSimulator.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -77,13 +78,15 @@
 		3D0D970A14B2D3F000BB51FC /* SMSimulatorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSimulatorModel.h; sourceTree = "<group>"; };
 		3D0D970B14B2D3F000BB51FC /* SMSimulatorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSimulatorModel.m; sourceTree = "<group>"; };
 		3D0D972514B2E8AD00BB51FC /* ZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipArchive.m; sourceTree = "<group>"; };
-		3D41575014B422A4002EF5D8 /* SMLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMLayerView.h; sourceTree = "<group>"; };
-		3D41575114B422A4002EF5D8 /* SMLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMLayerView.m; sourceTree = "<group>"; };
+		3D54B739166BF1C4006B67F9 /* checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked@2x.png"; sourceTree = "<group>"; };
+		3D54B73A166BF1C4006B67F9 /* unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unchecked@2x.png"; sourceTree = "<group>"; };
+		3D54B783166BF454006B67F9 /* KGNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGNoise.h; sourceTree = "<group>"; };
+		3D54B784166BF454006B67F9 /* KGNoise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGNoise.m; sourceTree = "<group>"; };
+		3D54B7AB166C58DB006B67F9 /* DropRect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DropRect@2x.png"; sourceTree = "<group>"; };
 		3D5F1C9F14B4AF620017D6C3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = SOURCE_ROOT; };
 		3D5F1CA414B4B1F50017D6C3 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		3D97866514B551E200F01009 /* SMDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDocument.h; sourceTree = "<group>"; };
 		3D97866614B551E200F01009 /* SMDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDocument.m; sourceTree = "<group>"; };
-		3D97866E14B6C02800F01009 /* noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noise.png; sourceTree = "<group>"; };
 		3D97867014B6CB7B00F01009 /* SMDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDividerView.h; sourceTree = "<group>"; };
 		3D97867114B6CB7B00F01009 /* SMDividerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDividerView.m; sourceTree = "<group>"; };
 		3D97867814B6D83D00F01009 /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
@@ -93,7 +96,6 @@
 		3D97868014B6D8CD00F01009 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3D97868314B6D91500F01009 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MoveApplication.strings; sourceTree = "<group>"; };
 		3D97868714B75C3900F01009 /* DropRect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DropRect.png; sourceTree = "<group>"; };
-		3D97868914B75EC200F01009 /* or.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = or.png; sourceTree = "<group>"; };
 		3D97869214B8DE8000F01009 /* SimDeploy.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = SimDeploy.icns; sourceTree = "<group>"; };
 		3DB7748814B36CBD0042BD98 /* NSAlert-OAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert-OAExtensions.h"; sourceTree = "<group>"; };
 		3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert-OAExtensions.m"; sourceTree = "<group>"; };
@@ -151,8 +153,7 @@
 				3D0D970114B2CC4600BB51FC /* ZipArchive.h */,
 				3D0D972514B2E8AD00BB51FC /* ZipArchive.m */,
 			);
-			name = ZipArchive;
-			path = SimDeploy/ZipArchive;
+			path = ZipArchive;
 			sourceTree = "<group>";
 		};
 		3D0D96F714B2CC4600BB51FC /* minizip */ = {
@@ -176,14 +177,25 @@
 			children = (
 				3D97869214B8DE8000F01009 /* SimDeploy.icns */,
 				3D97868414B6D91500F01009 /* MoveApplication.strings */,
-				3D97866E14B6C02800F01009 /* noise.png */,
 				C41407FE14BE0A9E002B8B32 /* checked.png */,
+				3D54B739166BF1C4006B67F9 /* checked@2x.png */,
 				C41407FF14BE0A9E002B8B32 /* unchecked.png */,
-				3D97868914B75EC200F01009 /* or.png */,
+				3D54B73A166BF1C4006B67F9 /* unchecked@2x.png */,
 				3D5F1CA414B4B1F50017D6C3 /* dsa_pub.pem */,
 				3D97868714B75C3900F01009 /* DropRect.png */,
+				3D54B7AB166C58DB006B67F9 /* DropRect@2x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		3D54B773166BF454006B67F9 /* KGNoise */ = {
+			isa = PBXGroup;
+			children = (
+				3D54B783166BF454006B67F9 /* KGNoise.h */,
+				3D54B784166BF454006B67F9 /* KGNoise.m */,
+			);
+			name = KGNoise;
+			path = vendor/KGNoise;
 			sourceTree = "<group>";
 		};
 		3D97866A14B6AB3800F01009 /* Classes */ = {
@@ -191,8 +203,6 @@
 			children = (
 				3DB7749914B400580042BD98 /* SMFileDragView.h */,
 				3DB7749A14B400580042BD98 /* SMFileDragView.m */,
-				3D41575014B422A4002EF5D8 /* SMLayerView.h */,
-				3D41575114B422A4002EF5D8 /* SMLayerView.m */,
 				3D97867014B6CB7B00F01009 /* SMDividerView.h */,
 				3D97867114B6CB7B00F01009 /* SMDividerView.m */,
 			);
@@ -217,15 +227,56 @@
 				3DEAE83714B011B300D239B4 /* SMAppModel.m */,
 				3D0D970A14B2D3F000BB51FC /* SMSimulatorModel.h */,
 				3D0D970B14B2D3F000BB51FC /* SMSimulatorModel.m */,
+				3DEAE83314AE964A00D239B4 /* SMSimDeployer.h */,
+				3DEAE83414AE964A00D239B4 /* SMSimDeployer.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		3DC59E73165B5B03004C7972 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				3D54B773166BF454006B67F9 /* KGNoise */,
+				3DC59E75165B5B4E004C7972 /* NSAlert-OAExtensions */,
+				3D97867714B6D83400F01009 /* LetsMove */,
+				3D0D96F614B2CC4600BB51FC /* ZipArchive */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		3DC59E74165B5B0C004C7972 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				3DEAE82814AE94E400D239B4 /* SMAppDelegate.h */,
+				3DEAE82914AE94E400D239B4 /* SMAppDelegate.m */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		3DC59E75165B5B4E004C7972 /* NSAlert-OAExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				3DB7748814B36CBD0042BD98 /* NSAlert-OAExtensions.h */,
+				3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */,
+			);
+			name = "NSAlert-OAExtensions";
+			sourceTree = "<group>";
+		};
+		3DC59E76165B5B7E004C7972 /* Main View */ = {
+			isa = PBXGroup;
+			children = (
+				3DEAE82B14AE94E400D239B4 /* MainMenu.xib */,
+				3D0D965014B28BF700BB51FC /* SMViewController.h */,
+				3D0D965114B28BF700BB51FC /* SMViewController.m */,
+			);
+			name = "Main View";
 			sourceTree = "<group>";
 		};
 		3DEAE80714AE94E400D239B4 = {
 			isa = PBXGroup;
 			children = (
 				3DEAE81C14AE94E400D239B4 /* SimDeploy */,
-				3D0D96F614B2CC4600BB51FC /* ZipArchive */,
+				3DEAE81D14AE94E400D239B4 /* Supporting Files */,
 				3DEAE81514AE94E400D239B4 /* Frameworks */,
 				3DEAE81314AE94E400D239B4 /* Products */,
 			);
@@ -266,21 +317,12 @@
 		3DEAE81C14AE94E400D239B4 /* SimDeploy */ = {
 			isa = PBXGroup;
 			children = (
+				3DC59E74165B5B0C004C7972 /* Application */,
+				3DC59E73165B5B03004C7972 /* Vendor */,
 				C482EDF314BC240900A713D5 /* Simulator */,
-				3D97867714B6D83400F01009 /* LetsMove */,
 				3D97866A14B6AB3800F01009 /* Classes */,
 				3DB7748714B362990042BD98 /* Model */,
-				3DB7748814B36CBD0042BD98 /* NSAlert-OAExtensions.h */,
-				3DB7748914B36CBD0042BD98 /* NSAlert-OAExtensions.m */,
-				3DEAE82B14AE94E400D239B4 /* MainMenu.xib */,
-				3DEAE82814AE94E400D239B4 /* SMAppDelegate.h */,
-				3DEAE82914AE94E400D239B4 /* SMAppDelegate.m */,
-				3D0D965014B28BF700BB51FC /* SMViewController.h */,
-				3D0D965114B28BF700BB51FC /* SMViewController.m */,
-				3DEAE83314AE964A00D239B4 /* SMSimDeployer.h */,
-				3DEAE83414AE964A00D239B4 /* SMSimDeployer.m */,
-				3D41574D14B421FB002EF5D8 /* Resources */,
-				3DEAE81D14AE94E400D239B4 /* Supporting Files */,
+				3DC59E76165B5B7E004C7972 /* Main View */,
 				3DD744F014B532E400EA0A46 /* SMIconView.h */,
 				3DD744F114B532E400EA0A46 /* SMIconView.m */,
 				3D97866514B551E200F01009 /* SMDocument.h */,
@@ -294,12 +336,14 @@
 		3DEAE81D14AE94E400D239B4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3D41574D14B421FB002EF5D8 /* Resources */,
 				3DEAE81E14AE94E400D239B4 /* SimDeploy-Info.plist */,
 				3DEAE81F14AE94E400D239B4 /* InfoPlist.strings */,
 				3DEAE82214AE94E400D239B4 /* main.m */,
 				3DEAE82414AE94E400D239B4 /* SimDeploy-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = SimDeploy;
 			sourceTree = "<group>";
 		};
 		C482EDF314BC240900A713D5 /* Simulator */ = {
@@ -367,13 +411,14 @@
 				3DEAE82114AE94E400D239B4 /* InfoPlist.strings in Resources */,
 				3DEAE82D14AE94E400D239B4 /* MainMenu.xib in Resources */,
 				3D5F1CA514B4B1F50017D6C3 /* dsa_pub.pem in Resources */,
-				3D97866F14B6C02800F01009 /* noise.png in Resources */,
 				3D97868214B6D91500F01009 /* MoveApplication.strings in Resources */,
 				3D97868814B75C3900F01009 /* DropRect.png in Resources */,
-				3D97868A14B75EC200F01009 /* or.png in Resources */,
 				3D97869314B8DE8000F01009 /* SimDeploy.icns in Resources */,
 				C414080014BE0A9E002B8B32 /* checked.png in Resources */,
 				C414080114BE0A9E002B8B32 /* unchecked.png in Resources */,
+				3D54B73B166BF1C4006B67F9 /* checked@2x.png in Resources */,
+				3D54B73C166BF1C4006B67F9 /* unchecked@2x.png in Resources */,
+				3D54B7AC166C58DB006B67F9 /* DropRect@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +442,6 @@
 				3D0D972614B2E8AD00BB51FC /* ZipArchive.m in Sources */,
 				3DB7748A14B36CBD0042BD98 /* NSAlert-OAExtensions.m in Sources */,
 				3DB7749B14B400580042BD98 /* SMFileDragView.m in Sources */,
-				3D41575214B422A5002EF5D8 /* SMLayerView.m in Sources */,
 				3DD744F214B532E400EA0A46 /* SMIconView.m in Sources */,
 				3D97866814B551E200F01009 /* SMDocument.m in Sources */,
 				3D97867214B6CB7B00F01009 /* SMDividerView.m in Sources */,
@@ -405,6 +449,7 @@
 				3D97867D14B6D83D00F01009 /* NSString+SymlinksAndAliases.m in Sources */,
 				C482EDBF14BBF95B00A713D5 /* SMAppInstallView.m in Sources */,
 				C482EDF614BC240900A713D5 /* iPhoneSimulator.m in Sources */,
+				3D54B796166BF454006B67F9 /* KGNoise.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,31 +537,33 @@
 		3DEAE83114AE94E400D239B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks\"",
-					"$(SRCROOT)/**",
+					"\"$(SRCROOT)\"/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimDeploy/SimDeploy-Prefix.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				HEADER_SEARCH_PATHS = (
-					.,
-					"$(SRCROOT)/Sparkle.framework/**",
+					"\".\"/**",
+					"\"$(SRCROOT)/Sparkle.framework\"/**",
 				);
 				INFOPLIST_FILE = "SimDeploy/SimDeploy-Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				INFOPLIST_PREPROCESS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				OTHER_LDFLAGS = (
 					"-framework",
 					AppKit,
-					"-F$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks",
+					"-F\"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks\"",
 					"-weak_framework",
 					iPhoneSimulatorRemoteClient,
 					"-Wl,-rpath",
-					"-Wl,$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks",
+					"-Wl,\"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks\"",
 					"-Wl,-rpath",
-					"-Wl,$(DEVELOPER_DIR)/../OtherFrameworks",
+					"-Wl,\"$(DEVELOPER_DIR)/../OtherFrameworks\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -526,31 +573,33 @@
 		3DEAE83214AE94E400D239B4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks\"",
-					"$(SRCROOT)/**",
+					"\"$(SRCROOT)\"/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimDeploy/SimDeploy-Prefix.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				HEADER_SEARCH_PATHS = (
-					.,
-					"$(SRCROOT)/Sparkle.framework/**",
+					"\".\"/**",
+					"\"$(SRCROOT)/Sparkle.framework\"/**",
 				);
 				INFOPLIST_FILE = "SimDeploy/SimDeploy-Info.plist";
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				INFOPLIST_PREPROCESS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				OTHER_LDFLAGS = (
 					"-framework",
 					AppKit,
-					"-F$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks",
+					"-F\"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks\"",
 					"-weak_framework",
 					iPhoneSimulatorRemoteClient,
 					"-Wl,-rpath",
-					"-Wl,$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks",
+					"-Wl,\"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks\"",
 					"-Wl,-rpath",
-					"-Wl,$(DEVELOPER_DIR)/../OtherFrameworks",
+					"-Wl,\"$(DEVELOPER_DIR)/../OtherFrameworks\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

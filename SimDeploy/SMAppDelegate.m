@@ -14,13 +14,6 @@
 @synthesize window = _window;
 @synthesize viewController;
 
-- (void)dealloc
-{
-	self.window = nil;
-	self.viewController = nil;
-    [super dealloc];
-}
-
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
 #ifndef DEBUG
@@ -50,11 +43,10 @@
 	for (NSString *component in components) {
 		NSArray *pair = [component componentsSeparatedByString:@"="];
 		
-		[queryParams setObject:[[pair objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding: NSMacOSRomanStringEncoding]
-						forKey:[pair objectAtIndex:0]]; 
+		queryParams[pair[0]] = [pair[1] stringByReplacingPercentEscapesUsingEncoding: NSMacOSRomanStringEncoding]; 
 	}
 	
-	NSString *fetchLocation = [queryParams objectForKey:@"url"];
+	NSString *fetchLocation = queryParams[@"url"];
 		
 	if (nil != fetchLocation) {
 		if (NO == [fetchLocation hasPrefix:@"http://"]) {
@@ -62,6 +54,13 @@
 		}
 
 		[self.viewController downloadURLAtLocation:fetchLocation];
+		return;
+	}
+	
+	NSString *localFile = queryParams[@"file"];
+	if (nil != localFile) {
+		localFile = [localFile stringByExpandingTildeInPath];
+		[self application:nil openFile:localFile];
 	}
 
 }
@@ -73,12 +72,13 @@
 		SMAppModel *app = [[SMSimDeployer defaultDeployer] unzipAppArchiveAtPath:path];
 		if (nil != app) {
 			[self.viewController setupAppInfoViewWithApp:app];
+			[self.viewController setAppInfoViewShowing:YES];
 			return YES;
 		}		
 	}
 	
 	NSBundle *bundle = [NSBundle bundleWithPath:path];
-	SMAppModel *appModel = [[[SMAppModel alloc] initWithBundle:bundle] autorelease];
+	SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
 	
 	if (nil == appModel) {
 		[self.viewController errorWithTitle:NSLocalizedString(@"Not a Valid Application", nil) 

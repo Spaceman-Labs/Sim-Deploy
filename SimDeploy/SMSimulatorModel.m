@@ -15,7 +15,6 @@
 - (id)initWithPath:(NSString *)aPath
 {
 	if (nil == aPath) {
-		[self release];
 		return nil;
 	}
 	
@@ -28,15 +27,6 @@
 	self.version = [aPath lastPathComponent];
 
 	return self;
-}
-
-- (void)dealloc
-{
-	self.path = nil;
-	self.version = nil;
-	self.userApplications = nil;
-	
-	[super dealloc];
 }
 
 - (NSString *)applicationsPath
@@ -76,7 +66,6 @@
 			if (nil != appModel) {
 				[applications addObject:appModel];
 			}
-			[appModel release];
 		}
 	}
 

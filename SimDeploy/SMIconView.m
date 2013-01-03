@@ -27,12 +27,6 @@ static CGPathRef createRoundedRectWithRadius(CGRect rect, CGFloat radius)
 
 @synthesize image;
 
-- (void)dealloc
-{
-	self.image = nil;
-	[super dealloc];
-}
-
 - (void)drawRect:(NSRect)dirtyRect
 {
 	[super drawRect:dirtyRect];
@@ -57,7 +51,7 @@ static CGPathRef createRoundedRectWithRadius(CGRect rect, CGFloat radius)
 		CGContextAddPath(context, path);
 		CGContextClip(context);
 		
-		CGImageSourceRef source = CGImageSourceCreateWithData((CFDataRef)[image TIFFRepresentation], NULL);
+		CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)[image TIFFRepresentation], NULL);
 		CGImageRef imageRef =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
 		CGContextDrawImage(context, insetRect, imageRef);
 		CGContextRestoreGState(context);
@@ -80,8 +74,7 @@ static CGPathRef createRoundedRectWithRadius(CGRect rect, CGFloat radius)
 		return;
 	}
 	
-	[image release];
-	image = [anImage retain];
+	image = anImage;
 	[self setNeedsDisplay];
 }
 

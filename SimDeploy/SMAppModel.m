@@ -17,15 +17,13 @@
 - (id)initWithBundle:(NSBundle *)bundle;
 {
 	if (nil == bundle) {
-		[self release];
 		return nil;
 	}
 	
 	NSString *infoPath = [[bundle bundlePath] stringByAppendingPathComponent:@"Info.plist"];
 	NSDictionary *infoDict = [NSDictionary dictionaryWithContentsOfFile:infoPath];
 	
-	if (NO == [[infoDict objectForKey:@"DTPlatformName"] isEqualToString:@"iphonesimulator"]) {
-		[self release];
+	if (NO == [infoDict[@"DTPlatformName"] isEqualToString:@"iphonesimulator"]) {
 		return nil;
 	}
 	
@@ -38,16 +36,16 @@
 	self.mainBundle = bundle;
 	self.infoDictionary = infoDict;
 	
-	self.name = [infoDictionary objectForKey:@"CFBundleDisplayName"];
-	self.identifier = [infoDictionary objectForKey:@"CFBundleIdentifier"];
-	self.version = [infoDictionary objectForKey:@"CFBundleVersion"];
-	self.marketingVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-	self.executableName = [infoDictionary objectForKey:@"CFBundleExecutable"];
+	self.name = infoDictionary[@"CFBundleDisplayName"];
+	self.identifier = infoDictionary[@"CFBundleIdentifier"];
+	self.version = infoDictionary[@"CFBundleVersion"];
+	self.marketingVersion = infoDictionary[@"CFBundleShortVersionString"];
+	self.executableName = infoDictionary[@"CFBundleExecutable"];
 	
 	// Find biggest icon file
 	NSString *biggestIconPath = nil;
 	NSSize biggestSize = NSMakeSize(0.0f, 0.0f);
-	for (NSString *iconName in [infoDictionary objectForKey:@"CFBundleIconFiles"]) {
+	for (NSString *iconName in infoDictionary[@"CFBundleIconFiles"]) {
 		NSString *path = [self.mainBundle.bundlePath stringByAppendingPathComponent:iconName];
 		NSImage *image = [[NSImage alloc] initWithContentsOfFile:path];
 		NSSize imageSize = [image size];
@@ -62,7 +60,6 @@
 			biggestIconPath = path;
 			biggestSize = imageSize;
 		}
-		[image release];
 	}
 	
 	self.iconPath = biggestIconPath;
@@ -75,16 +72,6 @@
 	if (self.deleteGUIDWhenFinished) {
 		[[NSFileManager defaultManager] removeItemAtPath:self.guidPath error:nil];
 	}
-	
-	self.guidPath = nil;
-	self.mainBundle = nil;
-	self.infoDictionary = nil;
-	self.name = nil;
-	self.identifier = nil;
-	self.version = nil;
-	self.marketingVersion = nil;
-	self.iconPath = nil;
-	[super dealloc];
 }
 
 - (NSString *)description
@@ -95,7 +82,7 @@
 - (NSString *)executablePath
 {
 	
-	return [[self.mainBundle bundlePath] stringByAppendingPathComponent:[infoDictionary objectForKey:@"CFBundleExecutable"]];
+	return [[self.mainBundle bundlePath] stringByAppendingPathComponent:infoDictionary[@"CFBundleExecutable"]];
 }
 
 @end

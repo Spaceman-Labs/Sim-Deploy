@@ -48,11 +48,4 @@
 	}
 }
 
-- (void)dealloc
-{
-	self.cleanInstallButton = nil;
-	self.installButton = nil;
-	[super dealloc];
-}
-
 @end

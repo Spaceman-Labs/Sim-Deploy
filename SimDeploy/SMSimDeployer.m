@@ -104,7 +104,6 @@
 	
 	if (nil != session) {
 //		[session requestEndWithTimeout:0];
-		[session release];
 		session = nil;
 	}
 	
@@ -124,12 +123,12 @@
 		}
 		
 		/* Set up the session configuration */
-		config = [[[DTiPhoneSimulatorSessionConfig alloc] init] autorelease];
+		config = [[DTiPhoneSimulatorSessionConfig alloc] init];
 		[config setApplicationToSimulateOnStart: appSpec];
 		[config setSimulatedSystemRoot: sdkRoot];
 		[config setSimulatedApplicationShouldWaitForDebugger: NO];
 		
-		[config setSimulatedApplicationLaunchArgs:[NSArray array]];
+		[config setSimulatedApplicationLaunchArgs:@[]];
 		[config setSimulatedApplicationLaunchEnvironment:[[NSProcessInfo processInfo] environment]];
 		
 		[config setLocalizedClientName:@"Sim Deploy"];
@@ -153,13 +152,13 @@
 			//			[config setSimulatedDeviceFamily:[NSNumber numberWithInt:1]];
 			//		}
 			
-			[config setSimulatedDeviceFamily:[NSNumber numberWithInt:2]];
+			[config setSimulatedDeviceFamily:@2];
 		}
 		
 		/* Start the session */
 		session = [[DTiPhoneSimulatorSession alloc] init];
 		[session setDelegate: self];
-		[session setSimulatedApplicationPID: [NSNumber numberWithInt: 35]];
+		[session setSimulatedApplicationPID: @35];
 		//	if (uuid!=nil)
 		//	{
 		//		[session setUuid:uuid];
@@ -208,7 +207,6 @@
 - (void)deleteTempFile
 {
 	[[NSFileManager defaultManager] removeItemAtPath:tempFile error:nil];
-	[tempFile release];
 	tempFile = nil;
 }
 
@@ -229,14 +227,13 @@
 	}
 	
 	NSString *applicationDirectoryPath = [self applicationDirectoryPath];
-	CFUUIDRef	uuidObj = CFUUIDCreate(nil);//create a new UUID
+	CFUUIDRef uuidObj = CFUUIDCreate(nil); //create a new UUID
 	//get the string representation of the UUID
-	NSString	*uuidString = (NSString*)CFUUIDCreateString(nil, uuidObj);
+	NSString *uuidString = (NSString*)CFBridgingRelease(CFUUIDCreateString(nil, uuidObj));
 	
-	tempFile = [[applicationDirectoryPath stringByAppendingPathComponent:uuidString] retain];
+	tempFile = [applicationDirectoryPath stringByAppendingPathComponent:uuidString];
 
 	CFRelease(uuidObj);
-	CFRelease(uuidString);
 	
 	return tempFile;
 }
@@ -291,7 +288,7 @@
 			continue;
 		}
 
-		SMSimulatorModel *sim = [[[SMSimulatorModel alloc] initWithPath:fullPath] autorelease];
+		SMSimulatorModel *sim = [[SMSimulatorModel alloc] initWithPath:fullPath];
 		if (nil == sim) {
 			continue;
 		}
@@ -313,7 +310,7 @@
 		}
 	}
 	
-	NSArray *foundSims = [NSArray arrayWithObjects:sim1, sim2, nil];
+	NSArray *foundSims = @[sim1, sim2];
 	
 	self.simulators = foundSims;
 	return foundSims;
@@ -325,10 +322,8 @@
 
 - (void)downloadAppAtURL:(NSURL *)url percentComplete:(void(^)(CGFloat percentComplete))percentComplete completion:(void(^)(BOOL failed))completion
 {
-	[downloadCompletionBlock release];
 	downloadCompletionBlock = [completion copy];
 	
-	[percentCompleteBlock release];
 	percentCompleteBlock = [percentComplete copy];
 	
 	[self deleteTempFile];
@@ -336,8 +331,7 @@
 	[[NSFileManager defaultManager] removeItemAtPath:[self tempArchivePath] error:nil];
 	
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20.0f];
-	self.download = [[[NSURLDownload alloc] initWithRequest:request delegate:self] autorelease];
-	[request release];
+	self.download = [[NSURLDownload alloc] initWithRequest:request delegate:self];
 	[download setDestination:[self tempArchivePath] allowOverwrite:YES];
 }
 
@@ -353,7 +347,7 @@
 	
 	NSFileManager *fm = [NSFileManager defaultManager];
 	NSError *error = nil;
-	ZipArchive *za = [[[ZipArchive alloc] init] autorelease];
+	ZipArchive *za = [[ZipArchive alloc] init];
 	NSString *tempApplicationPath = [self tempApplicationPath];
 	[fm removeItemAtPath:tempApplicationPath error:&error];
 	
@@ -380,12 +374,12 @@
 			continue;
 		}
 		
-		SMAppModel *appModel = [[[SMAppModel alloc] initWithBundle:bundle] autorelease];
+		SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
 		if (nil != appModel) {
 			[appModel setDeleteGUIDWhenFinished:YES];
 			
 			// Some bug causes the executable to lose it's +x permissions. Do that here.
-			NSString *executable = [appModel.infoDictionary objectForKey:@"CFBundleExecutable"];
+			NSString *executable = (appModel.infoDictionary)[@"CFBundleExecutable"];
 			NSString *executablePath = [appModel.mainBundle.bundlePath stringByAppendingPathComponent:executable];
 						
 			const char *path = [executablePath cStringUsingEncoding:NSASCIIStringEncoding];
@@ -415,12 +409,10 @@
 		return;
 	}
 	
-	[installQueue release];
 	installQueue = nil;
 	
 	if (nil != installCompletion) {
 		dispatch_async(dispatch_get_main_queue(), installCompletion);
-		[installCompletion release];
 		installCompletion = nil;
 	}
 	
@@ -436,7 +428,6 @@
 	installQueue = [[NSOperationQueue alloc] init];
 	[installQueue setName:@"com.spacemanlabs.simdeploy.install"];
 	
-	[installCompletion release];
 	installCompletion = [completion copy];
 	
 	for (SMSimulatorModel *sim in self.simulators) {
@@ -492,7 +483,6 @@
 		downloadCompletionBlock(NO);
 	}
 	
-	[downloadCompletionBlock release];
 	downloadCompletionBlock = nil;
 }
 
@@ -502,7 +492,6 @@
 		downloadCompletionBlock(YES);
 	}
 	
-	[downloadCompletionBlock release];
 	downloadCompletionBlock = nil;
 }
 
@@ -512,14 +501,12 @@
 - (void) session: (DTiPhoneSimulatorSession *) aSession didEndWithError: (NSError *) error {
     // Do we care about this?
     NSLog(@"Did end with error: %@", error);
-	[session release];
 	session = nil;
 }
 
 // from DTiPhoneSimulatorSessionDelegate protocol
 - (void) session: (DTiPhoneSimulatorSession *)aSession didStart: (BOOL) started withError: (NSError *) error {
 	NSLog(@"Error starting simulator: %@", error);
-	[session release];
 	session = nil;
 }
 

@@ -56,7 +56,10 @@
 		self.downloadTextField.stringValue = lastURL;
 	}
 	
-
+	self.mainView.backgroundColor = [NSColor colorWithDeviceRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0f];
+	self.mainView.noiseOpacity = 0.12f;
+	self.mainView.noiseBlendMode = kCGBlendModeMultiply;
+	
 //	CGRect frame = self.titleLabel.frame;
 //	frame.size.height += 20.0f;
 //	frame.origin.y -= 25.0f;
@@ -70,10 +73,20 @@
 //	frame.origin.y = CGRectGetMinY(self.installedVersionLabel.frame) - 5.0f;
 //	self.installedVersionLabel.frame = frame;
 	
-	[[self.versionLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
-	[[self.titleLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
-	[[self.installedVersionLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
-	[[self.cleanInstallButton cell] setBackgroundStyle:NSBackgroundStyleRaised];
+//	[[self.versionLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+//	[[self.titleLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+//	[[self.installedVersionLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+//	[[self.cleanInstallButton cell] setBackgroundStyle:NSBackgroundStyleRaised];
+	
+	NSShadow *shadow = [[NSShadow alloc] init];
+	shadow.shadowColor = [NSColor colorWithDeviceRed:1.0f green:1.0f blue:1.0f alpha:0.7f];
+	shadow.shadowOffset = CGSizeMake(0, 1.0f);
+
+	self.titleLabel.shadow = shadow;
+	self.versionLabel.shadow = shadow;
+	self.installedVersionLabel.shadow = shadow;
+	self.orLabel.shadow = shadow;	
+	self.cleanInstallButton.shadow = shadow;
 	
 	self.iconView.image = [NSImage imageNamed:@"Icon@2x.png"];
 	
@@ -88,30 +101,6 @@
 	}
 	
 	
-}
-
-- (void)dealloc
-{
-	self.mainWindow = nil;
-	self.fileDragView = nil;
-	self.downloadURLSheet = nil;
-	self.downloadTextField = nil;
-	self.boxView = nil;
-	self.appInfoView = nil;
-	self.versionLabel = nil;
-	self.downloadFromURLButton = nil;
-	self.controlContainer = nil;
-	self.installedVersionLabel = nil;
-	self.progressIndicator = nil;
-	self.downloadButton = nil;
-	self.installTitleLabel = nil;
-	self.installMessageLabel = nil;
-	self.installProgressIndicator = nil;
-	self.installPanel = nil;
-	self.urlLabel = nil;
-	self.cleanInstallButton = nil;
-	
-	[super dealloc];
 }
 
 - (IBAction)downloadFromURL:(id)sender
@@ -212,7 +201,7 @@
 						}
 						
 						if (failed) {
-							NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+							NSAlert *alert = [[NSAlert alloc] init];
 							[alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Ok")];
 							[alert setMessageText:NSLocalizedString(@"Download Failed", nil)];
 							[alert setInformativeText:NSLocalizedString(@"Unable to download a simulator build, please check your URL and try again.", nil)];
@@ -245,7 +234,7 @@
 	SMAppCompare appCompare = [sim compareInstalledAppsAgainstApp:app installedApp:nil];
 	
 	if (SMAppCompareSame == appCompare) {
-		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+		NSAlert *alert = [[NSAlert alloc] init];
 		[alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Ok")];
 		[alert setMessageText:NSLocalizedString(@"You're Already Up To Date", nil)];
 		[alert setInformativeText:NSLocalizedString(@"Your download was successful, but you already have this version installed!", nil)];
@@ -321,7 +310,7 @@
 
 - (void)errorWithTitle:(NSString *)title message:(NSString *)message
 {
-	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	NSAlert *alert = [[NSAlert alloc] init];
 	[alert addButtonWithTitle:NSLocalizedString(@"Ok", @"Ok")];
 	[alert setMessageText:title];
 	[alert setInformativeText:message];
@@ -376,12 +365,12 @@
 	versionsAreTheSame = NO;
 
 	self.titleLabel.stringValue = app.name;
-	[self.titleLabel sizeToFit];
+	
 	NSMutableString *version = [NSMutableString stringWithFormat:@"Version: %@", app.marketingVersion];
 	[version appendFormat:@" (%@)", app.version];
 	self.versionLabel.stringValue = version;
 	if (nil != app.iconPath) {
-		self.iconView.image = [[[NSImage alloc] initWithContentsOfFile:app.iconPath] autorelease];
+		self.iconView.image = [[NSImage alloc] initWithContentsOfFile:app.iconPath];
 	} else {
 		self.iconView.image = nil;
 	}
@@ -433,16 +422,16 @@
 		
 		NSArray *runningSims = [NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.iphonesimulator"];
 		if ([runningSims count] < 1) {
-			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+			NSAlert *alert = [[NSAlert alloc] init];
 			[alert addButtonWithTitle:NSLocalizedString(@"Launch Simulator", @"Launch Simulator")];
 			[alert addButtonWithTitle:NSLocalizedString(@"No Thanks", @"No Thanks")];
 			[alert setMessageText:NSLocalizedString(@"Success!", nil)];
 			[alert setInformativeText:NSLocalizedString(@"Your builds were installed successfully! Would you like us to fire up the simulator for you?", nil)];
 			[alert setAlertStyle:NSInformationalAlertStyle];
-			[alert beginSheetModalForWindow:[NSApp mainWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:[NSNull null]];
+			[alert beginSheetModalForWindow:[NSApp mainWindow] modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:(void *)[NSNull null]];
 		}
 		
-		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+		NSAlert *alert = [[NSAlert alloc] init];
 		[alert addButtonWithTitle:NSLocalizedString(@"Restart Now", @"Restart Now")];
 		[alert addButtonWithTitle:NSLocalizedString(@"Restart Later", @"Restart Later")];
 		[alert setMessageText:NSLocalizedString(@"Success!", nil)];
@@ -464,7 +453,7 @@
 		}
 	}
 	
-	if ([NSNull null] == contextInfo) {
+	if ([NSNull null] == (__bridge NSNull *)contextInfo) {
 		if (returnCode == NSAlertFirstButtonReturn) {
 			[[SMSimDeployer defaultDeployer] launchApplication:newApp];	
 		}		
@@ -480,7 +469,7 @@
 
 - (void)registerForDragAndDrop
 {
-	[self.fileDragView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+	[self.fileDragView registerForDraggedTypes:@[NSFilenamesPboardType]];
 }
 
 - (void)deregisterForDragAndDrop
@@ -523,8 +512,7 @@
 		return;
 	}
 	
-	[pendingApp release];
-	pendingApp = [newPendingApp retain];
+	pendingApp = newPendingApp;
 	if (nil != pendingApp) {
 		[self setupAppInfoViewWithApp:pendingApp];
 		[self setAppInfoViewShowing:YES];
@@ -549,7 +537,7 @@
 		}
 		
 		NSBundle *bundle = [NSBundle bundleWithPath:path];
-		SMAppModel *appModel = [[[SMAppModel alloc] initWithBundle:bundle] autorelease];
+		SMAppModel *appModel = [[SMAppModel alloc] initWithBundle:bundle];
 				
 		newApp = appModel;
 		break;

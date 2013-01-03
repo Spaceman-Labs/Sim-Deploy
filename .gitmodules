@@ -1,0 +1,3 @@
+[submodule "SimDeploy/vendor/KGNoise"]
+	path = SimDeploy/vendor/KGNoise
+	url = git@github.com:jerryhjones/KGNoise.git
