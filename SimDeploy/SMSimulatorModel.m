@@ -199,6 +199,15 @@
 		error = nil;
 	}
 	
+	// Create some initial subdirectories to mimic Xcode's setup
+	for (NSString *subdir in @[@"tmp", @"Documents", @"Library/Caches"]) {
+		NSString *tmpPath = [destinationGUIDPath stringByAppendingPathComponent:subdir];
+		if (NO == [fm createDirectoryAtPath:tmpPath withIntermediateDirectories:YES attributes:nil error:&error]) {
+			NSLog(@"Error creating directory %@: %@", tmpPath, error);
+			error = nil;
+		}
+	}
+	
 	// Invalidate old application list
 	self.userApplications = nil;
 	
